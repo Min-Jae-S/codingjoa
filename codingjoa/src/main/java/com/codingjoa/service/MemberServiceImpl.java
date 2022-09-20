@@ -16,6 +16,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<MemberVO> getMemberList() {
+		System.out.println("memberService");
 		return memberMapper.getMemberList();
 	}
 	

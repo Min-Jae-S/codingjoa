@@ -3,6 +3,7 @@ package com.codingjoa.domain;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class MemberVO {

@@ -18,10 +18,10 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 	
 	@Autowired
-	MemberService userService;
+	private MemberService memberService;
 	
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/")
 	public String home() {
@@ -32,7 +32,7 @@ public class MemberController {
 	public String getMemberList(Model model) {
 		System.out.println("============= getMemberList =============");
 
-		List<MemberVO> list = userService.getMemberList();
+		List<MemberVO> list = memberService.getMemberList();
 		for(MemberVO memberVO : list) {
 			System.out.println(memberVO);
 		}
