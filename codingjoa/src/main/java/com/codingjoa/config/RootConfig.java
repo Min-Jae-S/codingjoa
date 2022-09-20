@@ -16,8 +16,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@ComponentScan("com.codingjoa.service")
-@MapperScan("com.codingjoa.mapper")
+@ComponentScan(basePackages = "com.codingjoa.service")
+@MapperScan(basePackages = "com.codingjoa.mapper")
 @PropertySource("/WEB-INF/properties/db.properties")
 public class RootConfig {
 
