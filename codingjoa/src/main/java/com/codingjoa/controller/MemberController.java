@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codingjoa.domain.MemberVO;
 import com.codingjoa.service.MemberService;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -23,17 +28,18 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@RequestMapping("/getMemberList")
-	public String getMemberList(Model model) {
-		System.out.println("============= getMemberList =============");
-
-		List<MemberVO> list = memberService.getMemberList();
-		for(MemberVO memberVO : list) {
-			System.out.println(memberVO);
-		}
-		
-		model.addAttribute("list", list);
-		
-		return "member/memberList";
+	@GetMapping("/join")
+	public String join() {
+		return "member/join"; 
+	}
+	
+	@PostMapping("/joinProc")
+	public String joinProc() {
+		return "";
+	}
+	
+	@GetMapping("login")
+	public String login() {
+		return "member/login";
 	}
 }

@@ -9,7 +9,7 @@ import lombok.Getter;
 public class MemberVO {
 	
 	private int memberIdx;
-	private String memberId;
+	private String memberEmail;
 	private String memberName;
 	private String memberPassword;
 	private String memberZipcode;

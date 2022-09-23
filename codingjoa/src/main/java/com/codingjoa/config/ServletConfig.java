@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.codingjoa.controller")
+@ComponentScan(basePackages = { "com.codingjoa.controller" })
 public class ServletConfig implements WebMvcConfigurer {
 
 	@Override
@@ -26,5 +26,4 @@ public class ServletConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/**").addResourceLocations("/resources/");
 	}
 
-	
 }

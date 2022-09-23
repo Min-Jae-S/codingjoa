@@ -18,23 +18,23 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@ComponentScan(basePackages = "com.codingjoa.service.impl")
-@MapperScan(basePackages = "com.codingjoa.mapper")
+@ComponentScan(basePackages = { "com.codingjoa.service.impl" })
+@MapperScan(basePackages = { "com.codingjoa.mapper" })
 @PropertySource("/WEB-INF/properties/db.properties")
 public class RootConfig {
 
 	@Value("${db.classname}")
 	private String classname;
-	
+
 	@Value("${db.url}")
 	private String url;
-	
+
 	@Value("${db.username}")
 	private String username;
-	
+
 	@Value("${db.password}")
 	private String password;
-	
+
 	@Bean
 	public HikariConfig hikariConfig() {
 		HikariConfig hikariConfig = new HikariConfig();
@@ -42,22 +42,22 @@ public class RootConfig {
 		hikariConfig.setJdbcUrl(url);
 		hikariConfig.setUsername(username);
 		hikariConfig.setPassword(password);
-		
+
 		return hikariConfig;
 	}
-	
+
 	@Bean
 	public DataSource dataSource() {
 		return new HikariDataSource(hikariConfig());
 	}
-	
+
 	@Bean
 	public SqlSessionFactory factory(ApplicationContext applicationContext) throws Exception {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource());
 		factoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis/mybatis-config.xml"));
 		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/com/codingjoa/mapper/**.xml"));
-		
+
 		return factoryBean.getObject();
 	}
 }
