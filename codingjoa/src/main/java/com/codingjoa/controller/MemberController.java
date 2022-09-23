@@ -23,11 +23,6 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@RequestMapping("/")
-	public String home() {
-		return "home";
-	}
-	
 	@RequestMapping("/getMemberList")
 	public String getMemberList(Model model) {
 		System.out.println("============= getMemberList =============");
