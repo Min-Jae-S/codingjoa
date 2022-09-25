@@ -23,7 +23,7 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<%-- <form:form action="#" method="" modelAttribute="">
+					<form:form action="#" method="" modelAttribute="">
 						<div class="form-group">
 							<form:label path="user_name">이름</form:label>
 							<form:input path="user_name" class="form-control"/>
@@ -54,7 +54,7 @@
 								<form:button class="btn btn-primary">회원가입</form:button>
 							</div>
 						</div>
-					</form:form> --%>
+					</form:form>
 				</div>
 			</div>
 		</div>
