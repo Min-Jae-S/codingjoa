@@ -1,4 +1,4 @@
-package com.codingjoa.config;
+package com.codingjoa.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
