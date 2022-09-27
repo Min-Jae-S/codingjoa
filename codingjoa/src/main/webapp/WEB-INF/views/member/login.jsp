@@ -15,5 +15,13 @@
 </head>
 <body>
 
+<c:import url="/WEB-INF/views/include/top-menu.jsp"/>
+
+<div class="container" style="margin-top:150px">
+
+</div>
+
+<c:import url="/WEB-INF/views/include/bottom-menu.jsp"/>
+
 </body>
 </html>

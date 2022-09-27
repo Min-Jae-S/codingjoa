@@ -18,42 +18,45 @@
 
 <c:import url="/WEB-INF/views/include/top-menu.jsp"/>
 
-<div class="container" style="margin-top:100px">
+<div class="container" style="margin-top:150px">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${contextPath}/member/joinProc" method="POST" modelAttribute="joi">
+					<form:form action="${contextPath}/member/joinProc" method="POST" modelAttribute="memberVO">
 						<div class="form-group">
-							<form:label path="user_name">이름</form:label>
-							<form:input path="user_name" class="form-control"/>
-							<%-- <form:errors path="user_name"/> --%>
-						</div>
-						<div class="form-group">
-							<form:label path="user_id">아이디</form:label>
+							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
 							<div class="input-group">
-								<form:input path="user_id" class="form-control" onkeypress="resetUserIdExist()"/>
+								<form:input path="memberId" class="form-control" onkeypress="resetCheckId()"/>
 								<div class="input-group-append">
-									<button type="button" class="btn btn-primary" onclick="checkUserIdExist()">중복확인</button>
+									<button type="button" class="btn btn-secondary" onclick="checkId">중복확인</button>
 								</div>
 							</div>
-							<%-- <form:errors path="user_id"/> --%>
+							<form:errors path="memberId"/>
 						</div>
 						<div class="form-group">
-							<form:label path="user_pw">비밀번호</form:label>
-							<form:password path="user_pw" class="form-control"/>
-							<%-- <form:errors path="user_pw"/> --%>
+							<form:label path="memberPassword1" class="font-weight-bold">비밀번호</form:label>
+							<form:password path="memberPassword1" class="form-control"/>
+							<form:errors path="memberPassword1"/>
 						</div>
 						<div class="form-group">
-							<form:label path="user_pw2">비밀번호 확인</form:label>
-							<form:password path="user_pw2" class="form-control"/>
-							<%-- <form:errors path="user_pw2"/> --%>
+							<form:label path="memberPassword2" class="font-weight-bold">비밀번호 확인</form:label>
+							<form:password path="memberPassword2" class="form-control"/>
+							<form:errors path="memberPassword2"/>
 						</div>
 						<div class="form-group">
-							<div class="text-right">
-								<form:button class="btn btn-primary">회원가입</form:button>
+							<form:label path="memberEmail" class="font-weight-bold">이메일</form:label>
+							<div class="input-group">
+								<form:input path="memberEmail" class="form-control" onkeypress="resetCheckEmail()"/>
+								<div class="input-group-append">
+									<button type="button" class="btn btn-secondary" onclick="checkEmail">인증요청</button>
+								</div>
 							</div>
+							<form:errors path="memberEmail"/>
+						</div>
+						<div class="form-group">
+							<form:button class="btn btn-primary">회원가입</form:button>
 						</div>
 					</form:form>
 				</div>

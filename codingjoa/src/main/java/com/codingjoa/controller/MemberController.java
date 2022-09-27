@@ -1,12 +1,13 @@
 package com.codingjoa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.codingjoa.domain.MemberVO;
 import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,15 +21,19 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@GetMapping("/join")
-	public String join() {
+	public String join(@ModelAttribute MemberVO memberVO) {
 		log.info("====================== join ======================");
+		log.info("{}", memberVO);
+		
 		return "member/join"; 
 	}
 	
 	@PostMapping("/joinProc")
-	public String joinProc() {
+	public String joinProc(@ModelAttribute MemberVO memberVO) {
 		log.info("====================== joinProc ======================");
-		return "";
+		log.info("{}", memberVO);
+		
+		return "redirect:/member/join";
 	}
 	
 	@GetMapping("/login")
