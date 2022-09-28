@@ -40,8 +40,8 @@ public class MemberController {
 		
 		if(result.hasErrors()) {
 			log.info("-----------------------------------");
-			result.getAllErrors().forEach(obj -> {
-				log.info(obj.getCodes()[0]);
+			result.getAllErrors().forEach(objectError -> {
+				log.info(objectError.getCodes()[0]);
 			});
 			log.info("-----------------------------------");
 			return "member/join";
