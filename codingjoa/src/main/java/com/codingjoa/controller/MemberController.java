@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.codingjoa.domain.MemberVO;
 import com.codingjoa.service.MemberService;
 
+import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@Log4j
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -27,7 +28,7 @@ public class MemberController {
 	@GetMapping("/join")
 	public String join(@ModelAttribute MemberVO memberVO) {
 		log.info("====================== join ======================");
-		log.info("{}", memberVO);
+		log.info(memberVO);
 		
 		return "member/join"; 
 	}
@@ -35,15 +36,15 @@ public class MemberController {
 	@PostMapping("/joinProc")
 	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
 		log.info("====================== joinProc ======================");
-		log.info("{}", memberVO);
+		log.info(memberVO);
 		
 		if(result.hasErrors()) {
 			log.info("======================");
-			result.getAllErrors().forEach(e -> {
-				log.info("{}", e);
-			});
+			result.getAllErrors().forEach(e -> log.info(e));
+			return "member/join";
 		}
-		return "member/join";
+		
+		return "member/join-success"; 
 	}
 	
 	@GetMapping("/login")
