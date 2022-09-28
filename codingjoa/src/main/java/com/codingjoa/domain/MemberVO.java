@@ -11,39 +11,39 @@ import lombok.Data;
 
 @Data
 public class MemberVO {
-	
+
 	private int memberIdx;
-	
-	@Size(min = 6, max = 12)
-	@Pattern(regexp = "[a-zA-Z0-9]*")
+
+	@NotBlank
+	@Pattern(regexp = "^[a-zA-Z0-9]{6,12}$")
 	private String memberId;
-	
-	@Size(min = 8, max = 20)
-	@Pattern(regexp = "[a-zA-Z0-9]*")
+
+	@NotBlank
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$")
 	private String memberPassword1;
-	
-	@Size(min = 8, max = 20)
-	@Pattern(regexp = "[a-zA-Z0-9]*")
+
+	@NotBlank
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$")
 	private String memberPassword2;
-	
+
 	@NotBlank
 	@Email
 	private String memberEmail;
-	
-	@Size(min = 5, max = 5)
-	@Pattern(regexp = "[0-9]*")
+
+	@NotBlank
+	@Pattern(regexp = "^[0-9]{5}$")
 	private String memberZipcode;
 
 	@NotBlank
-	@Pattern(regexp = "[a-zA-Z0-9가-힣]*")
+	@Pattern(regexp = "^[a-zA-Z0-9가-힣]$")
 	private String memberAddr1;
-	
+
 	@NotBlank
-	@Pattern(regexp = "[a-zA-Z0-9가-힣]*")
+	@Pattern(regexp = "^[a-zA-Z0-9가-힣]$")
 	private String memberAddr2;
-	
+
 	@NotBlank
-	@Pattern(regexp = "[YN]")
+	@Pattern(regexp = "^[YN]{1}$")
 	private String memberAgree;
 	
 	private Date regdate;
