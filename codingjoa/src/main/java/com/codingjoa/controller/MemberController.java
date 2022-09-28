@@ -39,8 +39,11 @@ public class MemberController {
 		log.info(memberVO);
 		
 		if(result.hasErrors()) {
-			log.info("======================");
-			result.getAllErrors().forEach(e -> log.info(e));
+			log.info("-----------------------------------");
+			result.getAllErrors().forEach(obj -> {
+				log.info(obj.getCodes()[0]);
+			});
+			log.info("-----------------------------------");
 			return "member/join";
 		}
 		

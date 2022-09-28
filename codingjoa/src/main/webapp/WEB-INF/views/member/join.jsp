@@ -29,7 +29,7 @@
 
 <c:import url="/WEB-INF/views/include/top-menu.jsp"/>
 
-<div class="container" style="margin-top:150px">
+<div class="container py-5 my-5">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
