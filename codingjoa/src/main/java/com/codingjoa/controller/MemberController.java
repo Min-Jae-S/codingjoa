@@ -1,7 +1,5 @@
 package com.codingjoa.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codingjoa.domain.MemberVO;
 import com.codingjoa.service.MemberService;
+import com.codingjoa.validation.ValidationSequence;
 
 import lombok.extern.log4j.Log4j;
-import lombok.extern.slf4j.Slf4j;
 
 @Log4j
 @RequestMapping("/member")
@@ -34,14 +32,14 @@ public class MemberController {
 	}
 	
 	@PostMapping("/joinProc")
-	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
+	public String joinProc(@Validated(ValidationSequence.class) @ModelAttribute MemberVO memberVO, BindingResult result) {
 		log.info("====================== joinProc ======================");
 		log.info(memberVO);
 		
 		if(result.hasErrors()) {
 			log.info("-----------------------------------");
-			result.getAllErrors().forEach(objectError -> {
-				log.info(objectError.getCodes()[0]);
+			result.getAllErrors().forEach(e -> {
+				log.info(e.getCodes()[0]);
 			});
 			log.info("-----------------------------------");
 			return "member/join";

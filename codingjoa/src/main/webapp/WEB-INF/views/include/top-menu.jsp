@@ -21,7 +21,7 @@
 					<a href="${contextPath}/member/logout" class="nav-link">로그인</a>
 				</li>
 				<li class="nav-item">
-					<a href="${contextPath}/member/login" class="nav-link">로그인</a>
+					<a href="${contextPath}/member/login" class="nav-link">로그아웃</a>
 				</li>
 				<li class="nav-item">
 					<a href="${contextPath}/member/join" class="nav-link">회원가입</a>

@@ -1,4 +1,4 @@
-package com.codingjoa.validator;
+package com.codingjoa.validation;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
