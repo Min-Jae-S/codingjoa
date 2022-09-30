@@ -19,38 +19,36 @@ public class MemberVO {
 
 	private int memberIdx;
 
-	@NotBlank(groups = NotBlankGroup.class)
-	@Size(min = 6, max = 12, groups = SizeGroup.class)
+	@NotBlank
+	@Pattern(regexp = "^[a-z0-9]{6,12}$")
 	private String memberId;
 
-	@NotBlank(groups = NotBlankGroup.class)
-	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$", 
-			 groups = PatternGroup.class)
+	@NotBlank
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$")
 	private String memberPassword1;
 
-	@NotBlank(groups = NotBlankGroup.class)
-	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$",
-			 groups = PatternGroup.class)
+	@NotBlank
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$")
 	private String memberPassword2;
 
-	@NotBlank(groups = NotBlankGroup.class)
-	@Email(groups = EmailGroup.class)
+	@NotBlank
+	@Email
 	private String memberEmail;
 
-	@NotBlank(groups = NotBlankGroup.class)
-	@Pattern(regexp = "^[0-9]{5}$", groups = PatternGroup.class)
+	@NotBlank
+	@Pattern(regexp = "^[0-9]{5}$")
 	private String memberZipcode;
 
-	@NotBlank(groups = NotBlankGroup.class)
+	@NotBlank
 	@Pattern(regexp = "^[a-zA-Z0-9가-힣]$")
 	private String memberAddr1;
 
-	@NotBlank(groups = NotBlankGroup.class)
-	@Pattern(regexp = "^[a-zA-Z0-9가-힣]$", groups = PatternGroup.class)
+	@NotBlank
+	@Pattern(regexp = "^[a-zA-Z0-9가-힣]$")
 	private String memberAddr2;
 
-	@NotBlank(groups = NotBlankGroup.class)
-	@Pattern(regexp = "^[YN]{1}$", groups = PatternGroup.class)
+	@NotBlank
+	@Pattern(regexp = "^[YN]{1}$")
 	private String memberAgree;
 	
 	private Date regdate;

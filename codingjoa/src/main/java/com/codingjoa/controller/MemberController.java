@@ -1,5 +1,7 @@
 package com.codingjoa.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -32,7 +34,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/joinProc")
-	public String joinProc(@Validated(ValidationSequence.class) @ModelAttribute MemberVO memberVO, BindingResult result) {
+	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
 		log.info("====================== joinProc ======================");
 		log.info(memberVO);
 		
