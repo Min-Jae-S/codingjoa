@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codingjoa.domain.MemberVO;
 import com.codingjoa.service.MemberService;
-import com.codingjoa.validation.ValidationSequence;
 
 import lombok.extern.log4j.Log4j;
 
@@ -34,7 +33,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/joinProc")
-	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
+	public String joinProc(@Validated @ModelAttribute MemberVO memberVO, BindingResult result) {
 		log.info("====================== joinProc ======================");
 		log.info(memberVO);
 		

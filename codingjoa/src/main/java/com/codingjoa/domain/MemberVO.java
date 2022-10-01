@@ -5,12 +5,6 @@ import java.util.Date;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import com.codingjoa.validation.ValidationGroups.EmailGroup;
-import com.codingjoa.validation.ValidationGroups.NotBlankGroup;
-import com.codingjoa.validation.ValidationGroups.PatternGroup;
-import com.codingjoa.validation.ValidationGroups.SizeGroup;
 
 import lombok.Data;
 
