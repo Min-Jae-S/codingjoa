@@ -54,4 +54,18 @@ public class MemberController {
 		log.info("====================== login ======================");
 		return "member/login";
 	}
+	
+	
+	/******************************************************************************/
+	@GetMapping("/register")
+	public String register() {
+		log.info("====================== register ======================");
+		return "member/register";
+	}
+	
+	@PostMapping("/registerProc")
+	public String registerProc() {
+		log.info("====================== registerProc ======================");
+		return "";
+	}
 }
