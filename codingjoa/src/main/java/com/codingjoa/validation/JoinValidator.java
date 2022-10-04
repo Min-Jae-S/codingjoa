@@ -13,14 +13,18 @@ public class JoinValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return clazz.isAssignableFrom(MemberVO.class);
+		return MemberVO.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		log.info("====================== JoinValidator ======================");
+		log.info("====================== validate ======================");
 		log.info("target = {}", target);
 		log.info("objectName = {}", errors.getObjectName());
+		
+		errors.getAllErrors().forEach(e -> {
+			log.info(e.getCodes()[0]);
+		});
 	}
 
 }
