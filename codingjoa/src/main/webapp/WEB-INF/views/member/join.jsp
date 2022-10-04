@@ -19,7 +19,7 @@
  		 background: white;
 	}
 	
-	.form-group span {
+	.error {
 		color: red;
 		font-size: 13px;
 	}
@@ -44,17 +44,17 @@
 									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="checkId()">중복확인</button>
 								</div>
 							</div>
-							<form:errors path="memberId"/>
+							<form:errors path="memberId" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberPassword1" class="font-weight-bold">비밀번호</form:label>
 							<form:password path="memberPassword1" class="form-control"/>
-							<form:errors path="memberPassword1"/>
+							<form:errors path="memberPassword1" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberPassword2" class="font-weight-bold">비밀번호 확인</form:label>
 							<form:password path="memberPassword2" class="form-control"/>
-							<form:errors path="memberPassword2"/>
+							<form:errors path="memberPassword2" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberEmail" class="font-weight-bold">이메일</form:label>
@@ -64,7 +64,7 @@
 									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="checkEmail()">인증요청</button>
 								</div>
 							</div>
-							<form:errors path="memberEmail"/>
+							<form:errors path="memberEmail" cssClass="error"/>
 						</div>
 						<div class="form-group">
 							<form:label path="memberZipcode" class="font-weight-bold">주소</form:label>
@@ -74,15 +74,15 @@
 									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="execPostcode()">우편번호 찾기</button>
 								</div>
 							</div>
-							<form:errors path="memberZipcode"/>
+							<form:errors path="memberZipcode" cssClass="error"/>
 						</div>
 						<div class="form-group">
 							<form:input path="memberAddr1" class="form-control" readonly="true" placeholder="기본주소" onclick="execPostcode()"/>
-							<form:errors path="memberAddr1"/>
+							<form:errors path="memberAddr1" cssClass="error"/>
 						</div>
 						<div class="form-group mb-5">
 							<form:input path="memberAddr2" class="form-control" placeholder="상세주소"/>
-							<form:errors path="memberAddr2"/>
+							<form:errors path="memberAddr2" cssClass="error"/>
 						</div>
 						<div class="form-group">
 							<form:button class="btn btn-primary">회원가입</form:button>
