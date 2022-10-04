@@ -22,10 +22,17 @@ public class JoinValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		log.info("====================== validate ======================");
-		
+
 		MemberVO memberVO = (MemberVO) target;
-		String memberId = memberVO.getMemberId();
 		
+		checkId(memberVO.getMemberId(), errors);
+		
+		errors.getAllErrors().forEach(e -> {
+			log.info(e.getCodes()[0]);
+		});
+	}
+	
+	private void checkId(String memberId, Errors errors) {
 		if(StringUtils.isEmpty(memberId)) {
 			errors.rejectValue("memberId", "NotEmpty");
 		} else if(!Pattern.matches("^([a-z0-9]{6,12})$", memberId)) {
@@ -33,10 +40,6 @@ public class JoinValidator implements Validator {
 		} else if(true  /* 아이디 중복확인 */) {
 			errors.rejectValue("memberId", "DontCheckUserIdExist");
 		}
-		
-		errors.getAllErrors().forEach(e -> {
-			log.info(e.getCodes()[0]);
-		});
 	}
-
+	
 }
