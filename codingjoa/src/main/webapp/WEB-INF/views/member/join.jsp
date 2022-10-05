@@ -48,12 +48,12 @@
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberPassword1" class="font-weight-bold">비밀번호</form:label>
-							<form:password path="memberPassword1" class="form-control"/>
+							<form:password path="memberPassword1" class="form-control" showPassword="true"/>
 							<form:errors path="memberPassword1" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberPassword2" class="font-weight-bold">비밀번호 확인</form:label>
-							<form:password path="memberPassword2" class="form-control"/>
+							<form:password path="memberPassword2" class="form-control" showPassword="true"/>
 							<form:errors path="memberPassword2" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
@@ -101,6 +101,14 @@
 	$(function() {
 		
 	});
+	
+	function checkId() {
+		
+	}
+	
+	function checkEmail() {
+		
+	}
 
     function execPostcode() {
         new daum.Postcode({

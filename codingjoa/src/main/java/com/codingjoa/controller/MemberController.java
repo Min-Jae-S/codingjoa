@@ -40,6 +40,9 @@ public class MemberController {
 		log.info("member = {}", memberVO);
 		
 		if(result.hasErrors()) {
+			result.getAllErrors().forEach(e -> {
+				log.info(e.getCodes()[0]);
+			});
 			return "member/join";
 		}
 		
