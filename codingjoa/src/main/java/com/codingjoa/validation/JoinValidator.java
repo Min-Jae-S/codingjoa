@@ -38,7 +38,7 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberId", "NotEmpty");
 		} else if (!Pattern.matches(regexp, memberId)) {
 			errors.rejectValue("memberId", "Pattern");
-		} else if (false /* 아이디 중복확인 */) {
+		} else if (true /* 아이디 중복확인 */) {
 			errors.rejectValue("memberId", "NotCheckVaildId");
 		}
 	}
@@ -76,7 +76,7 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberEmail", "NotEmpty");
 		} else if (!Pattern.matches(regexp, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
-		} else if (false /* 이메일 인증 */) {
+		} else if (true /* 이메일 인증 */) {
 			errors.rejectValue("memberEmail", "NotCheckValidEmail");
 		}
 	}
