@@ -20,15 +20,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequiredArgsConstructor
 @Controller
 public class MemberController {
 	
+	@Autowired
 	private MemberService memberService;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(new JoinValidator(memberService));
+		binder.addValidators(new JoinValidator());
 	}
 	
 	@GetMapping("/member/join")
