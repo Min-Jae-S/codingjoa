@@ -27,9 +27,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
 	@GetMapping("/join")
 	public String join(@ModelAttribute MemberVO memberVO) {
 		log.info("====================== join ======================");
@@ -50,6 +47,8 @@ public class MemberController {
 			return "member/join";
 		}
 		
+		memberService.register(memberVO);
+		
 		return "member/join-success"; 
 	}
 	
@@ -57,20 +56,6 @@ public class MemberController {
 	public String login() {
 		log.info("====================== login ======================");
 		return "member/login";
-	}
-	
-	
-	/******************************************************************************/
-	@GetMapping("/register")
-	public String register() {
-		log.info("====================== register ======================");
-		return "member/register";
-	}
-	
-	@PostMapping("/registerProc")
-	public String registerProc() {
-		log.info("====================== registerProc ======================");
-		return "";
 	}
 	
 	@InitBinder

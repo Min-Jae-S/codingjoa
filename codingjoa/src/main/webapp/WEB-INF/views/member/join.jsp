@@ -47,9 +47,9 @@
 							<form:errors path="memberId" cssClass="error" />
 						</div>
 						<div class="form-group mb-4">
-							<form:label path="memberPassword1" class="font-weight-bold">비밀번호</form:label>
-							<form:password path="memberPassword1" class="form-control" showPassword="true"/>
-							<form:errors path="memberPassword1" cssClass="error"/>
+							<form:label path="memberPassword" class="font-weight-bold">비밀번호</form:label>
+							<form:password path="memberPassword" class="form-control" showPassword="true"/>
+							<form:errors path="memberPassword" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberPassword2" class="font-weight-bold">비밀번호 확인</form:label>
@@ -77,12 +77,12 @@
 							<form:errors path="memberZipcode" cssClass="error"/>
 						</div>
 						<div class="form-group">
-							<form:input path="memberAddr1" class="form-control" readonly="true" placeholder="기본주소" onclick="execPostcode()"/>
-							<form:errors path="memberAddr1" cssClass="error"/>
+							<form:input path="memberAddr" class="form-control" readonly="true" placeholder="기본주소" onclick="execPostcode()"/>
+							<form:errors path="memberAddr" cssClass="error"/>
 						</div>
 						<div class="form-group mb-5">
-							<form:input path="memberAddr2" class="form-control" placeholder="상세주소"/>
-							<form:errors path="memberAddr2" cssClass="error"/>
+							<form:input path="memberAddrDetail" class="form-control" placeholder="상세주소"/>
+							<form:errors path="memberAddrDetail" cssClass="error"/>
 						</div>
 						<div class="form-group">
 							<form:button class="btn btn-primary">회원가입</form:button>

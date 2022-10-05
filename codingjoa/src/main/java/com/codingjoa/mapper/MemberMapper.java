@@ -8,5 +8,7 @@ import com.codingjoa.domain.MemberVO;
 
 @Mapper
 public interface MemberMapper {
-
+	
+	public void register(MemberVO memberVO);
+	
 }

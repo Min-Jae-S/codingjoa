@@ -24,9 +24,9 @@ public class JoinValidator implements Validator {
 		log.info("====================== validate ======================");
 
 		MemberVO memberVO = (MemberVO) target;
-
+		
 		checkId(memberVO.getMemberId(), errors);
-		checkPassword(memberVO.getMemberPassword1(), memberVO.getMemberPassword2(), errors);
+		checkPassword(memberVO.getMemberPassword(), memberVO.getMemberPassword2(), errors);
 		checkEmail(memberVO.getMemberEmail(), errors);
 
 	}
@@ -43,13 +43,13 @@ public class JoinValidator implements Validator {
 		}
 	}
 	
-	private void checkPassword(String memberPassword1, String memberPassword2, Errors errors) {
+	private void checkPassword(String memberPassword, String memberPassword2, Errors errors) {
 		String regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,16}";
 		
-		if(StringUtils.isEmpty(memberPassword1)) {
-			errors.rejectValue("memberPassword1", "NotEmpty");
-		} else if (!Pattern.matches(regexp, memberPassword1)) {
-			errors.rejectValue("memberPassword1", "Pattern");
+		if(StringUtils.isEmpty(memberPassword)) {
+			errors.rejectValue("memberPassword", "NotEmpty");
+		} else if (!Pattern.matches(regexp, memberPassword)) {
+			errors.rejectValue("memberPassword", "Pattern");
 		}
 
 		if(StringUtils.isEmpty(memberPassword2)) {
@@ -58,12 +58,12 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberPassword2", "Pattern");
 		}
 		
-		//log.info("memberPassword1 has error? {}", errors.hasFieldErrors("memberPassword1"));
+		//log.info("memberPassword has error? {}", errors.hasFieldErrors("memberPassword"));
 		//log.info("memberPassword2 has error? {}", errors.hasFieldErrors("memberPassword2"));
 		
-		if(!errors.hasFieldErrors("memberPassword1") && !errors.hasFieldErrors("memberPassword2")) {
-			if(!memberPassword1.equals(memberPassword2)) {
-				errors.rejectValue("memberPassword1", "NotEquals");
+		if(!errors.hasFieldErrors("memberPassword") && !errors.hasFieldErrors("memberPassword2")) {
+			if(!memberPassword.equals(memberPassword2)) {
+				errors.rejectValue("memberPassword", "NotEquals");
 				errors.rejectValue("memberPassword2", "NotEquals");
 			}
 		}

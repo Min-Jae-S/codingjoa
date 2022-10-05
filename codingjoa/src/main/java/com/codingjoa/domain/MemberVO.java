@@ -14,7 +14,7 @@ public class MemberVO {
 	private int memberIdx;
 
 	private String memberId;
-	private String memberPassword1;
+	private String memberPassword;
 	private String memberPassword2;
 	private String memberEmail;
 
@@ -22,10 +22,10 @@ public class MemberVO {
 	private String memberZipcode;
 
 	@NotBlank
-	private String memberAddr1;
+	private String memberAddr;
 
 	@NotBlank
-	private String memberAddr2;
+	private String memberAddrDetail;
 
 	@NotBlank
 	private String memberAgree;
