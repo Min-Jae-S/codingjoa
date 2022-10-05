@@ -67,10 +67,10 @@
 						</div>
 						<div class="form-group">
 							<form:label path="memberZipcode" class="font-weight-bold">주소</form:label>
-						    <div class="input-group w-75">
+						    <div class="input-group w-50">
 						    	<form:input path="memberZipcode" class="form-control" readonly="true" placeholder="우편번호" onclick="execPostcode()"/>
 								<div class="input-group-append">
-									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="execPostcode()">우편번호 찾기</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="execPostcode()">주소찾기</button>
 								</div>
 							</div>
 							<form:errors path="memberZipcode" cssClass="error"/>
@@ -85,24 +85,23 @@
 						</div>
 						<div class="form-check small mb-1">
 							<label class="form-check-label">
-								<input class="form-check-input" type="checkbox" id="checkAgree" name="checkAgree">
+								<form:checkbox class="form-check-input" path="memberAgree" />
+								이메일 광고 수신에 동의합니다. (선택)
+							</label>
+						</div>
+						<div class="form-check small mb-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="checkbox" onchange="toggleBtn(this)">
 								<a href="#">이용약관</a> 및 <a href="#">개인정보 처리방침</a>에 동의합니다.
 							</label>
 						</div>
-						<div class="form-check small">
-							<label class="form-check-label">
-								<form:checkbox class="form-check-input" path="memberAgree" value="Y" />
-								이메일 광고 수신에 동의합니다. (선택)
-							</label>
-							<form:errors path="memberAgree" cssClass="error" element="div"/>
-						</div>
 						<hr>
 						<div class="form-group">
-							<form:button class="btn btn-primary">회원가입</form:button>
+							<form:button class="btn btn-primary btn-block mb-4" id="joinBtn" disabled="true">회원가입</form:button>
 						</div>
 					</form:form>
 					<p class="text-center small">
-						이미 회원이신가요?&nbsp;&nbsp;<a href="${contextPath}/member/login">로그인 하기</a>
+						이미 회원이신가요? <a href="${contextPath}/member/login">로그인 하기</a>
 					</p>
 				</div>
 			</div>
@@ -127,6 +126,15 @@
 		alert("이메일 인증요청 버튼 클릭");
 	}
 
+	function toggleBtn(checkbox) {
+		var btn = document.getElementById("joinBtn");
+		if(checkbox.checked == true) {
+			btn.disabled = false;
+		} else {
+			btn.disabled = true;
+		}
+	}
+	
     function execPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

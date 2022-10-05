@@ -28,7 +28,7 @@
 			member_addr,
 			member_addr_detail,
 			member_agree,
-			regedate,
+			regdate,
 			moddate
 		) VALUES (
 			seq_member.NEXTVAL,

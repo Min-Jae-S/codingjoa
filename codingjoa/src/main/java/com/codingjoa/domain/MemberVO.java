@@ -12,7 +12,6 @@ import lombok.Data;
 public class MemberVO {
 
 	private int memberIdx;
-
 	private String memberId;
 	private String memberPassword;
 	private String memberPassword2;
@@ -27,9 +26,7 @@ public class MemberVO {
 	@NotBlank
 	private String memberAddrDetail;
 
-	@NotBlank
-	private String memberAgree;
-	
+	private boolean memberAgree;
 	private Date regdate;
 	private Date moddate;
 }
