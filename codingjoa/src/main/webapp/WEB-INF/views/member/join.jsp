@@ -6,14 +6,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회원가입</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 	.form-control:read-only {
  		 background: white;
@@ -80,14 +79,31 @@
 							<form:input path="memberAddr" class="form-control" readonly="true" placeholder="기본주소" onclick="execPostcode()"/>
 							<form:errors path="memberAddr" cssClass="error"/>
 						</div>
-						<div class="form-group mb-5">
+						<div class="form-group mb-4">
 							<form:input path="memberAddrDetail" class="form-control" placeholder="상세주소"/>
 							<form:errors path="memberAddrDetail" cssClass="error"/>
 						</div>
+						<div class="form-check small mb-1">
+							<label class="form-check-label">
+								<input class="form-check-input" type="checkbox" id="checkAgree" name="checkAgree">
+								<a href="#">이용약관</a> 및 <a href="#">개인정보 처리방침</a>에 동의합니다.
+							</label>
+						</div>
+						<div class="form-check small">
+							<label class="form-check-label">
+								<form:checkbox class="form-check-input" path="memberAgree" value="Y" />
+								이메일 광고 수신에 동의합니다. (선택)
+							</label>
+							<form:errors path="memberAgree" cssClass="error" element="div"/>
+						</div>
+						<hr>
 						<div class="form-group">
 							<form:button class="btn btn-primary">회원가입</form:button>
 						</div>
 					</form:form>
+					<p class="text-center small">
+						이미 회원이신가요?&nbsp;&nbsp;<a href="${contextPath}/member/login">로그인 하기</a>
+					</p>
 				</div>
 			</div>
 		</div>
@@ -97,17 +113,18 @@
 
 <c:import url="/WEB-INF/views/include/bottom-menu.jsp"/>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(function() {
 		
 	});
 	
 	function checkId() {
-		
+		alert("중복확인 버튼 클릭");
 	}
 	
 	function checkEmail() {
-		
+		alert("이메일 인증요청 버튼 클릭");
 	}
 
     function execPostcode() {
@@ -128,9 +145,9 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('memberZipcode').value = data.zonecode;
-                document.getElementById("memberAddr1").value = addr;
+                document.getElementById("memberAddr").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("memberAddr2").focus();
+                document.getElementById("memberAddrDetail").focus();
             }
         }).open();
     }

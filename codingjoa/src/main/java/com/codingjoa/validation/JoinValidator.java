@@ -36,11 +36,13 @@ public class JoinValidator implements Validator {
 		
 		if(StringUtils.isEmpty(memberId)) {
 			errors.rejectValue("memberId", "NotEmpty");
-		} else if (!Pattern.matches(regexp, memberId)) {
+		} 
+		else if (!Pattern.matches(regexp, memberId)) {
 			errors.rejectValue("memberId", "Pattern");
-		} else if (true /* 아이디 중복확인 */) {
-			errors.rejectValue("memberId", "NotCheckVaildId");
-		}
+		} 
+//		else if (true /* 아이디 중복확인 */) {
+//			errors.rejectValue("memberId", "NotCheckVaildId");
+//		}
 	}
 	
 	private void checkPassword(String memberPassword, String memberPassword2, Errors errors) {
@@ -58,8 +60,8 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberPassword2", "Pattern");
 		}
 		
-		//log.info("memberPassword has error? {}", errors.hasFieldErrors("memberPassword"));
-		//log.info("memberPassword2 has error? {}", errors.hasFieldErrors("memberPassword2"));
+//		log.info("memberPassword has error? {}", errors.hasFieldErrors("memberPassword"));
+//		log.info("memberPassword2 has error? {}", errors.hasFieldErrors("memberPassword2"));
 		
 		if(!errors.hasFieldErrors("memberPassword") && !errors.hasFieldErrors("memberPassword2")) {
 			if(!memberPassword.equals(memberPassword2)) {
@@ -74,10 +76,12 @@ public class JoinValidator implements Validator {
 		
 		if(StringUtils.isEmpty(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotEmpty");
-		} else if (!Pattern.matches(regexp, memberEmail)) {
-			errors.rejectValue("memberEmail", "Pattern");
-		} else if (true /* 이메일 인증 */) {
-			errors.rejectValue("memberEmail", "NotCheckValidEmail");
 		}
+		else if (!Pattern.matches(regexp, memberEmail)) {
+			errors.rejectValue("memberEmail", "Pattern");
+		}
+//		else if (true /* 이메일 인증 */) {
+//			errors.rejectValue("memberEmail", "NotCheckValidEmail");
+//		}
 	}
 }
