@@ -38,10 +38,7 @@
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
 							<div class="input-group">
-								<form:input path="memberId" class="form-control" onkeypress="resetCheckId()"/>
-								<div class="input-group-append">
-									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="checkId()">중복확인</button>
-								</div>
+								<form:input path="memberId" class="form-control"/>
 							</div>
 							<form:errors path="memberId" cssClass="error" />
 						</div>
@@ -117,10 +114,6 @@
 	$(function() {
 		
 	});
-	
-	function checkId() {
-		alert("중복확인 버튼 클릭");
-	}
 	
 	function checkEmail() {
 		alert("이메일 인증요청 버튼 클릭");

@@ -29,7 +29,6 @@ public class JoinValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		log.info("====================== validate ======================");
-		log.info("TEST: memberService = {}", memberService);
 		
 		MemberVO memberVO = (MemberVO) target;
 
