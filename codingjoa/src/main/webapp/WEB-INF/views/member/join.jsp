@@ -91,7 +91,7 @@
 						</div>
 						<div class="form-check small mb-1">
 							<label class="form-check-label">
-								<input class="form-check-input" type="checkbox" onchange="toggleBtn(this)">
+								<input class="form-check-input" type="checkbox" onchange="toggleJoinBtn(this)">
 								<a href="#">이용약관</a> 및 <a href="#">개인정보 처리방침</a>에 동의합니다.
 							</label>
 						</div>
@@ -126,12 +126,12 @@
 		alert("이메일 인증요청 버튼 클릭");
 	}
 
-	function toggleBtn(checkbox) {
-		var btn = document.getElementById("joinBtn");
+	function toggleJoinBtn(checkbox) {
+		var joinBtn = document.getElementById("joinBtn");
 		if(checkbox.checked == true) {
-			btn.disabled = false;
+			joinBtn.disabled = false;
 		} else {
-			btn.disabled = true;
+			joinBtn.disabled = true;
 		}
 	}
 	
