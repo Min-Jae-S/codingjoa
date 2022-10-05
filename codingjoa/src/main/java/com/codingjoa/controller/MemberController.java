@@ -28,7 +28,7 @@ public class MemberController {
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(new JoinValidator());
+		binder.addValidators(new JoinValidator(memberService));
 	}
 	
 	@GetMapping("/member/join")
