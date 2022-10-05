@@ -16,17 +16,22 @@ import com.codingjoa.domain.MemberVO;
 import com.codingjoa.service.MemberService;
 import com.codingjoa.validation.JoinValidator;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping("/member")
+@RequiredArgsConstructor
 @Controller
 public class MemberController {
 	
-	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/join")
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(new JoinValidator());
+	}
+	
+	@GetMapping("/member/join")
 	public String join(@ModelAttribute MemberVO memberVO) {
 		log.info("====================== join ======================");
 		log.info("member = {}", memberVO);
@@ -34,7 +39,7 @@ public class MemberController {
 		return "member/join"; 
 	}
 	
-	@PostMapping("/joinProc")
+	@PostMapping("/member/joinProc")
 	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
 		log.info("====================== joinProc ======================");
 		log.info("member = {}", memberVO);
@@ -51,14 +56,11 @@ public class MemberController {
 		return "member/join-success"; 
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("/member/login")
 	public String login() {
 		log.info("====================== login ======================");
 		return "member/login";
 	}
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(new JoinValidator());
-	}
+	
 }

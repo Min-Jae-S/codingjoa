@@ -128,7 +128,7 @@
 
 	function toggleJoinBtn(checkbox) {
 		var joinBtn = document.getElementById("joinBtn");
-		if(checkbox.checked == true) {
+		if (checkbox.checked == true) {
 			joinBtn.disabled = false;
 		} else {
 			joinBtn.disabled = true;
