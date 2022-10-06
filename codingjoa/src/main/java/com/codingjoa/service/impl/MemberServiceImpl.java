@@ -29,5 +29,10 @@ public class MemberServiceImpl implements MemberService {
 		
 		memberMapper.register(memberVO);
 	}
+
+	@Override
+	public String checkIdExist(String memberId) {
+		return memberMapper.checkIdExist(memberId);
+	}
 	
 }

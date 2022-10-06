@@ -6,5 +6,7 @@ public interface MemberService {
 
 	public void register(MemberVO memberVO);
 	
+	public String checkIdExist(String memberId);
+	
 	
 }

@@ -45,10 +45,9 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberId", "NotEmpty");
 		} else if (!Pattern.matches(regexp, memberId)) {
 			errors.rejectValue("memberId", "Pattern");
+		} else if (memberService.checkIdExist(memberId) != null) {
+			errors.rejectValue("memberId", "IdExist");
 		}
-//		else if (true /* 아이디 중복확인 */) {
-//			errors.rejectValue("memberId", "NotCheckVaildId");
-//		}
 	}
 
 	private void checkPassword(String memberPassword, String memberPassword2, Errors errors) {

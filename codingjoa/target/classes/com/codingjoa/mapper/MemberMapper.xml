@@ -44,6 +44,14 @@
 		)
 	</insert>
 	
+	<select id="checkIdExist" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			member_name
+		FROM
+			member
+		WHERE
+			member_id = ${memberId}
+	</select>
 	
 	
 </mapper>
