@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 //@Transactional
-@Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -31,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String checkIdExist(String memberId) {
+	public boolean checkIdExist(String memberId) {
 		return memberMapper.checkIdExist(memberId);
 	}
 	

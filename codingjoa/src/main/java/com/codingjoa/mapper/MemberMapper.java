@@ -9,6 +9,6 @@ public interface MemberMapper {
 	
 	public void register(MemberVO memberVO);
 	
-	public String checkIdExist(String memberId);
+	public boolean checkIdExist(String memberId);
 	
 }

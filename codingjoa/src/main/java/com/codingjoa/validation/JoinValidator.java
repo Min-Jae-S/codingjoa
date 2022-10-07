@@ -45,7 +45,7 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberId", "NotEmpty");
 		} else if (!Pattern.matches(regexp, memberId)) {
 			errors.rejectValue("memberId", "Pattern");
-		} else if (memberService.checkIdExist(memberId) != null) {
+		} else if (memberService.checkIdExist(memberId)) {
 			errors.rejectValue("memberId", "IdExist");
 		}
 	}
