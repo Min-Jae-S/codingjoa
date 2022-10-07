@@ -23,15 +23,14 @@ public class EmailValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return MemberVO.class.isAssignableFrom(clazz);
+		return String.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
 		log.info("====================== EmailValidator ======================");
 		
-		MemberVO memberVO = (MemberVO) target;
-		String memberEmail = memberVO.getMemberEmail();
+		String memberEmail = (String) target;
 		String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 
 		if (StringUtils.isEmpty(memberEmail)) {

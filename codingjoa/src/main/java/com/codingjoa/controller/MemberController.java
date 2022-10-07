@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,10 +33,10 @@ public class MemberController {
 	@Resource(name = "emailValidator")
 	private Validator emailValidator;
 	
-//	@InitBinder
-//	public void initBinder(WebDataBinder binder) {
-//		binder.addValidators(joinValidator, emailValidator);
-//	}
+	@InitBinder("memberVO")
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(joinValidator);
+	}
 	
 	@GetMapping("/member/join")
 	public String join(@ModelAttribute MemberVO memberVO) {
@@ -49,14 +51,12 @@ public class MemberController {
 		log.info("====================== joinProc ======================");
 		log.info(memberVO.toString());
 		
-		joinValidator.validate(memberVO, result);
 		if(result.hasErrors()) {
 			result.getAllErrors().forEach(e -> {
 				log.info(e.getCodes()[0]);
 			});
 			return "member/join";
 		}
-		
 		memberService.register(memberVO);
 		
 		return "member/join-success"; 
@@ -64,16 +64,9 @@ public class MemberController {
 	
 	@PostMapping("/member/authEmail")
 	@ResponseBody
-	public String authEmail(@Valid @RequestBody MemberVO memberVO, BindingResult result) {
+	public String authEmail(@Valid String memberEmail) {
 		log.info("====================== authEmail ======================");
-		log.info("memberEmail = {}", memberVO.getMemberEmail());
-		
-		emailValidator.validate(memberVO, result);
-		if(result.hasErrors()) {
-			result.getAllErrors().forEach(e -> {
-				log.info(e.getCodes()[0]);
-			});
-		}
+		log.info("memberEmail = {}", memberEmail);
 		
 		return "success";
 	}

@@ -120,10 +120,7 @@
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/member/authEmail",
-			data : JSON.stringify({
-				memberEmail : $("#memberEmail").val()
-			}),
-			contentType: "application/json; charset=utf-8",
+			data : { memberEmail : $("#memberEmail").val() },
 			success : function(result) {
 				console.log(result);
 			},
