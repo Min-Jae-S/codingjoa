@@ -10,7 +10,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
@@ -55,9 +56,9 @@
 						<div class="form-group mb-4">
 							<form:label path="memberEmail" class="font-weight-bold">이메일</form:label>
 							<div class="input-group">
-								<form:input path="memberEmail" class="form-control" onkeypress="resetCheckEmail()"/>
+								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력" onkeypress="resetCheckEmail()" />
 								<div class="input-group-append">
-									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="checkEmail()">인증요청</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="authEmail()">인증번호 받기</button>
 								</div>
 							</div>
 							<form:errors path="memberEmail" cssClass="error"/>
@@ -65,19 +66,19 @@
 						<div class="form-group">
 							<form:label path="memberZipcode" class="font-weight-bold">주소</form:label>
 						    <div class="input-group w-50">
-						    	<form:input path="memberZipcode" class="form-control" readonly="true" placeholder="우편번호" onclick="execPostcode()"/>
+						    	<form:input path="memberZipcode" class="form-control" readonly="true" placeholder="우편번호 입력" onclick="execPostcode()"/>
 								<div class="input-group-append">
-									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="execPostcode()">주소찾기</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="execPostcode()">주소 찾기</button>
 								</div>
 							</div>
 							<form:errors path="memberZipcode" cssClass="error"/>
 						</div>
 						<div class="form-group">
-							<form:input path="memberAddr" class="form-control" readonly="true" placeholder="기본주소" onclick="execPostcode()"/>
+							<form:input path="memberAddr" class="form-control" readonly="true" placeholder="기본주소 입력" onclick="execPostcode()"/>
 							<form:errors path="memberAddr" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
-							<form:input path="memberAddrDetail" class="form-control" placeholder="상세주소"/>
+							<form:input path="memberAddrDetail" class="form-control" placeholder="상세주소 입력"/>
 							<form:errors path="memberAddrDetail" cssClass="error"/>
 						</div>
 						<div class="form-check small mb-1">
@@ -111,12 +112,25 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-	$(function() {
+	/* $(function() {
 		
-	});
+	}); */
 	
-	function checkEmail() {
-		alert("이메일 인증요청 버튼 클릭");
+	function authEmail() {
+		$.ajax({
+			type : "POST",
+			url : "${contextPath}/member/authEmail",
+			data : JSON.stringify({
+				memberEmail : $("#memberEmail").val()
+			}),
+			contentType: "application/json; charset=utf-8",
+			success : function(result) {
+				console.log(result);
+			},
+			error : function() {
+				console.log("error");
+			}
+		});
 	}
 
 	function toggleJoinBtn(checkbox) {

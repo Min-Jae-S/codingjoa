@@ -1,4 +1,4 @@
-package com.codingjoa.validation;
+package com.codingjoa.validator;
 
 import javax.validation.GroupSequence;
 

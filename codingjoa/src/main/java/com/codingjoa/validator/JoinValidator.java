@@ -1,4 +1,4 @@
-package com.codingjoa.validation;
+package com.codingjoa.validator;
 
 import java.util.regex.Pattern;
 
@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component(value = "joinValidator")
 public class JoinValidator implements Validator {
 	
 	@Autowired
@@ -28,7 +29,7 @@ public class JoinValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		log.info("====================== validate ======================");
+		log.info("====================== JoinValidator ======================");
 		
 		MemberVO memberVO = (MemberVO) target;
 

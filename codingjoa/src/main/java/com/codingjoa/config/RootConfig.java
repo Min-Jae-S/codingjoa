@@ -13,7 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.validation.Validator;
 
-import com.codingjoa.validation.JoinValidator;
+import com.codingjoa.validator.EmailValidator;
+import com.codingjoa.validator.JoinValidator;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -61,8 +62,4 @@ public class RootConfig {
 		return factoryBean.getObject();
 	}
 	
-	@Bean("joinValidator")
-	public Validator joinValidator() {
-		return new JoinValidator();
-	}
 }

@@ -7,15 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.domain.MemberVO;
 import com.codingjoa.service.MemberService;
-import com.codingjoa.validation.JoinValidator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,15 +28,18 @@ public class MemberController {
 	@Resource(name = "joinValidator")
 	private Validator joinValidator;
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(joinValidator);
-	}
+	@Resource(name = "emailValidator")
+	private Validator emailValidator;
+	
+//	@InitBinder
+//	public void initBinder(WebDataBinder binder) {
+//		binder.addValidators(joinValidator, emailValidator);
+//	}
 	
 	@GetMapping("/member/join")
 	public String join(@ModelAttribute MemberVO memberVO) {
 		log.info("====================== join ======================");
-		log.info("member = {}", memberVO);
+		log.info(memberVO.toString());
 		
 		return "member/join"; 
 	}
@@ -45,8 +47,9 @@ public class MemberController {
 	@PostMapping("/member/joinProc")
 	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
 		log.info("====================== joinProc ======================");
-		log.info("member = {}", memberVO);
+		log.info(memberVO.toString());
 		
+		joinValidator.validate(memberVO, result);
 		if(result.hasErrors()) {
 			result.getAllErrors().forEach(e -> {
 				log.info(e.getCodes()[0]);
@@ -59,11 +62,27 @@ public class MemberController {
 		return "member/join-success"; 
 	}
 	
+	@PostMapping("/member/authEmail")
+	@ResponseBody
+	public String authEmail(@Valid @RequestBody MemberVO memberVO, BindingResult result) {
+		log.info("====================== authEmail ======================");
+		log.info("memberEmail = {}", memberVO.getMemberEmail());
+		
+		emailValidator.validate(memberVO, result);
+		if(result.hasErrors()) {
+			result.getAllErrors().forEach(e -> {
+				log.info(e.getCodes()[0]);
+			});
+		}
+		
+		return "success";
+	}
+	
 	@GetMapping("/member/login")
 	public String login() {
 		log.info("====================== login ======================");
 		return "member/login";
 	}
 	
-	
+
 }

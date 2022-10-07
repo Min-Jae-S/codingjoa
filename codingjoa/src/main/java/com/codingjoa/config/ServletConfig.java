@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.codingjoa.controller" })
+@ComponentScan(basePackages = { "com.codingjoa.controller", "com.codingjoa.validator" })
 public class ServletConfig implements WebMvcConfigurer {
 
 	@Override

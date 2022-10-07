@@ -1,4 +1,4 @@
-package com.codingjoa.validation;
+package com.codingjoa.validator;
 
 //public class ValidationGroups {
 //	public interface NotBlankGroup {};
