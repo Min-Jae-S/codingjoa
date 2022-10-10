@@ -130,9 +130,6 @@
 		});
 	}
 	
-	//////////////////////////
-	/////////////////////////
-
 	function toggleJoinBtn(checkbox) {
 		var joinBtn = document.getElementById("joinBtn");
 		if (checkbox.checked == true) {
