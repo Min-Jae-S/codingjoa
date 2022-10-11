@@ -11,7 +11,6 @@ import org.springframework.validation.Validator;
 import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.MemberService;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,19 +28,21 @@ public class JoinValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		log.info("--------JoinValidator--------");
-		
+		log.info("--------JoinValidator.validate() --------");
+
 		MemberVO memberVO = (MemberVO) target;
+		
 		checkId(memberVO.getMemberId(), errors);
 		checkPassword(memberVO.getMemberPassword(), memberVO.getMemberPassword2(), errors);
+		checkEmail(memberVO.getMemberEmail(), errors);
 
 	}
 
 	private void checkId(String memberId, Errors errors) {
 		String regexp = "^([a-z0-9]{6,12})$";
 
-		if (StringUtils.isEmpty(memberId)) {
-			errors.rejectValue("memberId", "NotEmpty");
+		if (!StringUtils.hasText(memberId)) {
+			errors.rejectValue("memberId", "NotBlank");
 		} else if (!Pattern.matches(regexp, memberId)) {
 			errors.rejectValue("memberId", "Pattern");
 		} else if (memberService.checkIdExist(memberId)) {
@@ -52,26 +53,33 @@ public class JoinValidator implements Validator {
 	private void checkPassword(String memberPassword, String memberPassword2, Errors errors) {
 		String regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,16}";
 
-		if (StringUtils.isEmpty(memberPassword)) {
-			errors.rejectValue("memberPassword", "NotEmpty");
+		if (!StringUtils.hasText(memberPassword)) {
+			errors.rejectValue("memberPassword", "NotBlank");
 		} else if (!Pattern.matches(regexp, memberPassword)) {
 			errors.rejectValue("memberPassword", "Pattern");
 		}
 
-		if (StringUtils.isEmpty(memberPassword2)) {
-			errors.rejectValue("memberPassword2", "NotEmpty");
+		if (!StringUtils.hasText(memberPassword2)) {
+			errors.rejectValue("memberPassword2", "NotBlank");
 		} else if (!Pattern.matches(regexp, memberPassword2)) {
 			errors.rejectValue("memberPassword2", "Pattern");
 		}
-
-//		log.info("memberPassword has error? {}", errors.hasFieldErrors("memberPassword"));
-//		log.info("memberPassword2 has error? {}", errors.hasFieldErrors("memberPassword2"));
 
 		if (!errors.hasFieldErrors("memberPassword") && !errors.hasFieldErrors("memberPassword2")) {
 			if (!memberPassword.equals(memberPassword2)) {
 				errors.rejectValue("memberPassword", "NotEquals");
 				errors.rejectValue("memberPassword2", "NotEquals");
 			}
+		}
+	}
+	
+	private void checkEmail(String memberEmail, Errors errors) {
+		String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+		
+		if (!StringUtils.hasText(memberEmail)) {
+			errors.rejectValue("memberEmail", "NotBlank");
+		} else if (!Pattern.matches(regexp, memberEmail)) {
+			errors.rejectValue("memberEmail", "Pattern");
 		}
 	}
 }

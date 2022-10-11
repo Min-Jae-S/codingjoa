@@ -39,12 +39,12 @@ public class MemberController {
 	private Validator emailValidator;
 	
 	@InitBinder("memberVO")
-	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(joinValidator, emailValidator);
+	public void initJoinBinder(WebDataBinder binder) {
+		binder.addValidators(joinValidator);
 	}
 	
 	@InitBinder("emailRequestDTO")
-	public void initBinder2(WebDataBinder binder) {
+	public void initEmailBinder(WebDataBinder binder) {
 		binder.addValidators(emailValidator);
 	}
 	
@@ -72,16 +72,21 @@ public class MemberController {
 	
 	@PostMapping("/member/authEmail")
 	@ResponseBody
-	public String authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, BindingResult result) {
+	public String authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
+							BindingResult result) {
 		log.info("authEmail, memberEmail = {}", emailRequestDTO.getMemberEmail());
 		
 		if(result.hasErrors()) {
-			result.getAllErrors().forEach(e -> 
-				log.info(e.getCodes()[0])
-			);
+			result.getAllErrors().forEach(objectError -> {
+				log.info("code : " + objectError.getCodes()[0]);
+				log.info("defaultMessage : " + objectError.getDefaultMessage());
+				log.info("objectName : " + objectError.getObjectName());
+			});
+			
+			return "YES error";
+		} else {
+			return "NO error";
 		}
-		
-		return "success";
 	}
 	
 	@GetMapping("/member/login")

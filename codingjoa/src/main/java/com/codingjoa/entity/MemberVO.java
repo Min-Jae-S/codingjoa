@@ -29,4 +29,7 @@ public class MemberVO {
 	private Boolean memberAgree;
 	private Date regdate;
 	private Date moddate;
+	
+	@NotBlank
+	private String authCode;
 }

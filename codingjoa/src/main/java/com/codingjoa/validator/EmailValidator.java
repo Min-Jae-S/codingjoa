@@ -18,34 +18,22 @@ import lombok.extern.slf4j.Slf4j;
 @Component(value = "emailValidator")
 public class EmailValidator implements Validator {
 	
-	@Autowired
-	private MemberService memberService;
-	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return (EmailRequestDTO.class.isAssignableFrom(clazz) || MemberVO.class.isAssignableFrom(clazz));
+		return EmailRequestDTO.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		log.info("-------- EmailValidator --------");
+		log.info("-------- EmailValidator.validate() --------");
 
-		String objectName = errors.getObjectName();
-		String memberEmail = null;
-		
-		if(objectName.equals("memberVO")) {
-			MemberVO memberVO = (MemberVO) target;
-			memberEmail = memberVO.getMemberEmail();
-		} else {
-			EmailRequestDTO emailRequestDTO = (EmailRequestDTO) target;
-			memberEmail = emailRequestDTO.getMemberEmail();
-		}
-		
+		EmailRequestDTO emailRequestDTO = (EmailRequestDTO) target;
+		String memberEmail = emailRequestDTO.getMemberEmail();
 		String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 
-		if (StringUtils.isEmpty(memberEmail)) {
-			errors.rejectValue("memberEmail", "NotEmpty");
+		if (!StringUtils.hasText(memberEmail)) {
+			errors.rejectValue("memberEmail", "NotBlank");
 		} else if (!Pattern.matches(regexp, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
 		}

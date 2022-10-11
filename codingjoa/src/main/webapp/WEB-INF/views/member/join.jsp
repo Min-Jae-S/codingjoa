@@ -55,13 +55,17 @@
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberEmail" class="font-weight-bold">이메일</form:label>
-							<div class="input-group">
+							<div class="input-group mb-2">
 								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력" onkeypress="resetCheckEmail()" />
 								<div class="input-group-append">
 									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="authEmail()">인증번호 받기</button>
 								</div>
 							</div>
-							<form:errors path="memberEmail" cssClass="error"/>
+							<div class="input-group">
+								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요." readonly="true"/>
+							</div>
+							<form:errors path="memberEmail" cssClass="error" element="div"/>
+							<form:errors path="authCode" cssClass="error" element="div"/>
 						</div>
 						<div class="form-group">
 							<form:label path="memberZipcode" class="font-weight-bold">주소</form:label>
@@ -83,8 +87,7 @@
 						</div>
 						<div class="form-check small mb-1">
 							<label class="form-check-label">
-								<form:checkbox class="form-check-input" path="memberAgree" />
-								이메일 광고 수신에 동의합니다. (선택)
+								<form:checkbox class="form-check-input" path="memberAgree"/> 이메일 광고 수신에 동의합니다. (선택)
 							</label>
 						</div>
 						<div class="form-check small mb-1">
@@ -117,14 +120,12 @@
 	}); 
 	
 	function authEmail() {
-		var emailRequestDTO = {
-			memberEmail : $("#memberEmail").val()
-		};
-		
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/member/authEmail",
-			data : JSON.stringify(emailRequestDTO),
+			data : JSON.stringify({
+				memberEmail : $("#memberEmail").val() 
+			}),
 			contentType : "application/json; charset=utf-8",
 			success : function(result) {
 				console.log(result);
@@ -133,6 +134,10 @@
 				console.log("error");
 			}
 		});
+	}
+	
+	function sendEmail() {
+		
 	}
 	
 	function toggleJoinBtn(checkbox) {

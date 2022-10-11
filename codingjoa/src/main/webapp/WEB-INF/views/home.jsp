@@ -19,7 +19,6 @@
 
 <div class="container">
 	<h1>home</h1>
-	<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/member/sendEmail'">이메일 보내기</button>
 </div>
 
 <c:import url="/WEB-INF/views/include/bottom-menu.jsp"/>
