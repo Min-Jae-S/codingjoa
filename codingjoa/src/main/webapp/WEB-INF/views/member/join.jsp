@@ -127,6 +127,7 @@
 				memberEmail : $("#memberEmail").val() 
 			}),
 			contentType : "application/json; charset=utf-8",
+			dataType : "JSON",
 			success : function(result) {
 				console.log(result);
 			},

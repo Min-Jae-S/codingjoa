@@ -1,13 +1,19 @@
 package com.codingjoa.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,8 +66,8 @@ public class MemberController {
 		log.info("joinProc, memberVO = {}", memberVO);
 		
 		if(result.hasErrors()) {
-			result.getAllErrors().forEach(e -> 
-				log.info(e.getCodes()[0])
+			result.getAllErrors().forEach(objectError -> 
+				log.info(objectError.getCodes()[0])
 			);
 			return "member/join";
 		}
@@ -72,21 +78,19 @@ public class MemberController {
 	
 	@PostMapping("/member/authEmail")
 	@ResponseBody
-	public String authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
-							BindingResult result) {
-		log.info("authEmail, memberEmail = {}", emailRequestDTO.getMemberEmail());
+	public ResponseEntity<String> authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
+											BindingResult result) {
+		String memberEmail = emailRequestDTO.getMemberEmail();
+		log.info("authEmail, memberEmail = {}", memberEmail);
 		
 		if(result.hasErrors()) {
 			result.getAllErrors().forEach(objectError -> {
 				log.info("code : " + objectError.getCodes()[0]);
-				log.info("defaultMessage : " + objectError.getDefaultMessage());
-				log.info("objectName : " + objectError.getObjectName());
 			});
 			
-			return "YES error";
-		} else {
-			return "NO error";
+			return ResponseEntity.badRequest().body("fail");
 		}
+		return ResponseEntity.ok().body(memberEmail);
 	}
 	
 	@GetMapping("/member/login")
@@ -104,5 +108,6 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
-
+	
+	//@ExceptionHandler()
 }
