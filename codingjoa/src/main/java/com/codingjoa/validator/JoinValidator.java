@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.codingjoa.domain.MemberVO;
+import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.MemberService;
 
 import lombok.AllArgsConstructor;

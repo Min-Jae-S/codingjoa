@@ -1,6 +1,6 @@
 package com.codingjoa.service;
 
-import com.codingjoa.domain.MemberVO;
+import com.codingjoa.entity.MemberVO;
 
 public interface MemberService {
 

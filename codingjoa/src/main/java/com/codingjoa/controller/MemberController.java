@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.codingjoa.domain.MemberVO;
 import com.codingjoa.dto.EmailRequestDTO;
+import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.codingjoa.domain;
+package com.codingjoa.entity;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class MemberVO {
 
-	private int memberIdx;
+	private Long memberIdx;
 	private String memberId;
 	private String memberPassword;
 	private String memberPassword2;
@@ -26,7 +26,7 @@ public class MemberVO {
 	@NotBlank
 	private String memberAddrDetail;
 
-	private boolean memberAgree;
+	private Boolean memberAgree;
 	private Date regdate;
 	private Date moddate;
 }

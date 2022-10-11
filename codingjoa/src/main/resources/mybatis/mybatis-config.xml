@@ -7,6 +7,6 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.codingjoa.domain.MemberVO" alias="memberVO" />
+		<typeAlias type="com.codingjoa.entity.MemberVO" alias="memberVO" />
 	</typeAliases>
 </configuration>

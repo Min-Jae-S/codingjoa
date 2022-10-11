@@ -2,7 +2,7 @@ package com.codingjoa.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.codingjoa.domain.MemberVO;
+import com.codingjoa.entity.MemberVO;
 
 @Mapper
 public interface MemberMapper {

@@ -8,8 +8,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.codingjoa.domain.MemberVO;
 import com.codingjoa.dto.EmailRequestDTO;
+import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
