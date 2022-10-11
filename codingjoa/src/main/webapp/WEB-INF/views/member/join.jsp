@@ -113,14 +113,19 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(function() {
-		alert("join.jsp");
+
 	}); 
 	
 	function authEmail() {
+		var emailRequestDTO = {
+			memberEmail : $("#memberEmail").val()
+		};
+		
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/member/authEmail",
-			data : { memberEmail : $("#memberEmail").val() },
+			data : JSON.stringify(emailRequestDTO),
+			contentType : "application/json; charset=utf-8",
 			success : function(result) {
 				console.log(result);
 			},

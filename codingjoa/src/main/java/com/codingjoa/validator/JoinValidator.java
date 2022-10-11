@@ -29,13 +29,11 @@ public class JoinValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		log.info("====================== JoinValidator ======================");
+		log.info("--------JoinValidator--------");
 		
 		MemberVO memberVO = (MemberVO) target;
-
 		checkId(memberVO.getMemberId(), errors);
 		checkPassword(memberVO.getMemberPassword(), memberVO.getMemberPassword2(), errors);
-		checkEmail(memberVO.getMemberEmail(), errors);
 
 	}
 
@@ -75,18 +73,5 @@ public class JoinValidator implements Validator {
 				errors.rejectValue("memberPassword2", "NotEquals");
 			}
 		}
-	}
-
-	private void checkEmail(String memberEmail, Errors errors) {
-		String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
-
-		if (StringUtils.isEmpty(memberEmail)) {
-			errors.rejectValue("memberEmail", "NotEmpty");
-		} else if (!Pattern.matches(regexp, memberEmail)) {
-			errors.rejectValue("memberEmail", "Pattern");
-		}
-//		else if (true /* 이메일 인증 */) {
-//			errors.rejectValue("memberEmail", "NotCheckValidEmail");
-//		}
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.codingjoa.domain.MemberVO;
+import com.codingjoa.dto.EmailRequestDTO;
 import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +24,24 @@ public class EmailValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return String.class.isAssignableFrom(clazz);
+		return (EmailRequestDTO.class.isAssignableFrom(clazz) || MemberVO.class.isAssignableFrom(clazz));
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		log.info("====================== EmailValidator ======================");
+		log.info("-------- EmailValidator --------");
+
+		String objectName = errors.getObjectName();
+		String memberEmail = null;
 		
-		String memberEmail = (String) target;
+		if(objectName.equals("memberVO")) {
+			MemberVO memberVO = (MemberVO) target;
+			memberEmail = memberVO.getMemberEmail();
+		} else {
+			EmailRequestDTO emailRequestDTO = (EmailRequestDTO) target;
+			memberEmail = emailRequestDTO.getMemberEmail();
+		}
+		
 		String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 
 		if (StringUtils.isEmpty(memberEmail)) {

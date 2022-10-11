@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.domain.MemberVO;
+import com.codingjoa.dto.EmailRequestDTO;
 import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,26 +36,29 @@ public class MemberController {
 	
 	@InitBinder("memberVO")
 	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(joinValidator);
+		binder.addValidators(joinValidator, emailValidator);
+	}
+	
+	@InitBinder("emailRequestDTO")
+	public void initBinder2(WebDataBinder binder) {
+		binder.addValidators(emailValidator);
 	}
 	
 	@GetMapping("/member/join")
 	public String join(@ModelAttribute MemberVO memberVO) {
-		log.info("====================== join ======================");
-		log.info(memberVO.toString());
+		log.info("join, memberVO = {}", memberVO);
 		
 		return "member/join"; 
 	}
 	
 	@PostMapping("/member/joinProc")
 	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
-		log.info("====================== joinProc ======================");
-		log.info(memberVO.toString());
+		log.info("joinProc, memberVO = {}", memberVO);
 		
 		if(result.hasErrors()) {
-			result.getAllErrors().forEach(e -> {
-				log.info(e.getCodes()[0]);
-			});
+			result.getAllErrors().forEach(e -> 
+				log.info(e.getCodes()[0])
+			);
 			return "member/join";
 		}
 		memberService.register(memberVO);
@@ -64,9 +68,14 @@ public class MemberController {
 	
 	@PostMapping("/member/authEmail")
 	@ResponseBody
-	public String authEmail(@Valid String memberEmail) {
-		log.info("====================== authEmail ======================");
-		log.info("memberEmail = {}", memberEmail);
+	public String authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, BindingResult result) {
+		log.info("authEmail, memberEmail = {}", emailRequestDTO.getMemberEmail());
+		
+		if(result.hasErrors()) {
+			result.getAllErrors().forEach(e -> 
+				log.info(e.getCodes()[0])
+			);
+		}
 		
 		return "success";
 	}
