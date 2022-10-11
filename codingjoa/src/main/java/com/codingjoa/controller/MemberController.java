@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.dto.EmailRequestDTO;
 import com.codingjoa.entity.MemberVO;
+import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@Resource(name = "joinValidator")
 	private Validator joinValidator;
@@ -82,9 +86,18 @@ public class MemberController {
 	
 	@GetMapping("/member/login")
 	public String login() {
-		log.info("====================== login ======================");
+		log.info("-------- login --------");
+		
 		return "member/login";
 	}
 	
+	@GetMapping("/member/sendEmail")
+	public String sendEmail() {
+		log.info("-------- sendEmail --------");
+		
+		emailService.sendEmail();
+		
+		return "redirect:/";
+	}
 
 }
