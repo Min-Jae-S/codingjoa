@@ -32,9 +32,9 @@ public class EmailServiceImpl implements EmailService {
 				mailHelper.setSubject("Java Mail Test");
 				mailHelper.setText("테스트");
 			} catch (MessagingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			javaMailSender.send(mimeMessage);
 	}
 
