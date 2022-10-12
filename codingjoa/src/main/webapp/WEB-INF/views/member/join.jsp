@@ -137,10 +137,13 @@
 			contentType : "application/json; charset=utf-8",
 			dataType : "JSON",
 			success : function(result) {
+				$("#memberEmail\\.errors").remove();
 				if(result.validated) {
 					$("#authCode").attr("disabled", false);
+					$("#authCode").focus();
 				} else {
 					$("#authCode").attr("disabled", true);
+					$("#authCode").closest("div").after("<div id='memberEmail.errors' class='error'>" + result.errorMessage + "</div>");
 				}
 			}
 		});
