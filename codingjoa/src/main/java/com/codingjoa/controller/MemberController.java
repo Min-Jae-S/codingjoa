@@ -1,8 +1,5 @@
 package com.codingjoa.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
@@ -11,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.dto.EmailRequestDTO;
-import com.codingjoa.dto.ErrorResponseDTO;
 import com.codingjoa.entity.MemberVO;
+import com.codingjoa.error.ErrorResponse;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
 
@@ -45,14 +40,15 @@ public class MemberController {
 	@Resource(name = "emailValidator")
 	private Validator emailValidator;
 	
-	@InitBinder("memberVO")
-	public void initJoinBinder(WebDataBinder binder) {
-		binder.addValidators(joinValidator);
-	}
-	
-	@InitBinder("emailRequestDTO")
-	public void initEmailBinder(WebDataBinder binder) {
-		binder.addValidators(emailValidator);
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		String objectName = binder.getObjectName();
+		
+		if(objectName.equals("memberVO")) {
+			binder.setValidator(joinValidator);
+		} else if(objectName.equals("emailRequestDTO")) {
+			binder.setValidator(emailValidator);
+		}
 	}
 	
 	@GetMapping("/member/join")
@@ -67,13 +63,8 @@ public class MemberController {
 		log.info("joinProc, memberVO = {}", memberVO);
 
 		if(result.hasErrors()) {
-			result.getAllErrors().forEach(objectError -> {
-				log.info("code : {}", objectError.getCodes()[0]);
-				log.info("objectName : {}", objectError.getObjectName());
-			});
 			return "member/join";
 		}
-		
 		memberService.register(memberVO);
 		
 		return "member/join-success"; 
@@ -81,16 +72,16 @@ public class MemberController {
 	
 	@PostMapping("/member/authEmail")
 	@ResponseBody
-	public void authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
-						  BindingResult result) {
-		log.info("authEmail, memberEmail = {}", emailRequestDTO);
+	public ResponseEntity<ErrorResponse> authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
+						  							BindingResult result) {
+		log.info("authEmail, emailRequestDTO = {}", emailRequestDTO);
 		
 		if(result.hasErrors()) {
-			result.getAllErrors().forEach(objectError -> {
-				log.info("code : {}", objectError.getCodes()[0]);
-				log.info("objectName : {}", objectError.getObjectName());
-			});
+		
 		}
+		emailService.sendEmail();
+		
+		return null;
 	}
 	
 	@GetMapping("/member/login")
@@ -100,14 +91,6 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	@GetMapping("/member/sendEmail")
-	public String sendEmail() {
-		log.info("-------- sendEmail --------");
-		
-		emailService.sendEmail();
-		
-		return "redirect:/";
-	}
 	
 	
 }
