@@ -2,6 +2,6 @@ package com.codingjoa.service;
 
 public interface EmailService {
 	
-	public void sendEmail();
+	public void sendEmail(String memberEmail);
 	
 }

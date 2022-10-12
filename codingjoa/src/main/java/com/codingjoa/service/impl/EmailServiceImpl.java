@@ -1,5 +1,6 @@
 package com.codingjoa.service.impl;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +21,21 @@ public class EmailServiceImpl implements EmailService {
 	
 	@Async
 	@Override
-	public void sendEmail() {
-		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+	public void sendEmail(String memberEmail) {
+			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		
-		try {
-			MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
-			mailHelper.setFrom("suhminjae1027@gmail.com", "Codingjoa");
-			mailHelper.setTo("smj20228@naver.com");
-			mailHelper.setSubject("Java Mail Test");
-			mailHelper.setText("테스트");
-			
+			// MessagingException
+			// MailAuthenticationException, MailSendException, MailException
+			try {
+				MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
+				mailHelper.setTo(memberEmail);
+				mailHelper.setSubject("Java Mail Test");
+				mailHelper.setText("테스트");
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			javaMailSender.send(mimeMessage);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 }
