@@ -16,7 +16,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 	.form-control:read-only {
- 		 background: white;
+ 		background-color: white;
+	}
+	
+	.form-control:disabled {
+		background-color: #f2f2f2;
+	}
+	
+	.border-green {
+		border: 1px solid #62DA98;
 	}
 	
 	.error {
@@ -56,13 +64,13 @@
 						<div class="form-group mb-4">
 							<form:label path="memberEmail" class="font-weight-bold">이메일</form:label>
 							<div class="input-group mb-2">
-								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력" onkeypress="resetCheckEmail()" />
+								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력"/>
 								<div class="input-group-append">
 									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="authEmail()">인증번호 받기</button>
 								</div>
 							</div>
 							<div class="input-group">
-								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요." readonly="true"/>
+								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요." disabled="true" />
 							</div>
 							<form:errors path="memberEmail" cssClass="error" element="div"/>
 							<form:errors path="authCode" cssClass="error" element="div"/>
@@ -129,12 +137,10 @@
 			contentType : "application/json; charset=utf-8",
 			dataType : "JSON",
 			success : function(result) {
-				console.log(result);
-				
-				if(result.isValidated) {
-					
+				if(result.validated) {
+					$("#authCode").attr("disabled", false);
 				} else {
-					
+					$("#authCode").attr("disabled", true);
 				}
 			}
 		});

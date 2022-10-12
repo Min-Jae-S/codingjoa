@@ -83,7 +83,8 @@ public class MemberController {
 		EmailResponseDTO emailResponseDTO = new EmailResponseDTO();
 		if(bindingResult.hasErrors()) {
 			emailResponseDTO.setValidated(false);
-			emailResponseDTO.setErrorMessage(bindingResult.getAllErrors().get(0).getCodes()[0]);
+			String code = bindingResult.getAllErrors().get(0).getCodes()[0];
+			emailResponseDTO.setErrorMessage(messageSource.getMessage(code, null, null));
 		} else {
 			emailResponseDTO.setValidated(true);
 		}
