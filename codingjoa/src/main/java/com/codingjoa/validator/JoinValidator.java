@@ -35,7 +35,6 @@ public class JoinValidator implements Validator {
 		checkId(memberVO.getMemberId(), errors);
 		checkPassword(memberVO.getMemberPassword(), memberVO.getMemberPassword2(), errors);
 		checkEmail(memberVO.getMemberEmail(), errors);
-
 	}
 
 	private void checkId(String memberId, Errors errors) {

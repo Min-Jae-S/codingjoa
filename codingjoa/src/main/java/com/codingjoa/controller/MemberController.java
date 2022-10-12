@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.dto.EmailRequestDTO;
+import com.codingjoa.dto.ErrorResponse;
 import com.codingjoa.entity.MemberVO;
-import com.codingjoa.error.ErrorResponse;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
 
@@ -33,6 +35,9 @@ public class MemberController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private MessageSource messageSource;
 	
 	@Resource(name = "joinValidator")
 	private Validator joinValidator;
@@ -59,10 +64,11 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/joinProc")
-	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
+	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, 
+						   BindingResult bindingResult) {
 		log.info("joinProc, memberVO = {}", memberVO);
 
-		if(result.hasErrors()) {
+		if(bindingResult.hasErrors()) {
 			return "member/join";
 		}
 		memberService.register(memberVO);
@@ -72,16 +78,16 @@ public class MemberController {
 	
 	@PostMapping("/member/authEmail")
 	@ResponseBody
-	public ResponseEntity<ErrorResponse> authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
-						  							BindingResult result) {
+	public ResponseEntity<Object> authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
+						  							BindingResult bindingResult) {
 		log.info("authEmail, emailRequestDTO = {}", emailRequestDTO);
 		
-		if(result.hasErrors()) {
-		
+		if(bindingResult.hasErrors()) {
+			return ResponseEntity.badRequest()
+					.body(ErrorResponse.of(bindingResult, messageSource));
 		}
-		emailService.sendEmail();
 		
-		return null;
+		return ResponseEntity.ok("success");
 	}
 	
 	@GetMapping("/member/login")
