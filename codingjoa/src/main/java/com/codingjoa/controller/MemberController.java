@@ -5,8 +5,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.dto.EmailRequestDTO;
-import com.codingjoa.dto.ErrorResponse;
+import com.codingjoa.dto.EmailResponseDTO;
 import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
@@ -78,16 +76,19 @@ public class MemberController {
 	
 	@PostMapping("/member/authEmail")
 	@ResponseBody
-	public ResponseEntity<Object> authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
-						  							BindingResult bindingResult) {
+	public EmailResponseDTO authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
+						  			  BindingResult bindingResult) {
 		log.info("authEmail, emailRequestDTO = {}", emailRequestDTO);
 		
+		EmailResponseDTO emailResponseDTO = new EmailResponseDTO();
 		if(bindingResult.hasErrors()) {
-			return ResponseEntity.badRequest()
-					.body(ErrorResponse.of(bindingResult, messageSource));
+			emailResponseDTO.setValidated(false);
+			emailResponseDTO.setErrorMessage(bindingResult.getAllErrors().get(0).getCodes()[0]);
+		} else {
+			emailResponseDTO.setValidated(true);
 		}
 		
-		return ResponseEntity.ok("success");
+		return emailResponseDTO;
 	}
 	
 	@GetMapping("/member/login")

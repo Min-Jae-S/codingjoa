@@ -130,9 +130,12 @@
 			dataType : "JSON",
 			success : function(result) {
 				console.log(result);
-			},
-			error : function() {
-				console.log("error");
+				
+				if(result.isValidated) {
+					
+				} else {
+					
+				}
 			}
 		});
 	}
