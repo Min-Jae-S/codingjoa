@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.dto.EmailRequestDTO;
+import com.codingjoa.dto.ErrorResponseDTO;
 import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
@@ -64,13 +65,15 @@ public class MemberController {
 	@PostMapping("/member/joinProc")
 	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult result) {
 		log.info("joinProc, memberVO = {}", memberVO);
-		
+
 		if(result.hasErrors()) {
-			result.getAllErrors().forEach(objectError -> 
-				log.info(objectError.getCodes()[0])
-			);
+			result.getAllErrors().forEach(objectError -> {
+				log.info("code : {}", objectError.getCodes()[0]);
+				log.info("objectName : {}", objectError.getObjectName());
+			});
 			return "member/join";
 		}
+		
 		memberService.register(memberVO);
 		
 		return "member/join-success"; 
@@ -78,19 +81,16 @@ public class MemberController {
 	
 	@PostMapping("/member/authEmail")
 	@ResponseBody
-	public ResponseEntity<String> authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
-											BindingResult result) {
-		String memberEmail = emailRequestDTO.getMemberEmail();
-		log.info("authEmail, memberEmail = {}", memberEmail);
+	public void authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
+						  BindingResult result) {
+		log.info("authEmail, memberEmail = {}", emailRequestDTO);
 		
 		if(result.hasErrors()) {
 			result.getAllErrors().forEach(objectError -> {
-				log.info("code : " + objectError.getCodes()[0]);
+				log.info("code : {}", objectError.getCodes()[0]);
+				log.info("objectName : {}", objectError.getObjectName());
 			});
-			
-			return ResponseEntity.badRequest().body("fail");
 		}
-		return ResponseEntity.ok().body(memberEmail);
 	}
 	
 	@GetMapping("/member/login")
@@ -109,5 +109,5 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	//@ExceptionHandler()
+	
 }
