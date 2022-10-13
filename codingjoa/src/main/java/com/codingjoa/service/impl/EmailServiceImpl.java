@@ -30,8 +30,11 @@ public class EmailServiceImpl implements EmailService {
 				MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
 				mailHelper.setTo(memberEmail);
 				mailHelper.setSubject("Java Mail Test");
-				mailHelper.setText("테스트");
+				mailHelper.setText("<h1>테스트</h1>");
 			} catch (MessagingException e) {
+				// MessagingException에 해당하는 ErrorMessage설정 추가하기 
+				// Async Config
+				// Template(thymleaf, velocity, musch...)
 				e.printStackTrace();
 			}
 			
