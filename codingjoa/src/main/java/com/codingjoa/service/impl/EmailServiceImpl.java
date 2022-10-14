@@ -58,7 +58,7 @@ public class EmailServiceImpl implements EmailService {
 		}
 		
 		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-		valueOperations.set(memberEmail, authCode, Duration.ofSeconds(5 * 60));
+		valueOperations.set(memberEmail, authCode, Duration.ofMinutes(5L));
 	}
 	
 	private String buildTemplate(String authCode) {

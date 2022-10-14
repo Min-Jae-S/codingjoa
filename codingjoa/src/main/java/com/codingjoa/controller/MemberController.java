@@ -5,6 +5,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
@@ -54,6 +56,9 @@ public class MemberController {
 		}
 	}
 	
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
+	
 	@GetMapping("/member/join")
 	public String join(@ModelAttribute MemberVO memberVO) {
 		log.info("join, memberVO = {}", memberVO);
@@ -99,6 +104,24 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	@PostMapping("/member/testRedis")
+	@ResponseBody
+	public String testRedis(String memberEmail) throws InterruptedException {
+		log.info("testRedis, memberEmail = {}", memberEmail);
+		
+		String authCode = "tj23947";
+		
+		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+		valueOperations.set(memberEmail, authCode);
+		log.info("key : {}, value : {} 를 Redis에 저장", memberEmail, authCode);
+		
+		Thread.sleep(3000);
+		
+		String result = valueOperations.get(memberEmail);
+		log.info("Redis에서 value = {}를 조회", result);
+		
+		return result;
+	}
 	
 	
 }
