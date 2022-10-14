@@ -27,25 +27,25 @@ public class EmailServiceImpl implements EmailService {
 	
 	@Async
 	@Override
-	public void sendEmail(EmailRequestDTO emailRequestDTO) {
-			String memberEmail = emailRequestDTO.getMemberEmail();
-		
-			try {
-				MimeMessage mimeMessage = mailSender.createMimeMessage();
-				MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
-				
-				mailHelper.setTo(memberEmail);
-				mailHelper.setSubject("Java Mail Test");
+	public void sendAuthEmail(EmailRequestDTO emailRequestDTO) {
+		String memberEmail = emailRequestDTO.getMemberEmail();
+	
+		try {
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
+			
+			mailHelper.setTo(memberEmail);
+			mailHelper.setSubject("Java Mail Test");
 
-				String html = build(makeAuthCode());
-				mailHelper.setText(html, true);
-				
-				mailSender.send(mimeMessage);
-			} catch (MessagingException e) {
-				// MessagingException에 해당하는 ErrorMessage설정 추가하기
-				// Async Config
-				e.printStackTrace();
-			}
+			String html = build(makeAuthCode());
+			mailHelper.setText(html, true);
+			
+			mailSender.send(mimeMessage);
+		} catch (MessagingException e) {
+			// MessagingException에 해당하는 ErrorMessage설정 추가하기
+			// Async Config
+			e.printStackTrace();
+		}
 	}
 	
 	private String build(String text) {

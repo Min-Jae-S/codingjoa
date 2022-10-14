@@ -81,14 +81,16 @@ public class MemberController {
 		log.info("checkEmail, emailRequestDTO = {}", emailRequestDTO);
 		
 		EmailResponseDTO emailResponseDTO = new EmailResponseDTO();
+
 		if(bindingResult.hasErrors()) {
 			String code = bindingResult.getAllErrors().get(0).getCodes()[0];
 			emailResponseDTO.setErrorMessage(messageSource.getMessage(code, null, null));
 			emailResponseDTO.setValidated(false);
 		} else {
 			emailResponseDTO.setValidated(true);
-			emailService.sendEmail(emailRequestDTO);
+			emailService.sendAuthEmail(emailRequestDTO);
 		}
+		
 		return emailResponseDTO;
 	}
 	
