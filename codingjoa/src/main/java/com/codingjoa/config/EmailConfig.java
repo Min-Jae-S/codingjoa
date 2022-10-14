@@ -6,47 +6,32 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
 @PropertySource("/WEB-INF/properties/mail.properties")
 public class EmailConfig {
+	
+	private Environment env;
 
-	@Value("${mail.host}")
-	private String host;
-
-	@Value("${mail.port}")
-	private int port;
-	
-	@Value("${mail.username}")
-	private String username;
-	
-	@Value("${mail.password}")
-	private String password;
-	
-	@Value("${mail.auth}")
-	private boolean auth;
-	
-	@Value("${mail.enable}")
-	private boolean enable;
-	
 	@Bean
-	public JavaMailSender javaMailSender() {
-		JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
-		javaMailSenderImpl.setHost(host);
-		javaMailSenderImpl.setPort(port);
-		javaMailSenderImpl.setUsername(username);
-		javaMailSenderImpl.setPassword(password);
-		javaMailSenderImpl.setJavaMailProperties(javaMailProperties());
+	public JavaMailSender mailSeneder() {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost(env.getProperty("mail.host"));
+		mailSender.setPort(Integer.parseInt(env.getProperty("mail.port")));
+		mailSender.setUsername(env.getProperty("mail.username"));
+		mailSender.setPassword(env.getProperty("mail.password"));
+		mailSender.setJavaMailProperties(javaMailProperties());
 		
-		return javaMailSenderImpl;
+		return mailSender;
 	}
 	
 	private Properties javaMailProperties() {
 		Properties properties = new Properties();
-		properties.put("mail.smtp.auth", auth);
-		properties.put("mail.smtp.starttls.enable", enable);
+		properties.put("mail.smtp.auth", env.getProperty("mail.auth"));
+		properties.put("mail.smtp.starttls.enable", env.getProperty("mail.enable"));
 		
 		return properties;
 	}

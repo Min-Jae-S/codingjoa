@@ -9,6 +9,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @EnableWebMvc
@@ -27,6 +31,26 @@ public class ServletConfig implements WebMvcConfigurer {
 		// TODO Auto-generated method stub
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 		registry.addResourceHandler("/**").addResourceLocations("/resources/");
+	}
+	
+	@Bean
+	public TemplateEngine templateEngine() {
+		SpringTemplateEngine templaEngine = new SpringTemplateEngine();
+		templaEngine.addTemplateResolver(springResourceTemplateResolver());
+		
+		return templaEngine;
+	}
+	
+	@Bean
+	public SpringResourceTemplateResolver springResourceTemplateResolver() {
+		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+		resolver.setPrefix("/WEB-INF/views/");
+		resolver.setSuffix(".html");
+		resolver.setTemplateMode(TemplateMode.HTML);
+		resolver.setCharacterEncoding("UTF-8");
+		resolver.setCacheable(false);
+		
+		return resolver;
 	}
 
 	@Bean

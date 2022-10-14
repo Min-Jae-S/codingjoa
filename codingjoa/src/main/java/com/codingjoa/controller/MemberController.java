@@ -74,11 +74,11 @@ public class MemberController {
 		return "member/join-success"; 
 	}
 	
-	@PostMapping("/member/authEmail")
+	@PostMapping("/member/checkEmail")
 	@ResponseBody
-	public EmailResponseDTO authEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
-						  			  BindingResult bindingResult) {
-		log.info("authEmail, emailRequestDTO = {}", emailRequestDTO);
+	public EmailResponseDTO checkEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
+						  			   BindingResult bindingResult) {
+		log.info("checkEmail, emailRequestDTO = {}", emailRequestDTO);
 		
 		EmailResponseDTO emailResponseDTO = new EmailResponseDTO();
 		if(bindingResult.hasErrors()) {
@@ -87,7 +87,7 @@ public class MemberController {
 			emailResponseDTO.setValidated(false);
 		} else {
 			emailResponseDTO.setValidated(true);
-			emailService.sendEmail(emailRequestDTO.getMemberEmail());
+			emailService.sendEmail(emailRequestDTO);
 		}
 		return emailResponseDTO;
 	}

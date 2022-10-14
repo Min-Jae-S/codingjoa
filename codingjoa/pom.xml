@@ -18,6 +18,7 @@
 		<javax.servlet.jsp-version>2.3.3</javax.servlet.jsp-version>
 		<javax.servlet.jsp.jstl-version>1.2</javax.servlet.jsp.jstl-version>
 		<com.oracle-version>11.2.0.3</com.oracle-version>
+		<org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
 	</properties>
 
 	<repositories>
@@ -206,6 +207,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- thymeleaf(email template) -->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring5</artifactId>
+			<version>${org.thymeleaf-version}</version>
 		</dependency>
 
 	</dependencies>

@@ -9,7 +9,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
+import com.codingjoa.dto.EmailRequestDTO;
 import com.codingjoa.service.EmailService;
 
 @EnableAsync
@@ -17,28 +20,43 @@ import com.codingjoa.service.EmailService;
 public class EmailServiceImpl implements EmailService {
 
 	@Autowired
-	JavaMailSender javaMailSender;
+	JavaMailSender mailSender;
+	
+	@Autowired
+	TemplateEngine templateEngine;
 	
 	@Async
 	@Override
-	public void sendEmail(String memberEmail) {
-			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+	public void sendEmail(EmailRequestDTO emailRequestDTO) {
+			String memberEmail = emailRequestDTO.getMemberEmail();
 		
-			// MessagingException
-			// MailAuthenticationException, MailSendException, MailException
 			try {
+				MimeMessage mimeMessage = mailSender.createMimeMessage();
 				MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
+				
 				mailHelper.setTo(memberEmail);
 				mailHelper.setSubject("Java Mail Test");
-				mailHelper.setText("<h1>테스트</h1>");
+
+				String html = build(makeAuthCode());
+				mailHelper.setText(html, true);
+				
+				mailSender.send(mimeMessage);
 			} catch (MessagingException e) {
-				// MessagingException에 해당하는 ErrorMessage설정 추가하기 
+				// MessagingException에 해당하는 ErrorMessage설정 추가하기
 				// Async Config
-				// Template(thymleaf, velocity, musch...)
 				e.printStackTrace();
 			}
-			
-			javaMailSender.send(mimeMessage);
+	}
+	
+	private String build(String text) {
+		Context ctx = new Context();
+		ctx.setVariable("text", text);
+		
+		return templateEngine.process("template/authcode-mail", ctx);
+	}
+	
+	private String makeAuthCode() {
+		return "12345x";
 	}
 
 }

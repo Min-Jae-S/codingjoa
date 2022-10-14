@@ -66,7 +66,7 @@
 							<div class="input-group mb-2">
 								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력"/>
 								<div class="input-group-append">
-									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="authEmail()">인증번호 받기</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="checkEmail()">인증번호 받기</button>
 								</div>
 							</div>
 							<div class="input-group">
@@ -127,10 +127,10 @@
 
 	}); 
 	
-	function authEmail() {
+	function checkEmail() {
 		$.ajax({
 			type : "POST",
-			url : "${contextPath}/member/authEmail",
+			url : "${contextPath}/member/checkEmail",
 			data : JSON.stringify({
 				memberEmail : $("#memberEmail").val() 
 			}),
