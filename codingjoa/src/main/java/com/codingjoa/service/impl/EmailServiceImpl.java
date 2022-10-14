@@ -37,7 +37,10 @@ public class EmailServiceImpl implements EmailService {
 			mailHelper.setTo(memberEmail);
 			mailHelper.setSubject("Java Mail Test");
 
-			String html = build(makeAuthCode());
+			Context context = new Context();
+			context.setVariable("authcode", makeAuthCode());
+			
+			String html = templateEngine.process("template/authcode-mail", context);
 			mailHelper.setText(html, true);
 			
 			mailSender.send(mimeMessage);
@@ -46,13 +49,6 @@ public class EmailServiceImpl implements EmailService {
 			// Async Config
 			e.printStackTrace();
 		}
-	}
-	
-	private String build(String text) {
-		Context ctx = new Context();
-		ctx.setVariable("text", text);
-		
-		return templateEngine.process("template/authcode-mail", ctx);
 	}
 	
 	private String makeAuthCode() {

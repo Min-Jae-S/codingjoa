@@ -74,9 +74,9 @@ public class MemberController {
 		return "member/join-success"; 
 	}
 	
-	@PostMapping("/member/checkEmail")
+	@PostMapping("/member/sendAuthEmail")
 	@ResponseBody
-	public EmailResponseDTO checkEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
+	public EmailResponseDTO sendAuthEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
 						  			   BindingResult bindingResult) {
 		log.info("checkEmail, emailRequestDTO = {}", emailRequestDTO);
 		
