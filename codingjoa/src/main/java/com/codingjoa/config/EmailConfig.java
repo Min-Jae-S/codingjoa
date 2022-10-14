@@ -2,7 +2,7 @@ package com.codingjoa.config;
 
 import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @PropertySource("/WEB-INF/properties/mail.properties")
 public class EmailConfig {
 	
+	@Autowired
 	private Environment env;
 
 	@Bean
