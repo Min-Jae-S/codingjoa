@@ -62,8 +62,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/joinProc")
-	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, 
-						   BindingResult bindingResult) {
+	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult bindingResult) {
 		log.info("joinProc, memberVO = {}", memberVO);
 
 		if(bindingResult.hasErrors()) {
@@ -76,9 +75,8 @@ public class MemberController {
 	
 	@PostMapping("/member/sendAuthEmail")
 	@ResponseBody
-	public EmailResponseDTO sendAuthEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, 
-						  			   BindingResult bindingResult) {
-		log.info("checkEmail, emailRequestDTO = {}", emailRequestDTO);
+	public EmailResponseDTO sendAuthEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, BindingResult bindingResult) {
+		log.info("sendAuthEmail, emailRequestDTO = {}", emailRequestDTO);
 		
 		EmailResponseDTO emailResponseDTO = new EmailResponseDTO();
 
