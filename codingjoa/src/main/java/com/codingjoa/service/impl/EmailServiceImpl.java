@@ -1,10 +1,14 @@
 package com.codingjoa.service.impl;
 
+import java.time.Duration;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -16,42 +20,50 @@ import org.thymeleaf.context.Context;
 import com.codingjoa.dto.EmailRequestDTO;
 import com.codingjoa.service.EmailService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @EnableAsync
 @Service
 public class EmailServiceImpl implements EmailService {
 
 	@Autowired
-	JavaMailSender mailSender;
+	private JavaMailSender mailSender;
 	
 	@Autowired
-	TemplateEngine templateEngine;
+	private TemplateEngine templateEngine;
 	
-	@Async
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
+	
+	@Async // Async Config
 	@Override
 	public void sendAuthEmail(EmailRequestDTO emailRequestDTO) {
-		String subject = "authcode 메일입니다.";
-		String to = emailRequestDTO.getMemberEmail();
-		String text = buildTemplate();
+		String authCode = RandomStringUtils.randomAlphanumeric(10);
+		log.info("authCode : {}", authCode);
+
+		String text = buildTemplate(authCode);
+		String memberEmail = emailRequestDTO.getMemberEmail();
 	
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
 
-			mailHelper.setTo(to);
-			mailHelper.setSubject(subject);
+			mailHelper.setTo(memberEmail);
+			mailHelper.setSubject("test");
 			mailHelper.setText(text, true);
 			mailSender.send(mimeMessage);
-			
 		} catch (MessagingException e) {
-			// MessagingException에 해당하는 ErrorMessage설정 추가하기
-			// Async Config
 			e.printStackTrace();
 		}
+		
+		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+		valueOperations.set(memberEmail, authCode, Duration.ofSeconds(5 * 60));
 	}
 	
-	private String buildTemplate() {
+	private String buildTemplate(String authCode) {
 		Context context = new Context();
-		context.setVariable("authCode", RandomStringUtils.randomAlphanumeric(10));
+		context.setVariable("authCode", authCode);
 		
 		return templateEngine.process("template/authcode-mail", context);
 	}
