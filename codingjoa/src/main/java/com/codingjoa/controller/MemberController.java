@@ -109,7 +109,7 @@ public class MemberController {
 	public String testRedis(String memberEmail) throws InterruptedException {
 		log.info("testRedis, memberEmail = {}", memberEmail);
 		
-		String authCode = "tj23947";
+		String authCode = "";
 		
 		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
 		valueOperations.set(memberEmail, authCode);
