@@ -53,6 +53,7 @@ public class EmailServiceImpl implements EmailService {
 			mailHelper.setSubject("test");
 			mailHelper.setText(text, true);
 			mailSender.send(mimeMessage);
+			
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

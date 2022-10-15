@@ -115,7 +115,7 @@ public class MemberController {
 		valueOperations.set(memberEmail, authCode);
 		log.info("key : {}, value : {}를 Redis에 저장", memberEmail, authCode);
 		
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		
 		String result = valueOperations.get(memberEmail);
 		log.info("Redis에서 조회된 결과, value = {}", result);
