@@ -3,6 +3,7 @@ package com.codingjoa.controller;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -109,16 +110,17 @@ public class MemberController {
 	public String testRedis(String memberEmail) throws InterruptedException {
 		log.info("testRedis, memberEmail = {}", memberEmail);
 		
-		String authCode = "";
+		String authCode = RandomStringUtils.randomAlphanumeric(10);
+		log.info("authCod = {}", authCode);
 		
 		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
 		valueOperations.set(memberEmail, authCode);
-		log.info("key : {}, value : {}를 Redis에 저장", memberEmail, authCode);
+		log.info("key = {}, value = {}를 Redis에 저장", memberEmail, authCode);
 		
 		Thread.sleep(2000);
 		
 		String result = valueOperations.get(memberEmail);
-		log.info("Redis에서 조회된 결과, value = {}", result);
+		log.info("Redis에서 조회, value = {}", result);
 		
 		return result;
 	}
