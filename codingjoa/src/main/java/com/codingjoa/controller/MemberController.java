@@ -105,6 +105,7 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	/* Redis Test */
 	@PostMapping("/member/testRedis")
 	@ResponseBody
 	public String testRedis(String memberEmail) throws InterruptedException {
