@@ -42,7 +42,7 @@ public class EmailServiceImpl implements EmailService {
 		String authCode = RandomStringUtils.randomAlphanumeric(10);
 		log.info("authCode : {}", authCode);
 
-		String text = buildTemplate(authCode);
+		String html = buildTemplate(authCode);
 		String memberEmail = emailRequestDTO.getMemberEmail();
 	
 		try {
@@ -51,7 +51,7 @@ public class EmailServiceImpl implements EmailService {
 
 			mailHelper.setTo(memberEmail);
 			mailHelper.setSubject("test");
-			mailHelper.setText(text, true);
+			mailHelper.setText(html, true);
 			mailSender.send(mimeMessage);
 			
 		} catch (MessagingException e) {
