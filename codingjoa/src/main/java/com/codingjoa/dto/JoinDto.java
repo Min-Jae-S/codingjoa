@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class JoinRequestDTO {
+public class JoinDto {
 
 	private String memberId;
 	private String memberPassword;

@@ -3,7 +3,7 @@ package com.codingjoa.dto;
 import lombok.Data;
 
 @Data
-public class EmailRequestDTO {
+public class EmailDto {
 	
 	private String memberEmail;
 }

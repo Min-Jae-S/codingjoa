@@ -1,9 +1,9 @@
 package com.codingjoa.service;
 
-import com.codingjoa.dto.EmailRequestDTO;
+import com.codingjoa.dto.EmailDto;
 
 public interface EmailService {
 	
-	public void sendAuthEmail(EmailRequestDTO emailReqestDTO);
+	public void sendAuthEmail(EmailDto emailDto);
 	
 }

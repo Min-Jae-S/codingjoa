@@ -39,7 +39,7 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${contextPath}/member/loginProc" method="POST" modelAttribute="loginRequestDTO">
+					<form:form action="${contextPath}/member/loginProc" method="POST" modelAttribute="loginDto">
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
 							<form:input path="memberId" class="form-control" placeholder="아이디"/>

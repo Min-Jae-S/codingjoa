@@ -2,16 +2,12 @@ package com.codingjoa.validator;
 
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.codingjoa.dto.EmailRequestDTO;
-import com.codingjoa.entity.MemberVO;
-import com.codingjoa.service.MemberService;
-import com.codingjoa.service.RedisService;
+import com.codingjoa.dto.EmailDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,15 +18,15 @@ public class EmailValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return EmailRequestDTO.class.isAssignableFrom(clazz);
+		return EmailDto.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
 		log.info("============== EmailValidator ==============");
 
-		EmailRequestDTO emailRequestDTO = (EmailRequestDTO) target;
-		String memberEmail = emailRequestDTO.getMemberEmail();
+		EmailDto emailDto = (EmailDto) target;
+		String memberEmail = emailDto.getMemberEmail();
 		String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 
 		if (!StringUtils.hasText(memberEmail)) {

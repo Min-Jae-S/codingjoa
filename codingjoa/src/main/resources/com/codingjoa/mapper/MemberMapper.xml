@@ -18,7 +18,7 @@
 	);
 	-->
 	
-	<insert id="register" parameterType="memberVO">
+	<insert id="register" parameterType="member">
 		INSERT INTO member (
 			member_idx,
 			member_id,

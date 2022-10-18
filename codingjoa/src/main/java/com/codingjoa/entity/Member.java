@@ -3,12 +3,9 @@ package com.codingjoa.entity;
 import java.util.Date;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
 
-@Getter
-@ToString
-public class MemberVO {
+@Data
+public class Member {
 
 	private Long memberIdx;
 	private String memberId;

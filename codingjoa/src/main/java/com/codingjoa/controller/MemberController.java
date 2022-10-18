@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.codingjoa.dto.EmailRequestDTO;
+import com.codingjoa.dto.EmailDto;
 import com.codingjoa.dto.EmailResponseDTO;
-import com.codingjoa.dto.JoinRequestDTO;
-import com.codingjoa.dto.LoginRequestDTO;
+import com.codingjoa.dto.JoinDto;
+import com.codingjoa.dto.LoginDto;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
 
@@ -51,38 +51,38 @@ public class MemberController {
 	public void initBinder(WebDataBinder binder) {
 		String objectName = binder.getObjectName();
 
-		if(objectName.equals("joinRequestDTO")) {
+		if(objectName.equals("joinDto")) {
 			binder.addValidators(joinValidator);
-		} else if(objectName.equals("emailRequestDTO")) {
+		} else if(objectName.equals("emailDto")) {
 			binder.addValidators(emailValidator);
-		} else if(objectName.equals("loginRequestDTO")) {
+		} else if(objectName.equals("loginDto")) {
 			binder.addValidators(loginValidator);
 		}
 	}
 	
 	@GetMapping("/member/join")
-	public String join(@ModelAttribute JoinRequestDTO joinRequestDTO) {
-		log.info("join, {}", joinRequestDTO);
+	public String join(@ModelAttribute JoinDto joinDto) {
+		log.info("join, {}", joinDto);
 		
 		return "member/join"; 
 	}
 	
 	@PostMapping("/member/joinProc")
-	public String joinProc(@Valid @ModelAttribute JoinRequestDTO joinRequestDTO, BindingResult bindingResult) {
-		log.info("joinProc, {}", joinRequestDTO);
+	public String joinProc(@Valid @ModelAttribute JoinDto joinDto, BindingResult bindingResult) {
+		log.info("joinProc, {}", joinDto);
 
 		if(bindingResult.hasErrors()) {
 			return "member/join";
 		}
-		memberService.register(joinRequestDTO);
+		memberService.register(joinDto);
 		
 		return "member/join-success"; 
 	}
 	
 	@PostMapping("/member/sendAuthEmail")
 	@ResponseBody
-	public EmailResponseDTO sendAuthEmail(@Valid @RequestBody EmailRequestDTO emailRequestDTO, BindingResult bindingResult) {
-		log.info("sendAuthEmail, emailRequestDTO = {}", emailRequestDTO);
+	public EmailResponseDTO sendAuthEmail(@Valid @RequestBody EmailDto emailDto, BindingResult bindingResult) {
+		log.info("sendAuthEmail, {}", emailDto);
 		
 		EmailResponseDTO emailResponseDTO = new EmailResponseDTO();
 
@@ -92,15 +92,15 @@ public class MemberController {
 			emailResponseDTO.setValidated(false);
 		} else {
 			emailResponseDTO.setValidated(true);
-			emailService.sendAuthEmail(emailRequestDTO);
+			emailService.sendAuthEmail(emailDto);
 		}
 		
 		return emailResponseDTO;
 	}
 	
 	@GetMapping("/member/login")
-	public String login(@ModelAttribute LoginRequestDTO loginRequestDTO) {
-		log.info("login, {}", loginRequestDTO);
+	public String login(@ModelAttribute LoginDto loginDto) {
+		log.info("login, {}", loginDto);
 		
 		return "member/login";
 	}

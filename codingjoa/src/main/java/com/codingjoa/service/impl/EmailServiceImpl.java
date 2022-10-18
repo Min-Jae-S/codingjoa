@@ -1,14 +1,10 @@
 package com.codingjoa.service.impl;
 
-import java.time.Duration;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -17,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import com.codingjoa.dto.EmailRequestDTO;
+import com.codingjoa.dto.EmailDto;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.RedisService;
 
@@ -39,13 +35,13 @@ public class EmailServiceImpl implements EmailService {
 	
 	@Async // Async Config
 	@Override
-	public void sendAuthEmail(EmailRequestDTO emailRequestDTO) {
+	public void sendAuthEmail(EmailDto emailDto) {
+		String memberEmail = emailDto.getMemberEmail();
 		String authCode = RandomStringUtils.randomAlphanumeric(10);
 		log.info("authCode : {}", authCode);
-
-		String html = buildTemplate(authCode);
-		String memberEmail = emailRequestDTO.getMemberEmail();
 	
+		String html = buildTemplate(authCode);
+		
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
