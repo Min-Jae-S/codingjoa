@@ -70,7 +70,7 @@
 								</div>
 							</div>
 							<div class="input-group">
-								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요." disabled="true" />
+								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요."/>
 							</div>
 							<form:errors path="memberEmail" cssClass="error" element="div"/>
 							<form:errors path="authCode" cssClass="error" element="div"/>
@@ -124,7 +124,8 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(function() {
-
+		
+		
 	}); 
 	
 	function sendAuthEmail() {
@@ -138,11 +139,11 @@
 			dataType : "JSON",
 			success : function(result) {
 				$("#memberEmail\\.errors").remove();
+				$("#authCode\\.errors").remove();
 				if(result.validated) {
-					$("#authCode").attr("disabled", false);
+					$("#authCode").val("");
 					$("#authCode").focus();
 				} else {
-					$("#authCode").attr("disabled", true);
 					$("#authCode").closest("div").after("<div id='memberEmail.errors' class='error'>" + result.errorMessage + "</div>");
 				}
 			}

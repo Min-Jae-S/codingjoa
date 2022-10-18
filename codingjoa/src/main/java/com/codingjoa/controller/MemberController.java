@@ -3,11 +3,8 @@ package com.codingjoa.controller;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
@@ -49,16 +46,13 @@ public class MemberController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		String objectName = binder.getObjectName();
-		
+
 		if(objectName.equals("memberVO")) {
-			binder.setValidator(joinValidator);
+			binder.addValidators(joinValidator);
 		} else if(objectName.equals("emailRequestDTO")) {
-			binder.setValidator(emailValidator);
+			binder.addValidators(emailValidator);
 		}
 	}
-	
-	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
 	
 	@GetMapping("/member/join")
 	public String join(@ModelAttribute MemberVO memberVO) {
@@ -103,27 +97,6 @@ public class MemberController {
 		log.info("-------- login --------");
 		
 		return "member/login";
-	}
-	
-	/* Redis Test */
-	@PostMapping("/member/testRedis")
-	@ResponseBody
-	public String testRedis(String memberEmail) throws InterruptedException {
-		log.info("testRedis, memberEmail = {}", memberEmail);
-		
-		String authCode = RandomStringUtils.randomAlphanumeric(10);
-		log.info("authCod = {}", authCode);
-		
-		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-		valueOperations.set(memberEmail, authCode);
-		log.info("key = {}, value = {}를 Redis에 저장", memberEmail, authCode);
-		
-		Thread.sleep(2000);
-		
-		String result = valueOperations.get(memberEmail);
-		log.info("Redis에서 조회, value = {}", result);
-		
-		return result;
 	}
 	
 	
