@@ -43,7 +43,7 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${contextPath}/member/joinProc" method="POST" modelAttribute="memberVO">
+					<form:form action="${contextPath}/member/joinProc" method="POST" modelAttribute="joinRequestDTO">
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
 							<div class="input-group">

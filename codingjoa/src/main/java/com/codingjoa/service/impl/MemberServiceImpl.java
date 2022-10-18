@@ -35,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO memberVO = modelMapper.map(joinRequestDTO, MemberVO.class);
 		log.info("joinRequestDTO --> memberVO = {}", memberVO);
 		
-		memberMapper.register(memberVO);
+		//memberMapper.register(memberVO);
 	}
 
 	@Override
