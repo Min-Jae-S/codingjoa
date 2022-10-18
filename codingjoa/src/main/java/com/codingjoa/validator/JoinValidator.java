@@ -10,6 +10,7 @@ import org.springframework.validation.Validator;
 
 import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.MemberService;
+import com.codingjoa.service.RedisService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +20,9 @@ public class JoinValidator implements Validator {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private RedisService redisService;
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -34,7 +38,7 @@ public class JoinValidator implements Validator {
 		
 		checkId(memberVO.getMemberId(), errors);
 		checkPassword(memberVO.getMemberPassword(), memberVO.getMemberPassword2(), errors);
-		checkEmail(memberVO.getMemberEmail(), errors);
+		checkEmailAndAuth(memberVO.getMemberEmail(), memberVO.getAuthCode(), errors);
 	}
 
 	private void checkId(String memberId, Errors errors) {
@@ -44,7 +48,7 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberId", "NotBlank");
 		} else if (!Pattern.matches(regexp, memberId)) {
 			errors.rejectValue("memberId", "Pattern");
-		} else if (memberService.checkIdExist(memberId)) {
+		} else if (memberService.isIdExist(memberId)) {
 			errors.rejectValue("memberId", "IdExist");
 		}
 	}
@@ -72,13 +76,18 @@ public class JoinValidator implements Validator {
 		}
 	}
 	
-	private void checkEmail(String memberEmail, Errors errors) {
+	private void checkEmailAndAuth(String memberEmail, String authCode, Errors errors) {
 		String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 		
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
 		} else if (!Pattern.matches(regexp, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
+		} else if (!StringUtils.hasText(authCode)) {
+			errors.rejectValue("authCode", "NotBlank");
+		} else if (!redisService.isAuthCodeValid(memberEmail, authCode)) {
+			errors.rejectValue("authCode", "NotValid");
 		}
 	}
+	
 }

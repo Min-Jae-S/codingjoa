@@ -16,6 +16,7 @@ public class MemberVO {
 	private String memberPassword;
 	private String memberPassword2;
 	private String memberEmail;
+	private String authCode;
 
 	@NotBlank
 	private String memberZipcode;
@@ -25,9 +26,8 @@ public class MemberVO {
 
 	@NotBlank
 	private String memberAddrDetail;
-
 	private Boolean memberAgree;
 	private Date regdate;
 	private Date moddate;
-	private String authCode;
+	
 }

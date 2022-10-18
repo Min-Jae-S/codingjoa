@@ -51,7 +51,7 @@ public class EmailServiceImpl implements EmailService {
 			MimeMessageHelper mailHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
 
 			mailHelper.setTo(memberEmail);
-			mailHelper.setSubject("test");
+			mailHelper.setSubject("[codingjoa] 이메일 인증번호입니다.");
 			mailHelper.setText(html, true);
 			mailSender.send(mimeMessage);
 			

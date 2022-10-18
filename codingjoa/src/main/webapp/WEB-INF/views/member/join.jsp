@@ -112,7 +112,6 @@
 					<p class="text-center small">
 						이미 회원이신가요? <a href="${contextPath}/member/login">로그인 하기</a>
 					</p>
-					<button type="button" class="btn btn-warning btn-block" onclick="testRedis()">Test Redis</button>
 				</div>
 			</div>
 		</div>
@@ -127,22 +126,6 @@
 	$(function() {
 
 	}); 
-	
-	function testRedis() {
-		console.log("testRedis button clicked...");
-		
-		$.ajax({
-			type : "POST",
-			url : "${contextPath}/member/testRedis",
-			data : { memberEmail : $("#memberEmail").val() },
-			success : function(result) {
-				console.log(result);
-			},
-			error : function() {
-				console.log("error");
-			}
-		});
-	}
 	
 	function sendAuthEmail() {
 		$.ajax({
@@ -164,10 +147,6 @@
 				}
 			}
 		});
-	}
-	
-	function sendEmail() {
-		
 	}
 	
 	function toggleJoinBtn(checkbox) {

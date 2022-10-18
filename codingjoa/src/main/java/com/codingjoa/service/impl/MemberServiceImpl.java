@@ -30,8 +30,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean checkIdExist(String memberId) {
-		return memberMapper.checkIdExist(memberId);
+	public boolean isIdExist(String memberId) {
+		return memberMapper.isIdExist(memberId);
 	}
 	
 }

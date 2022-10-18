@@ -22,8 +22,10 @@ public class RedisServiceImpl implements RedisService {
 	}
 
 	@Override
-	public void loadAuthCode(String memberEmail, String authCode) {
-		// TODO Auto-generated method stub
+	public boolean isAuthCodeValid(String memberEmail, String authCode) {
+		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+		String value = valueOperations.get(memberEmail);
 		
+		return authCode.equals(value);
 	}
 }

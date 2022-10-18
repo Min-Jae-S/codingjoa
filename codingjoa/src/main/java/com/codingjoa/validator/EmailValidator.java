@@ -19,9 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Component(value = "emailValidator")
 public class EmailValidator implements Validator {
 	
-	@Autowired
-	private RedisService redisService;
-	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
