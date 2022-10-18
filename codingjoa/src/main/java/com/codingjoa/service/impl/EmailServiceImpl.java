@@ -19,6 +19,7 @@ import org.thymeleaf.context.Context;
 
 import com.codingjoa.dto.EmailRequestDTO;
 import com.codingjoa.service.EmailService;
+import com.codingjoa.service.RedisService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +35,7 @@ public class EmailServiceImpl implements EmailService {
 	private TemplateEngine templateEngine;
 	
 	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	private RedisService redisService;
 	
 	@Async // Async Config
 	@Override
@@ -58,8 +59,7 @@ public class EmailServiceImpl implements EmailService {
 			e.printStackTrace();
 		}
 		
-		ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
-		valueOperations.set(memberEmail, authCode, Duration.ofMinutes(5L));
+		redisService.saveAuthCode(memberEmail, authCode);
 	}
 	
 	private String buildTemplate(String authCode) {

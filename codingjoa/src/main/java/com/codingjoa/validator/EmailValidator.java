@@ -11,12 +11,16 @@ import org.springframework.validation.Validator;
 import com.codingjoa.dto.EmailRequestDTO;
 import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.MemberService;
+import com.codingjoa.service.RedisService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component(value = "emailValidator")
 public class EmailValidator implements Validator {
+	
+	@Autowired
+	private RedisService redisService;
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
