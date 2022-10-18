@@ -23,8 +23,13 @@
 		background-color: #f2f2f2;
 	}
 	
-	.border-green {
-		border: 1px solid #62DA98;
+	.container {
+		margin-top: 150px;
+		margin-bottom: 100px;
+	}
+	
+	input::placeholder {
+		font-size: 14px;
 	}
 	
 	.error {
@@ -37,7 +42,7 @@
 
 <c:import url="/WEB-INF/views/include/top-menu.jsp"/>
 
-<div class="container py-5 my-5">
+<div class="container">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
@@ -104,9 +109,8 @@
 								<a href="#">이용약관</a> 및 <a href="#">개인정보 처리방침</a>에 동의합니다.
 							</label>
 						</div>
-						<hr>
-						<div class="form-group">
-							<form:button class="btn btn-primary btn-block mb-4" id="joinBtn" disabled="false">회원가입</form:button>
+						<div class="form-group pt-4">
+							<form:button class="btn btn-primary btn-lg btn-block mb-4" id="joinBtn" disabled="true">회원가입</form:button>
 						</div>
 					</form:form>
 					<p class="text-center small">
