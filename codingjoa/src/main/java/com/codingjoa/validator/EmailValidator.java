@@ -27,7 +27,7 @@ public class EmailValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		log.info("-------- EmailValidator.validate() --------");
+		log.info("============== EmailValidator ==============");
 
 		EmailRequestDTO emailRequestDTO = (EmailRequestDTO) target;
 		String memberEmail = emailRequestDTO.getMemberEmail();

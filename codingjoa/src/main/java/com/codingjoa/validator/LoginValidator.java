@@ -20,7 +20,7 @@ public class LoginValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		log.info("--------LoginValidator.validate() --------");
+		log.info("============== LoginValidator ==============");
 	}
 
 }

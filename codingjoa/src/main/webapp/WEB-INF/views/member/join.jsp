@@ -144,6 +144,7 @@
 			success : function(result) {
 				$("#memberEmail\\.errors").remove();
 				$("#authCode\\.errors").remove();
+				
 				if(result.validated) {
 					$("#authCode").val("");
 					$("#authCode").focus();

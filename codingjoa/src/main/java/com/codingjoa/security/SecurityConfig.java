@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -15,6 +17,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new LoginSuccessHandler();
+	}
+	
+	@Bean
+	public AuthenticationFailureHandler authenticationFailureHandler() {
+		return new LoginFailureHandler();
 	}
 	
 	@Override
@@ -38,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("memberId")
 				.passwordParameter("memberPassword")
 				.loginProcessingUrl("/member/loginProc")
+				.successHandler(authenticationSuccessHandler())
+				.failureHandler(authenticationFailureHandler())
 				.permitAll()
 				.and()
 			.logout()
