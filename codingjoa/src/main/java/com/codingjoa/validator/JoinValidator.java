@@ -36,7 +36,6 @@ public class JoinValidator implements Validator {
 		log.info("--------JoinValidator.validate() --------");
 
 		JoinRequestDTO joinRequestDTO = (JoinRequestDTO) target;
-		
 		checkId(joinRequestDTO.getMemberId(), errors);
 		checkPassword(joinRequestDTO.getMemberPassword(), joinRequestDTO.getMemberPassword2(), errors);
 		checkEmailAndAuth(joinRequestDTO.getMemberEmail(), joinRequestDTO.getAuthCode(), errors);

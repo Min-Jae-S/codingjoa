@@ -10,7 +10,6 @@ public class MemberVO {
 	private Long memberIdx;
 	private String memberId;
 	private String memberPassword;
-	private String memberPassword2;
 	private String memberEmail;
 	private String memberZipcode;
 	private String memberAddr;
