@@ -1,22 +1,26 @@
-package com.codingjoa.entity;
+package com.codingjoa.dto;
 
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
 @Data
-public class MemberVO {
+public class JoinRequestDTO {
 
-	private Long memberIdx;
 	private String memberId;
 	private String memberPassword;
 	private String memberPassword2;
 	private String memberEmail;
+	private String authCode;
+
+	@NotBlank
 	private String memberZipcode;
-	private String memberAddr;
-	private String memberAddrDetail;
-	private Boolean memberAgree;
-	private Date regdate;
-	private Date moddate;
 	
+	@NotBlank
+	private String memberAddr;
+	
+	@NotBlank
+	private String memberAddrDetail;
+	
+	private boolean memberAgree;
 }

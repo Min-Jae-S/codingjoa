@@ -1,10 +1,10 @@
 package com.codingjoa.service;
 
-import com.codingjoa.entity.MemberVO;
+import com.codingjoa.dto.JoinRequestDTO;
 
 public interface MemberService {
 
-	public void register(MemberVO memberVO);
+	public void register(JoinRequestDTO joinRequestDTO);
 	
 	public boolean isIdExist(String memberId);
 	

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.dto.EmailRequestDTO;
 import com.codingjoa.dto.EmailResponseDTO;
+import com.codingjoa.dto.JoinRequestDTO;
 import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
@@ -47,7 +48,7 @@ public class MemberController {
 	public void initBinder(WebDataBinder binder) {
 		String objectName = binder.getObjectName();
 
-		if(objectName.equals("memberVO")) {
+		if(objectName.equals("joinRequestDTO")) {
 			binder.addValidators(joinValidator);
 		} else if(objectName.equals("emailRequestDTO")) {
 			binder.addValidators(emailValidator);
@@ -55,20 +56,20 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/join")
-	public String join(@ModelAttribute MemberVO memberVO) {
-		log.info("join, memberVO = {}", memberVO);
+	public String join(@ModelAttribute JoinRequestDTO joinRequestDTO) {
+		log.info("join, {}", joinRequestDTO);
 		
 		return "member/join"; 
 	}
 	
 	@PostMapping("/member/joinProc")
-	public String joinProc(@Valid @ModelAttribute MemberVO memberVO, BindingResult bindingResult) {
-		log.info("joinProc, memberVO = {}", memberVO);
+	public String joinProc(@Valid @ModelAttribute JoinRequestDTO joinRequestDTO, BindingResult bindingResult) {
+		log.info("joinProc,{}", joinRequestDTO);
 
 		if(bindingResult.hasErrors()) {
 			return "member/join";
 		}
-		memberService.register(memberVO);
+		memberService.register(joinRequestDTO);
 		
 		return "member/join-success"; 
 	}

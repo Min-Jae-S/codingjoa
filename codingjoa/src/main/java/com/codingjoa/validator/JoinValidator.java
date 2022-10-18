@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import com.codingjoa.dto.JoinRequestDTO;
 import com.codingjoa.entity.MemberVO;
 import com.codingjoa.service.MemberService;
 import com.codingjoa.service.RedisService;
@@ -27,18 +28,18 @@ public class JoinValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return MemberVO.class.isAssignableFrom(clazz);
+		return JoinRequestDTO.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
 		log.info("--------JoinValidator.validate() --------");
 
-		MemberVO memberVO = (MemberVO) target;
+		JoinRequestDTO joinRequestDTO = (JoinRequestDTO) target;
 		
-		checkId(memberVO.getMemberId(), errors);
-		checkPassword(memberVO.getMemberPassword(), memberVO.getMemberPassword2(), errors);
-		checkEmailAndAuth(memberVO.getMemberEmail(), memberVO.getAuthCode(), errors);
+		checkId(joinRequestDTO.getMemberId(), errors);
+		checkPassword(joinRequestDTO.getMemberPassword(), joinRequestDTO.getMemberPassword2(), errors);
+		checkEmailAndAuth(joinRequestDTO.getMemberEmail(), joinRequestDTO.getAuthCode(), errors);
 	}
 
 	private void checkId(String memberId, Errors errors) {
