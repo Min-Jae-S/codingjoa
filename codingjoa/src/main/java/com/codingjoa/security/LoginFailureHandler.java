@@ -21,7 +21,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 			AuthenticationException exception) throws IOException, ServletException {
 		log.info("============== LoginFailureHandler ==============");
 		
-		request.getRequestDispatcher(DEFAULT_FAILURE_URL).forward(request, response);
+		response.sendRedirect(DEFAULT_FAILURE_URL);
 	}
 	
 

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codingjoa.dto.EmailDto;
 import com.codingjoa.dto.EmailResponseDTO;
 import com.codingjoa.dto.JoinDto;
-import com.codingjoa.dto.LoginDto;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
 
@@ -44,8 +43,6 @@ public class MemberController {
 	@Resource(name = "emailValidator")
 	private Validator emailValidator;
 	
-	@Resource(name = "loginValidator")
-	private Validator loginValidator;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -55,8 +52,6 @@ public class MemberController {
 			binder.addValidators(joinValidator);
 		} else if(objectName.equals("emailDto")) {
 			binder.addValidators(emailValidator);
-		} else if(objectName.equals("loginDto")) {
-			binder.addValidators(loginValidator);
 		}
 	}
 	
@@ -99,8 +94,8 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/login")
-	public String login(@ModelAttribute LoginDto loginDto) {
-		log.info("login, {}", loginDto);
+	public String login() {
+		log.info("login");
 		
 		return "member/login";
 	}
