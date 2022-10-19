@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codingjoa.dto.EmailDto;
 import com.codingjoa.dto.EmailResponseDTO;
 import com.codingjoa.dto.JoinDto;
+import com.codingjoa.dto.LoginDto;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
 
@@ -42,7 +43,6 @@ public class MemberController {
 	
 	@Resource(name = "emailValidator")
 	private Validator emailValidator;
-	
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -94,8 +94,8 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/login")
-	public String login() {
-		log.info("login");
+	public String login(@ModelAttribute LoginDto loginDto) {
+		log.info("login, {}", loginDto);
 		
 		return "member/login";
 	}

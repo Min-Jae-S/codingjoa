@@ -1,38 +1,35 @@
-package com.codingjoa.security;
+package com.codingjoa.domain;
 
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.codingjoa.entity.Member;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class SecurityUser implements UserDetails {
+public class SecurityMember implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-	private Member member;
+	private Collection<GrantedAuthority> memberAuthorities;
+	private String memberId;
+	private String memberPassword;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return memberAuthorities;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return member.getMemberPassword();
+		return memberPassword;
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return member.getMemberId();
+		return memberId;
 	}
 
 	@Override

@@ -8,5 +8,4 @@ public interface MemberService {
 	
 	public boolean isIdExist(String memberId);
 	
-	
 }

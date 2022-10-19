@@ -1,4 +1,4 @@
-package com.codingjoa.entity;
+package com.codingjoa.domain;
 
 import java.util.Date;
 
