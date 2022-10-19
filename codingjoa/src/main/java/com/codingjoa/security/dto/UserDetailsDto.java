@@ -1,4 +1,4 @@
-package com.codingjoa.security;
+package com.codingjoa.security.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,21 +15,21 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class SecurityMember implements UserDetails {
+public class UserDetailsDto implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	private Member member;
-	private Auth auth;
+	private String memberRole;
 	
-	public SecurityMember(Member member, Auth auth) {
+	public UserDetailsDto(Member member, String memberRole) {
 		this.member = member;
-		this.auth = auth;
+		this.memberRole = memberRole;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collection = new ArrayList<>();
-		collection.add(new SimpleGrantedAuthority(auth.getMemberRole()));
+		collection.add(new SimpleGrantedAuthority(memberRole));
 		
 		return collection;
 	}

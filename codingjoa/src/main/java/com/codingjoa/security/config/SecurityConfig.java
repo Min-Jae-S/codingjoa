@@ -1,4 +1,4 @@
-package com.codingjoa.security;
+package com.codingjoa.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.codingjoa.security.service.LoginFailureHandler;
+import com.codingjoa.security.service.LoginSuccessHandler;
+import com.codingjoa.security.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity

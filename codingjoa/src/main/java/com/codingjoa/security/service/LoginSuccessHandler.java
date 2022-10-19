@@ -1,4 +1,4 @@
-package com.codingjoa.security;
+package com.codingjoa.security.service;
 
 import java.io.IOException;
 

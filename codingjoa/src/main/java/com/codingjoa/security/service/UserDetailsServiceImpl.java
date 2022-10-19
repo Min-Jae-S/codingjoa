@@ -1,4 +1,4 @@
-package com.codingjoa.security;
+package com.codingjoa.security.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.codingjoa.entity.Auth;
 import com.codingjoa.entity.Member;
+import com.codingjoa.security.dto.UserDetailsDto;
 import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(memberId);
 		}
 		
-		return new SecurityMember(member, auth);
+		return new UserDetailsDto(member, auth.getMemberRole());
 	}
 }
