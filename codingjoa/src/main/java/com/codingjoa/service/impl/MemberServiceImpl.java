@@ -13,8 +13,8 @@ import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
-//@Transactional
 @Slf4j
+//@Transactional
 @Service
 public class MemberServiceImpl implements MemberService {
 	

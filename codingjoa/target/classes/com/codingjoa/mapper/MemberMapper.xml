@@ -50,7 +50,7 @@
 			member_id
 		) VALUES (
 			seq_auth.NEXTVAL,
-			#{memberId},
+			#{memberId}
 		)
 	</insert>
 	

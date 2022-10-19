@@ -22,8 +22,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		log.info("loadUserByUsername, memberId = {}", memberId);
 
 		Member member = memberService.findMemberById(memberId);
+		log.info("member = {}", member);
+		
 		Auth auth = memberService.findAuthById(memberId);
-		log.info("member = {}, auth = {}", member, auth);
+		log.info("auth = {}", auth);
 		
 		if(member == null || auth == null) {
 			throw new UsernameNotFoundException(memberId);
