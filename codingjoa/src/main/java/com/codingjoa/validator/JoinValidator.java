@@ -9,7 +9,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.codingjoa.dto.JoinDto;
-import com.codingjoa.entity.Member;
 import com.codingjoa.service.MemberService;
 import com.codingjoa.service.RedisService;
 

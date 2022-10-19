@@ -21,6 +21,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws IOException, ServletException {
 		log.info("============== LoginSuccessHandler ==============");
 		
+		response.sendRedirect(request.getContextPath());
 	}
 
 }

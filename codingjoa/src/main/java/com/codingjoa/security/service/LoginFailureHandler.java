@@ -21,8 +21,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 	@Autowired
 	MessageSource messageSource;
 	
-	private final String DEFAULT_FAILURE_URL = "/member/login";
-	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
@@ -30,7 +28,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		log.info("exception = {}", exception.getClass());
 		log.info("message = {}", exception.getMessage());
 		
-		response.sendRedirect(request.getContextPath() + DEFAULT_FAILURE_URL);
+		response.sendRedirect(request.getContextPath() + "/member/login");
 	}
 	
 
