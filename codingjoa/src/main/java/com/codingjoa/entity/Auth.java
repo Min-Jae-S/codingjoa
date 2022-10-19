@@ -1,4 +1,4 @@
-package com.codingjoa.domain;
+package com.codingjoa.entity;
 
 import lombok.Data;
 

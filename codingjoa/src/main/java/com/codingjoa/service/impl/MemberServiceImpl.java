@@ -2,16 +2,12 @@ package com.codingjoa.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.codingjoa.domain.Auth;
-import com.codingjoa.domain.Member;
-import com.codingjoa.domain.SecurityMember;
 import com.codingjoa.dto.JoinDto;
+import com.codingjoa.entity.Auth;
+import com.codingjoa.entity.Member;
 import com.codingjoa.mapper.MemberMapper;
 import com.codingjoa.service.MemberService;
 
@@ -20,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 //@Transactional
 @Slf4j
 @Service
-public class MemberServiceImpl implements MemberService, UserDetailsService {
+public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	private MemberMapper memberMapper;
@@ -32,7 +28,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	private PasswordEncoder passwordEncoder;
 
 	@Override
-	public void registerMember(JoinDto joinDto) {
+	public void register(JoinDto joinDto) {
 		String rawPassword = joinDto.getMemberPassword();
 		String encPassword = passwordEncoder.encode(rawPassword);
 		joinDto.setMemberPassword(encPassword);
@@ -45,7 +41,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		if(result == 1) {
 			Auth auth = new Auth();
 			auth.setMemberId(member.getMemberId());
-			log.info("{}", auth);
+			log.info("auth = {}", auth);
 
 			memberMapper.registerAuth(auth);
 		}
@@ -57,17 +53,14 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
-		log.info("loadUserByUsername, memberId = {}", memberId);
-
-		SecurityMember securityMember = memberMapper.findSecurityMemberById(memberId);
-		log.info("loadUserByUsername, securityMember = {}", securityMember);
-		
-		if(securityMember == null) {
-			throw new UsernameNotFoundException(memberId);
-		}
-		
-		return securityMember;
+	public Member findMemberById(String memberId) {
+		return memberMapper.findMemberById(memberId);
 	}
+
+	@Override
+	public Auth findAuthById(String memberId) {
+		return memberMapper.findAuthById(memberId);
+	}
+
 	
 }

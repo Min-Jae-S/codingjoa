@@ -8,8 +8,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.codingjoa.domain.Member;
 import com.codingjoa.dto.JoinDto;
+import com.codingjoa.entity.Member;
 import com.codingjoa.service.MemberService;
 import com.codingjoa.service.RedisService;
 

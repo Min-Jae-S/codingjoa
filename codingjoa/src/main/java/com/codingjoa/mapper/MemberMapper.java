@@ -2,9 +2,8 @@ package com.codingjoa.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.codingjoa.domain.Auth;
-import com.codingjoa.domain.Member;
-import com.codingjoa.domain.SecurityMember;
+import com.codingjoa.entity.Auth;
+import com.codingjoa.entity.Member;
 
 @Mapper
 public interface MemberMapper {
@@ -15,7 +14,9 @@ public interface MemberMapper {
 	
 	public boolean isIdExist(String memberId);
 	
-	public SecurityMember findSecurityMemberById(String memberId);
+	public Member findMemberById(String memberId);
+	
+	public Auth findAuthById(String memberId);
 	
 	
 }

@@ -7,8 +7,7 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.codingjoa.domain.Member" alias="member" />
-		<typeAlias type="com.codingjoa.domain.SecurityMember" alias="securityMember" />
-		<typeAlias type="com.codingjoa.domain.Auth" alias="auth" />
+		<typeAlias type="com.codingjoa.entity.Member" alias="member" />
+		<typeAlias type="com.codingjoa.entity.Auth" alias="auth" />
 	</typeAliases>
 </configuration>

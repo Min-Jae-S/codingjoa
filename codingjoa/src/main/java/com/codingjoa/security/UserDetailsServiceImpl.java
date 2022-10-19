@@ -5,21 +5,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.codingjoa.mapper.MemberMapper;
+import com.codingjoa.entity.Auth;
+import com.codingjoa.entity.Member;
+import com.codingjoa.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
-	
+
 	@Autowired
-	MemberMapper memberMapper;
+	MemberService memberService;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		log.info("loadUserByUsername, memberId = {}", username);
-		
-		return null;
-	}
+	public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
+		log.info("loadUserByUsername, memberId = {}", memberId);
 
+		Member member = memberService.findMemberById(memberId);
+		Auth auth = memberService.findAuthById(memberId);
+		log.info("member = {}, auth = {}", member, auth);
+		
+		if(member == null || auth == null) {
+			throw new UsernameNotFoundException(memberId);
+		}
+		
+		return new SecurityMember(member, auth);
+	}
 }

@@ -69,7 +69,8 @@ public class MemberController {
 		if(bindingResult.hasErrors()) {
 			return "member/join";
 		}
-		memberService.registerMember(joinDto);
+		
+		memberService.register(joinDto);
 		
 		return "member/join-success"; 
 	}
