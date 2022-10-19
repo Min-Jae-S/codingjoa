@@ -18,18 +18,18 @@ public class SecurityMember implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private String memberId;
 	private String memberPassword;
-	private String auth;
+	private String memberRole;
 	
-	public SecurityMember(String memberId, String memberPassword, String auth) {
+	public SecurityMember(String memberId, String memberPassword, String memberRole) {
 		this.memberId = memberId;
 		this.memberPassword = memberPassword;
-		this.auth = auth;
+		this.memberRole = memberRole;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collection = new ArrayList<>();
-		collection.add(new SimpleGrantedAuthority(auth));
+		collection.add(new SimpleGrantedAuthority(memberRole));
 		
 		return collection;
 	}
@@ -46,25 +46,21 @@ public class SecurityMember implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

@@ -44,6 +44,16 @@
 		)
 	</insert>
 	
+	<insert id="registerAuth" parameterType="auth">
+		INSERT INTO auth (
+			auth_idx,
+			member_id
+		) VALUES (
+			seq_auth.NEXTVAL,
+			#{memberId},
+		)
+	</insert>
+	
 	<select id="isIdExist" parameterType="string" resultType="boolean">
 		SELECT
 			COUNT(member_id)
@@ -57,7 +67,7 @@
 		SELECT
 			a.member_id,
 			a.member_password,
-			b.auth
+			b.member_role
 		FROM 
 			member a
 		INNER JOIN

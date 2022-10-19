@@ -7,6 +7,6 @@ public class Auth {
 
 	private int authIdx;
 	private String memberId;
-	private String auth;
+	private String memberRole;
 	
 }
