@@ -18,7 +18,7 @@
 	);
 	-->
 	
-	<insert id="register" parameterType="member">
+	<insert id="registerMember" parameterType="member">
 		INSERT INTO member (
 			member_idx,
 			member_id,
@@ -44,7 +44,7 @@
 		)
 	</insert>
 	
-	<select id="isIdExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+	<select id="isIdExist" parameterType="string" resultType="boolean">
 		SELECT
 			COUNT(member_id)
 		FROM
@@ -52,6 +52,22 @@
 		WHERE
 			member_id = #{memberId}
 	</select>
+	
+	<select id="findSecurityMemberById" parameterType="string" resultType="securityMember">
+		SELECT
+			a.member_id,
+			a.member_password,
+			b.auth
+		FROM 
+			member a
+		INNER JOIN
+			auth b
+		ON
+			a.member_id = b.member_id
+		WHERE 
+			a.member_id = #{memberId}
+	</select>
+	
 	
 	
 </mapper>
