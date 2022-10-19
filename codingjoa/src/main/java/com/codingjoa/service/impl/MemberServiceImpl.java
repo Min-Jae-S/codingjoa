@@ -52,15 +52,4 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.isIdExist(memberId);
 	}
 
-	@Override
-	public Member findMemberById(String memberId) {
-		return memberMapper.findMemberById(memberId);
-	}
-
-	@Override
-	public Auth findAuthById(String memberId) {
-		return memberMapper.findAuthById(memberId);
-	}
-
-	
 }

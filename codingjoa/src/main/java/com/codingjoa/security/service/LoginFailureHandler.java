@@ -1,4 +1,4 @@
-	package com.codingjoa.security.service;
+package com.codingjoa.security.service;
 
 import java.io.IOException;
 
@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Service
 public class LoginFailureHandler implements AuthenticationFailureHandler {
 	
 	@Autowired

@@ -7,25 +7,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.codingjoa.entity.Auth;
-import com.codingjoa.entity.Member;
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
+@AllArgsConstructor
 public class UserDetailsDto implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-	private Member member;
+	private String memberId;
+	private String memberPassword;
 	private String memberRole;
 	
-	public UserDetailsDto(Member member, String memberRole) {
-		this.member = member;
-		this.memberRole = memberRole;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collection = new ArrayList<>();
@@ -36,12 +31,12 @@ public class UserDetailsDto implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return member.getMemberPassword();
+		return memberPassword;
 	}
 
 	@Override
 	public String getUsername() {
-		return member.getMemberId();
+		return memberId;
 	}
 
 	@Override
@@ -63,5 +58,7 @@ public class UserDetailsDto implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+
+	
 
 }

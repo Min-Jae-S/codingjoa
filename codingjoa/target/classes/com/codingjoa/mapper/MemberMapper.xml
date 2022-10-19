@@ -63,22 +63,19 @@
 			member_id = #{memberId}
 	</select>
 	
-	<select id="findMemberById" parameterType="string" resultType="member">
+	<select id="checkLogin" parameterType="string" resultType="userDetailsDto">
 		SELECT
-			*
-		FROM 
-			member 
-		WHERE 
-			member_id = #{memberId}
-	</select>
-	
-	<select id="findAuthById" parameterType="string" resultType="auth">
-		SELECT
-			*
-		FROM 
-			auth
-		WHERE 
-			member_id = #{memberId}
+			a.member_id,
+			a.member_password,
+			b.member_role
+		FROM
+			member a
+		INNER JOIN
+			auth b
+		ON
+			a.member_id = b.member_id
+		WHERE
+			a.member_id = #{memberId}
 	</select>
 	
 	

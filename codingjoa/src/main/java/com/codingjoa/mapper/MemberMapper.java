@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.codingjoa.entity.Auth;
 import com.codingjoa.entity.Member;
+import com.codingjoa.security.dto.UserDetailsDto;
 
 @Mapper
 public interface MemberMapper {
@@ -14,9 +15,7 @@ public interface MemberMapper {
 	
 	public boolean isIdExist(String memberId);
 	
-	public Member findMemberById(String memberId);
-	
-	public Auth findAuthById(String memberId);
+	public UserDetailsDto checkLogin(String memberId);
 	
 	
 }
