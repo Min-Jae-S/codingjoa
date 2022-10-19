@@ -1,42 +1,31 @@
 package com.codingjoa.security.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.codingjoa.security.service.LoginFailureHandler;
-import com.codingjoa.security.service.LoginSuccessHandler;
-import com.codingjoa.security.service.UserDetailsServiceImpl;
-
 @Configuration
+@ComponentScan("com.codingjoa.security.service")
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	AuthenticationSuccessHandler loginSuccessHandler;
+	
+	@Autowired
+	AuthenticationFailureHandler loginFailureHandler;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	}
-	
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new UserDetailsServiceImpl();
-	}
-	
-	@Bean
-	public AuthenticationSuccessHandler authenticationSuccessHandler() {
-		return new LoginSuccessHandler();
-	}
-	
-	@Bean
-	public AuthenticationFailureHandler authenticationFailureHandler() {
-		return new LoginFailureHandler();
 	}
 	
 	@Override
@@ -60,8 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("memberId")
 				.passwordParameter("memberPassword")
 				.loginProcessingUrl("/member/loginProc")
-				.successHandler(authenticationSuccessHandler())
-				.failureHandler(authenticationFailureHandler())
+				.successHandler(loginSuccessHandler)
+				.failureHandler(loginFailureHandler)
 				.permitAll()
 				.and()
 			.logout()
