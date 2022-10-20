@@ -62,9 +62,9 @@
 							<form:errors path="memberPassword" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
-							<form:label path="memberPassword2" class="font-weight-bold">비밀번호 확인</form:label>
-							<form:password path="memberPassword2" class="form-control" showPassword="true"/>
-							<form:errors path="memberPassword2" cssClass="error"/>
+							<form:label path="confirmPassword" class="font-weight-bold">비밀번호 확인</form:label>
+							<form:password path="confirmPassword" class="form-control" showPassword="true"/>
+							<form:errors path="confirmPassword" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberEmail" class="font-weight-bold">이메일</form:label>

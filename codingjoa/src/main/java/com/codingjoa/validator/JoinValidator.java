@@ -36,7 +36,7 @@ public class JoinValidator implements Validator {
 
 		JoinDto joinDto = (JoinDto) target;
 		checkId(joinDto.getMemberId(), errors);
-		checkPassword(joinDto.getMemberPassword(), joinDto.getMemberPassword2(), errors);
+		checkPassword(joinDto.getMemberPassword(), joinDto.getConfirmPassword(), errors);
 		checkEmailAndAuth(joinDto.getMemberEmail(), joinDto.getAuthCode(), errors);
 	}
 
@@ -52,7 +52,7 @@ public class JoinValidator implements Validator {
 		}
 	}
 
-	private void checkPassword(String memberPassword, String memberPassword2, Errors errors) {
+	private void checkPassword(String memberPassword, String confirmPassword, Errors errors) {
 		String regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,16}";
 
 		if (!StringUtils.hasText(memberPassword)) {
@@ -61,16 +61,16 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberPassword", "Pattern");
 		}
 
-		if (!StringUtils.hasText(memberPassword2)) {
-			errors.rejectValue("memberPassword2", "NotBlank");
-		} else if (!Pattern.matches(regexp, memberPassword2)) {
-			errors.rejectValue("memberPassword2", "Pattern");
+		if (!StringUtils.hasText(confirmPassword)) {
+			errors.rejectValue("confirmPassword", "NotBlank");
+		} else if (!Pattern.matches(regexp, confirmPassword)) {
+			errors.rejectValue("confirmPassword", "Pattern");
 		}
 
-		if (!errors.hasFieldErrors("memberPassword") && !errors.hasFieldErrors("memberPassword2")) {
-			if (!memberPassword.equals(memberPassword2)) {
+		if (!errors.hasFieldErrors("memberPassword") && !errors.hasFieldErrors("confirmPassword")) {
+			if (!memberPassword.equals(confirmPassword)) {
 				errors.rejectValue("memberPassword", "NotEquals");
-				errors.rejectValue("memberPassword2", "NotEquals");
+				errors.rejectValue("confirmPassword", "NotEquals");
 			}
 		}
 	}

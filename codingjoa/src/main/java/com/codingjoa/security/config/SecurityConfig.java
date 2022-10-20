@@ -37,18 +37,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth
+			.userDetailsService(userDetailsService)
+			.passwordEncoder(passwordEncoder());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		//super.configure(http);
+
+		/*	FilterChain
+		 * 
+		 *	Browser HTTP Request
+		 *		--> SecurityContextPersistenceFilter 
+		 * 		--> HeaderWriterFilter
+		 * 		--> CsrfFilter
+		 * 		--> LogoutFilter
+		 * 		--> UsernamePasswordAuthenticationFilter
+		 * 		--> ...
+		 */
 		
 		CharacterEncodingFilter filter = new CharacterEncodingFilter();
 		filter.setEncoding("UTF-8");
 		filter.setForceEncoding(true);
 		
-		http.addFilterBefore(filter, CsrfFilter.class)
+		http
+			.addFilterBefore(filter, CsrfFilter.class)
 			.csrf().disable()
 			.authorizeRequests()
 				.anyRequest().permitAll()

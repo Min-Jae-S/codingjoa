@@ -1,10 +1,13 @@
 package com.codingjoa.security.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.codingjoa.mapper.MemberMapper;
 import com.codingjoa.security.dto.UserDetailsDto;
@@ -12,7 +15,7 @@ import com.codingjoa.security.dto.UserDetailsDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service
+@Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
@@ -21,13 +24,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
 		log.info("loadUserByUsername, memberId = {}", memberId);
+		//log.info("'{}' has Text? {}", memberId, StringUtils.hasText(memberId));
 		
-		UserDetailsDto userDetailsDto = memberMapper.checkLogin(memberId);
-		log.info("userDetailsDto = {}", userDetailsDto);
+		Map<String, String> map = memberMapper.findUserDetailsById(memberId);
+		log.info("map = {}", map);
 		
-		if(userDetailsDto == null) {
+		if(map == null) {
 			throw new UsernameNotFoundException(memberId);
 		}
-		return userDetailsDto;
+		
+		memberId = map.get("memberId");
+		
+		String memberPassword = map.get("memberPassword");
+		String memberRole = map.get("memberRole");
+		
+		return new UserDetailsDto(memberId, memberPassword, memberRole);
 	}
 }

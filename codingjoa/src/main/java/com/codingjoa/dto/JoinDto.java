@@ -9,7 +9,7 @@ public class JoinDto {
 
 	private String memberId;
 	private String memberPassword;
-	private String memberPassword2;
+	private String confirmPassword;
 	private String memberEmail;
 	private String authCode;
 

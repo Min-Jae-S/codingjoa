@@ -1,5 +1,7 @@
 package com.codingjoa.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.codingjoa.entity.Auth;
@@ -15,7 +17,7 @@ public interface MemberMapper {
 	
 	public boolean isIdExist(String memberId);
 	
-	public UserDetailsDto checkLogin(String memberId);
+	public Map<String, String> findUserDetailsById(String memberId); // spring security(login)
 	
 	
 }

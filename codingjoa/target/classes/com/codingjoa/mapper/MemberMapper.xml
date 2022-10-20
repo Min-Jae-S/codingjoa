@@ -63,11 +63,11 @@
 			member_id = #{memberId}
 	</select>
 	
-	<select id="checkLogin" parameterType="string" resultType="userDetailsDto">
+	<select id="findUserDetailsById" parameterType="string" resultType="map">
 		SELECT
-			a.member_id,
-			a.member_password,
-			b.member_role
+			a.member_id 		AS memberId,
+			a.member_password 	AS memberPassword,
+			b.member_role 		AS memberRole
 		FROM
 			member a
 		INNER JOIN

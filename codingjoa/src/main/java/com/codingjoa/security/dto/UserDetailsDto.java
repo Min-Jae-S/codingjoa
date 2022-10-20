@@ -30,15 +30,16 @@ public class UserDetailsDto implements UserDetails {
 	}
 
 	@Override
-	public String getPassword() {
-		return memberPassword;
-	}
-
-	@Override
 	public String getUsername() {
 		return memberId;
 	}
 
+	@Override
+	public String getPassword() {
+		return memberPassword;
+	}
+
+	// more details(active, locked, expired...)
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
