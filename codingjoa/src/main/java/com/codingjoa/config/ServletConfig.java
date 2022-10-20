@@ -32,10 +32,10 @@ public class ServletConfig implements WebMvcConfigurer {
 	
 	@Bean
 	public MessageSource messageSource() {
-		ReloadableResourceBundleMessageSource src = new ReloadableResourceBundleMessageSource();
-		src.setDefaultEncoding("UTF-8");
-		src.setBasename("/WEB-INF/properties/messages");
+		ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+		source.setDefaultEncoding("UTF-8");
+		source.setBasename("/WEB-INF/properties/messages");
 		
-		return src;
+		return source;
 	}
 }
