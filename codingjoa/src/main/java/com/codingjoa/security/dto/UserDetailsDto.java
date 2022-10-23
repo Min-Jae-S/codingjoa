@@ -26,8 +26,6 @@ public class UserDetailsDto implements UserDetails {
 		Collection<GrantedAuthority> collection = new ArrayList<>();
 		collection.add(new SimpleGrantedAuthority(memberRole));
 		
-		
-		
 		return collection;
 	}
 
