@@ -20,6 +20,7 @@ import com.codingjoa.security.exception.LoginRequireFieldException;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
@@ -34,6 +35,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		log.info("============== CustomAuthenticationProvider ==============");
 		
 		String memberId = (String) authentication.getPrincipal();
 		String memberPassword = (String) authentication.getCredentials();
