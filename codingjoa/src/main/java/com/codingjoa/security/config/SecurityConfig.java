@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -25,17 +24,26 @@ import com.codingjoa.security.service.LoginValidationFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	UserDetailsService userDetailsService;
-
-	@Autowired
 	AuthenticationSuccessHandler loginSuccessHandler;
 	
 	@Autowired
 	AuthenticationFailureHandler loginFailureHandler;
 	
+	@Autowired
+	LoginValidationFilter loginValidationFilter;
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public CharacterEncodingFilter encodingFilter() {
+		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+		encodingFilter.setEncoding("UTF-8");
+		encodingFilter.setForceEncoding(true);
+		
+		return encodingFilter;
 	}
 	
 	@Override
@@ -54,11 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 			.csrf().disable()
-			.addFilterBefore(new CharacterEncodingFilter("UTF-8", true), CsrfFilter.class)
-			.addFilterBefore(new LoginValidationFilter(), UsernamePasswordAuthenticationFilter.class) 
-			// Filter를 구현해서 Bean으로 만들면 안되고 인스턴스(new) 형태로 추가 해야한다.
-			// Bean으로 만들경우 자동으로 Servlet 필터로 추가됨
-
+			.addFilterBefore(encodingFilter(), CsrfFilter.class)
+			.addFilterBefore(loginValidationFilter, UsernamePasswordAuthenticationFilter.class) 
 			.authorizeRequests()
 				.anyRequest().permitAll()
 				.and()
