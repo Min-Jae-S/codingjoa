@@ -9,6 +9,5 @@
 	<typeAliases>
 		<typeAlias type="com.codingjoa.entity.Member" alias="member" />
 		<typeAlias type="com.codingjoa.entity.Auth" alias="auth" />
-		<typeAlias type="com.codingjoa.security.dto.UserDetailsDto" alias="userDetailsDto" />
 	</typeAliases>
 </configuration>
