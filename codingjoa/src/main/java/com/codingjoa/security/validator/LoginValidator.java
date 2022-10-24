@@ -26,7 +26,7 @@ public class LoginValidator implements Validator {
 		String memberId = loginDto.getMemberId();
 		String memberPassword = loginDto.getMemberPassword();
 		
-		if (!StringUtils.hasText(memberId)) {
+		if ("".equals(memberId)) {
 			errors.rejectValue("memberId", "NotBlank");
 		} else if (!StringUtils.hasText(memberPassword)) {
 			errors.rejectValue("memberPassword", "NotBlank");

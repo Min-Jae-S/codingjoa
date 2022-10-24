@@ -24,7 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
 		log.info("loadUserByUsername, memberId = {}", memberId);
-		//log.info("'{}' has Text? {}", memberId, StringUtils.hasText(memberId));
 		
 		Map<String, String> map = memberMapper.findUserDetailsById(memberId);
 		log.info("map = {}", map);
@@ -33,7 +32,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(memberId);
 		} else {
 			memberId = map.get("memberId");
-			
 			String memberPassword = map.get("memberPassword");
 			String memberRole = map.get("memberRole");
 			
