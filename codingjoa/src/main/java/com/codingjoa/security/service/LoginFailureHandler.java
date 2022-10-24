@@ -28,7 +28,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		log.info("exception = {}", exception.getClass());
 		log.info("message = {}", exception.getMessage());
 		
-		response.sendRedirect(request.getContextPath() + "/member/login");
+		//response.sendRedirect(request.getContextPath() + "/member/login");
 	}
 	
 

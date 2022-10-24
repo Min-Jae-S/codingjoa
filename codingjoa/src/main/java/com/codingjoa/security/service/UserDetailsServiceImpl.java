@@ -31,13 +31,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 		if(map == null) {
 			throw new UsernameNotFoundException(memberId);
+		} else {
+			memberId = map.get("memberId");
+			
+			String memberPassword = map.get("memberPassword");
+			String memberRole = map.get("memberRole");
+			
+			return new UserDetailsDto(memberId, memberPassword, memberRole);
 		}
-		
-		memberId = map.get("memberId");
-		
-		String memberPassword = map.get("memberPassword");
-		String memberRole = map.get("memberRole");
-		
-		return new UserDetailsDto(memberId, memberPassword, memberRole);
 	}
 }

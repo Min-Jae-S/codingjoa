@@ -60,6 +60,4 @@ public class UserDetailsDto implements UserDetails {
 		return true;
 	}
 
-	
-
 }
