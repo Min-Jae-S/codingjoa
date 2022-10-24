@@ -51,6 +51,8 @@
 						<div class="form-group pt-4">
 							<form:button class="btn btn-primary btn-lg btn-block">로그인</form:button>
 						</div>
+						<form:errors path="memberId" cssClass="error" element="div"/>
+						<form:errors path="memberPassword" cssClass="error" element="div"/>
 					</form:form>
 				</div>
 			</div>

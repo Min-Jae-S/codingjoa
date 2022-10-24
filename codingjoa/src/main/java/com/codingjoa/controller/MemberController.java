@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codingjoa.dto.EmailDto;
 import com.codingjoa.dto.EmailResponseDTO;
 import com.codingjoa.dto.JoinDto;
-import com.codingjoa.dto.LoginDto;
+import com.codingjoa.security.dto.LoginDto;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
 

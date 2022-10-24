@@ -16,10 +16,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-import com.codingjoa.security.service.ValidationFilter;
+import com.codingjoa.security.service.LoginValidationFilter;
 
 @Configuration
 @ComponentScan("com.codingjoa.security.service")
+@ComponentScan("com.codingjoa.security.validator")
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
@@ -54,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.addFilterBefore(new CharacterEncodingFilter("UTF-8", true), CsrfFilter.class)
-			.addFilterBefore(new ValidationFilter(), UsernamePasswordAuthenticationFilter.class) 
+			.addFilterBefore(new LoginValidationFilter(), UsernamePasswordAuthenticationFilter.class) 
 			// Filter를 구현해서 Bean으로 만들면 안되고 인스턴스(new) 형태로 추가 해야한다.
 			// Bean으로 만들경우 자동으로 Servlet 필터로 추가됨
 
