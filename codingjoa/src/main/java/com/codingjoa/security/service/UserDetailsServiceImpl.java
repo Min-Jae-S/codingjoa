@@ -7,10 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import com.codingjoa.mapper.MemberMapper;
-import com.codingjoa.security.dto.UserDetailsDto;
+import com.codingjoa.security.dto.CustomUserDetails;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			String memberPassword = map.get("memberPassword");
 			String memberRole = map.get("memberRole");
 			
-			return new UserDetailsDto(memberId, memberPassword, memberRole);
+			return new CustomUserDetails(memberId, memberPassword, memberRole);
 		}
 	}
 }

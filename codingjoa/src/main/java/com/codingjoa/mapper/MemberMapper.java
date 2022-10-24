@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.codingjoa.entity.Auth;
 import com.codingjoa.entity.Member;
-import com.codingjoa.security.dto.UserDetailsDto;
+import com.codingjoa.security.dto.CustomUserDetails;
 
 @Mapper
 public interface MemberMapper {

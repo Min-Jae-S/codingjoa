@@ -15,11 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.validation.Validator;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import com.codingjoa.validator.LoginValidator;
 
 @Configuration
 @ComponentScan("com.codingjoa.security.service")
-@ComponentScan("com.codingjoa.security.validator")
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -38,6 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public Validator validator() {
+		return new LoginValidator();
 	}
 	
 	@Bean

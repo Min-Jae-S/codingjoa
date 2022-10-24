@@ -14,9 +14,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public class UserDetailsDto implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6918130188428402603L;
 	private String memberId;
 	private String memberPassword;
 	private String memberRole;
