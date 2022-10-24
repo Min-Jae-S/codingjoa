@@ -20,7 +20,7 @@ import com.codingjoa.security.service.ValidationFilter;
 
 @Configuration
 @ComponentScan("com.codingjoa.security.service")
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
