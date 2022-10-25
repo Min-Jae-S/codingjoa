@@ -28,43 +28,54 @@ public class HomeController {
 	}
 	
 	@GetMapping("/test1")
-	public void test1() {
+	public String test1() {
 		log.info("============== test1 ==============");
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
 		if(principal != null) {
-			UserDetails userDetails = (UserDetails) principal;
-			String memberId = userDetails.getUsername();
-			String memberPassword = userDetails.getPassword();
-			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
+			log.info("principal is NOT NULL");
+//			UserDetails userDetails = (UserDetails) principal;
+//			String memberId = userDetails.getUsername();
+//			String memberPassword = userDetails.getPassword();
+//			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
+		} else {
+			log.info("principal is NULL");
 		}
-		log.info("principal is NULL");
+		
+		return "home";
 	}
 
 	@GetMapping("/test2")
-	public void test2(Authentication authentication) {
+	public String test2(Authentication authentication) {
 		log.info("============== test2 ==============");
 		
 		if(authentication != null) {
-			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-			String memberId = userDetails.getUsername();
-			String memberPassword = userDetails.getPassword();
-			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
+			log.info("authentication is NOT NULL");
+//			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//			String memberId = userDetails.getUsername();
+//			String memberPassword = userDetails.getPassword();
+//			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
+		} else {
+			log.info("authentication is NULL");
 		}
-		log.info("authentication is NULL");
+		
+		return "home";
 	}
 	
 	@GetMapping("/test3")
-	public void test3(@AuthenticationPrincipal UserDetails userDetails) {
+	public String test3(@AuthenticationPrincipal UserDetails userDetails) {
 		log.info("============== test3 ==============");
 		
 		if(userDetails != null) {
-			String memberId = userDetails.getUsername();
-			String memberPassword = userDetails.getPassword();
-			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
+			log.info("userDetails is NOT NULL");
+//			String memberId = userDetails.getUsername();
+//			String memberPassword = userDetails.getPassword();
+//			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
+		} else {
+			log.info("userDetails is NULL");
 		}
-		log.info("userDetails is NULL");
+		
+		return "home";
 	}
 	
 }

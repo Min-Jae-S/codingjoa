@@ -6,6 +6,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -39,13 +40,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new LoginRequireFieldException("login validation failed", "error.LoginRequireField.memberPassword");
 		}
 		
-		UserDetailsDto userDetailsDto = (UserDetailsDto) userDetailsService.loadUserByUsername(memberId);
+		UserDetails userDetails = userDetailsService.loadUserByUsername(memberId);
+		log.info("userDetails = {}", userDetails);
 		
-		if(!passwordEncoder.matches(memberPassword, userDetailsDto.getMemberPassword())) {
+		if(!passwordEncoder.matches(memberPassword, userDetails.getPassword())) {
 			throw new BadCredentialsException(memberId);
 		}
 		
-		return new UsernamePasswordAuthenticationToken(userDetailsDto, null, userDetailsDto.getAuthorities());
+		return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 	}
 
 	@Override

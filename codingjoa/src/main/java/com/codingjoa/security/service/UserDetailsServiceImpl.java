@@ -30,9 +30,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if(map == null) {
 			throw new UsernameNotFoundException(memberId);
 		} else {
-			memberId = map.get("memberId");
-			String memberPassword = map.get("memberPassword");
-			String memberRole = map.get("memberRole");
+			memberId = map.get("MEMBERID");
+			String memberPassword = map.get("MEMBERPASSWORD");
+			String memberRole = map.get("MEMBERROLE");
 			
 			return new UserDetailsDto(memberId, memberPassword, memberRole);
 		}
