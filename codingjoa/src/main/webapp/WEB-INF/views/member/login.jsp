@@ -39,21 +39,19 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${contextPath}/member/loginProc" method="POST" modelAttribute="loginDto">
+					<form action="${contextPath}/member/loginProc" method="POST">
 						<div class="form-group mb-4">
-							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
-							<form:input path="memberId" class="form-control" placeholder="아이디"/>
+							<label for="memberId" class="font-weight-bold">아이디</label>
+							<input id="memberId" name="memberId" class="form-control" placeholder="아이디"/>
 						</div>
 						<div class="form-group mb-4">
-							<form:label path="memberPassword" class="font-weight-bold">비밀번호</form:label>
-							<form:password path="memberPassword" class="form-control" placeholder="비밀번호"/>
+							<label for="memberPassword" class="font-weight-bold">비밀번호</label>
+							<input id="memberPassword" name="memberPassword" class="form-control" placeholder="비밀번호"/>
 						</div>
 						<div class="form-group pt-4">
-							<form:button class="btn btn-primary btn-lg btn-block">로그인</form:button>
+							<button class="btn btn-primary btn-lg btn-block">로그인</button>
 						</div>
-						<form:errors path="memberId" cssClass="error" element="div"/>
-						<form:errors path="memberPassword" cssClass="error" element="div"/>
-					</form:form>
+					</form>
 				</div>
 			</div>
 		</div>

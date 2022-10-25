@@ -8,24 +8,22 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@ToString
+@Data
 @AllArgsConstructor
-public class CustomUserDetails implements UserDetails {
+public class UserDetailsDto implements UserDetails {
 
 	private static final long serialVersionUID = -6918130188428402603L;
 	private String memberId;
 	private String memberPassword;
 	private String memberRole;
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collection = new ArrayList<>();
 		collection.add(new SimpleGrantedAuthority(memberRole));
-		
+
 		return collection;
 	}
 

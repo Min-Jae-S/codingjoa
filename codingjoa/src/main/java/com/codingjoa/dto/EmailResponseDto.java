@@ -3,7 +3,7 @@ package com.codingjoa.dto;
 import lombok.Data;
 
 @Data
-public class EmailResponseDTO {
+public class EmailResponseDto {
 	
 	private boolean validated;
 	private String errorMessage;

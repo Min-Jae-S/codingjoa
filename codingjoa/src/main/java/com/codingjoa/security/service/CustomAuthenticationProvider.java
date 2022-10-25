@@ -9,12 +9,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.BeanPropertyBindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
+import org.springframework.util.StringUtils;
 
-import com.codingjoa.security.dto.CustomUserDetails;
-import com.codingjoa.security.dto.LoginDto;
+import com.codingjoa.security.dto.UserDetailsDto;
 import com.codingjoa.security.exception.LoginRequireFieldException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-	
-	@Autowired
-	private Validator loginValidator;
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -38,22 +32,20 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		String memberId = (String) authentication.getPrincipal();
 		String memberPassword = (String) authentication.getCredentials();
-		LoginDto loginDto = new LoginDto(memberId, memberPassword);
 		
-		Errors errors = new BeanPropertyBindingResult(loginDto, "loginDto");
-		loginValidator.validate(loginDto, errors);
-		
-		if(errors.hasErrors()) {
-			throw new LoginRequireFieldException("login validation failed", errors);
+		if("".equals(memberId)) {
+			throw new LoginRequireFieldException("login validation failed", "error.LoginRequireField.memberId");
+		} else if(!StringUtils.hasText(memberPassword)) {
+			throw new LoginRequireFieldException("login validation failed", "error.LoginRequireField.memberPassword");
 		}
 		
-		CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(memberId);
+		UserDetailsDto userDetailsDto = (UserDetailsDto) userDetailsService.loadUserByUsername(memberId);
 		
-		if(!passwordEncoder.matches(memberPassword, userDetails.getMemberPassword())) {
+		if(!passwordEncoder.matches(memberPassword, userDetailsDto.getMemberPassword())) {
 			throw new BadCredentialsException(memberId);
 		}
 		
-		return new UsernamePasswordAuthenticationToken(memberId, memberPassword, userDetails.getAuthorities());
+		return new UsernamePasswordAuthenticationToken(memberId, memberPassword, userDetailsDto.getAuthorities());
 	}
 
 	@Override
