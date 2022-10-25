@@ -3,12 +3,8 @@ package com.codingjoa.security.exception;
 import org.springframework.security.core.AuthenticationException;
 
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
-@Setter
-@ToString
 public class LoginRequireFieldException extends AuthenticationException {
 	
 	private static final long serialVersionUID = 2417338241376612871L;
