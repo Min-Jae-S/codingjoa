@@ -19,6 +19,11 @@
 
 <div class="container">
 	<h1>home</h1>
+	<div class="mt-4">
+		<button class="btn btn-primary" onclick="location.href='${contextPath}/test1'">test1</button>
+		<button class="btn btn-warning" onclick="location.href='${contextPath}/test2'">test2</button>
+		<button class="btn btn-info" onclick="location.href='${contextPath}/test3'">test3</button>
+	</div>
 </div>
 
 <c:import url="/WEB-INF/views/include/bottom-menu.jsp"/>

@@ -22,9 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class LoginFailureHandler implements AuthenticationFailureHandler {
+
+	private final String DEFAULT_FAILURE_URL = "/member/login";
 	
 	@Autowired
-	MessageSource messageSource;
+	private MessageSource messageSource;
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
@@ -44,7 +46,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		log.info("ErrorMessage = {}", errorMessage);
 		
 		request.setAttribute("errorMessage", errorMessage);
-		request.getRequestDispatcher("/member/login").forward(request, response);
+		request.getRequestDispatcher(DEFAULT_FAILURE_URL).forward(request, response);
 	}
 
 }
