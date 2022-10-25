@@ -27,52 +27,25 @@ public class HomeController {
 		return "access-denied";
 	}
 	
-	@GetMapping("/test1")
-	public String test1() {
-		log.info("============== test1 ==============");
-		
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if(principal != null) {
-			log.info("principal is NOT NULL");
-//			UserDetails userDetails = (UserDetails) principal;
-//			String memberId = userDetails.getUsername();
-//			String memberPassword = userDetails.getPassword();
-//			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
-		} else {
-			log.info("principal is NULL");
-		}
-		
-		return "home";
-	}
 
-	@GetMapping("/test2")
-	public String test2(Authentication authentication) {
-		log.info("============== test2 ==============");
+	@GetMapping("/test")
+	public String test(Authentication authentication) {
+		log.info("============== test ==============");
 		
-		if(authentication != null) {
-			log.info("authentication is NOT NULL");
-//			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//			String memberId = userDetails.getUsername();
-//			String memberPassword = userDetails.getPassword();
-//			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
+		if(authentication == null) {
+			log.info("authentication is null");
+			
+			return "home";
+		} 
+		
+		Object principal = authentication.getPrincipal();
+		
+		if(principal instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) principal;
+			log.info("{}", userDetails);
 		} else {
-			log.info("authentication is NULL");
-		}
-		
-		return "home";
-	}
-	
-	@GetMapping("/test3")
-	public String test3(@AuthenticationPrincipal UserDetails userDetails) {
-		log.info("============== test3 ==============");
-		
-		if(userDetails != null) {
-			log.info("userDetails is NOT NULL");
-//			String memberId = userDetails.getUsername();
-//			String memberPassword = userDetails.getPassword();
-//			log.info("memberId = {}, memberPassword = {}", memberId, memberPassword);
-		} else {
-			log.info("userDetails is NULL");
+			String memberId = (String) principal;
+			log.info("{}", memberId);
 		}
 		
 		return "home";
