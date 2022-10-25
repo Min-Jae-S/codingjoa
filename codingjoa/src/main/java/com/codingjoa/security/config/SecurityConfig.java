@@ -18,7 +18,7 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.validation.Validator;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-import com.codingjoa.validator.LoginValidator;
+import com.codingjoa.security.service.LoginValidator;
 
 @Configuration
 @ComponentScan("com.codingjoa.security.service")
@@ -27,9 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	AuthenticationProvider authenticationProvider;
-	
-	@Autowired
-	UserDetailsService userDetailsService;
 	
 	@Autowired
 	AuthenticationSuccessHandler loginSuccessHandler;
@@ -58,10 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-			.authenticationProvider(authenticationProvider)
-			.userDetailsService(userDetailsService)
-			.passwordEncoder(passwordEncoder());
+		auth.authenticationProvider(authenticationProvider);
 	}
 
 	@Override

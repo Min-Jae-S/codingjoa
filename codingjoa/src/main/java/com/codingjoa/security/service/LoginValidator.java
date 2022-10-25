@@ -1,5 +1,6 @@
-package com.codingjoa.validator;
+package com.codingjoa.security.service;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -9,6 +10,7 @@ import com.codingjoa.security.dto.LoginDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class LoginValidator implements Validator {
 
 	@Override
