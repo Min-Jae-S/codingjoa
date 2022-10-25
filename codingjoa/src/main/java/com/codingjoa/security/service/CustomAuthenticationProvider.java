@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.codingjoa.security.dto.UserDetailsDto;
 import com.codingjoa.security.exception.LoginRequireFieldException;
 
 import lombok.extern.slf4j.Slf4j;
