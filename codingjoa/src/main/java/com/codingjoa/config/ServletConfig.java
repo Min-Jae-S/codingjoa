@@ -34,7 +34,7 @@ public class ServletConfig implements WebMvcConfigurer {
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
 		source.setDefaultEncoding("UTF-8");
-		source.setBasename("/WEB-INF/properties/messages");
+		source.setBasename("/WEB-INF/properties/error-message");
 		
 		return source;
 	}

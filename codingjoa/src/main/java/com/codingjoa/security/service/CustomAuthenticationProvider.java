@@ -34,9 +34,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String memberPassword = (String) authentication.getCredentials();
 		
 		if("".equals(memberId)) {
-			throw new LoginRequireFieldException("login validation failed", "error.LoginRequireField.memberId");
+			throw new LoginRequireFieldException("Id validation failed", "error.LoginRequireField.memberId");
 		} else if(!StringUtils.hasText(memberPassword)) {
-			throw new LoginRequireFieldException("login validation failed", "error.LoginRequireField.memberPassword");
+			throw new LoginRequireFieldException("Password validation failed", "error.LoginRequireField.memberPassword");
 		}
 		
 		UserDetailsDto userDetailsDto = (UserDetailsDto) userDetailsService.loadUserByUsername(memberId);
