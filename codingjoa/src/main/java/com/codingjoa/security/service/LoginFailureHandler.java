@@ -30,7 +30,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException e) throws IOException, ServletException {
 		log.info("============== LoginFailureHandler ==============");
-		log.info("{}", e.getClass());
+		log.info("Exception = {}", e.getClass());
 		
 		String errorMessage = null;
 
