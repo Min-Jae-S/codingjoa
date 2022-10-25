@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
+import com.codingjoa.dto.LoginDto;
 import com.codingjoa.security.exception.LoginRequireFieldException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +33,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		log.info("============== LoginFailureHandler ==============");
 		log.info("Exception = {}", e.getClass());
 		
+		String memberId = request.getParameter("memberId");
+		String memberPassword = request.getParameter("memberPassword");
 		String errorMessage = null;
-
+		
 		if(e instanceof LoginRequireFieldException) {
 			String code = ((LoginRequireFieldException) e).getCode();
 			errorMessage = messageSource.getMessage(code, null, Locale.getDefault());
@@ -41,9 +44,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 			errorMessage = messageSource.getMessage("error.UsernameNotFoundOrBadCredentials", null, Locale.getDefault());
 		}
 		
-		log.info("erroMessage = {}", errorMessage);
+		LoginDto loginDto = new LoginDto(memberId, memberPassword, errorMessage);
+		request.setAttribute("loginDto", loginDto);
 		
-		//response.sendRedirect(request.getContextPath() + "/member/login");
+		request.getRequestDispatcher(request.getContextPath() + "/member/login").forward(request, response);
 	}
 
 }
