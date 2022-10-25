@@ -47,7 +47,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		LoginDto loginDto = new LoginDto(memberId, memberPassword, errorMessage);
 		request.setAttribute("loginDto", loginDto);
 		
-		request.getRequestDispatcher(request.getContextPath() + "/member/login").forward(request, response);
+		//response.sendRedirect(request.getContextPath() + "/member/login?error");
+		request.getRequestDispatcher("/member/login").forward(request, response);
 	}
 
 }
