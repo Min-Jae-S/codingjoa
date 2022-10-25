@@ -9,8 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
-@Data
+@ToString
 @AllArgsConstructor
 public class UserDetailsDto implements UserDetails {
 

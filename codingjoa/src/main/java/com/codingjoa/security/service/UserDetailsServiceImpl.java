@@ -29,12 +29,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 		if(map == null) {
 			throw new UsernameNotFoundException(memberId);
-		} else {
-			memberId = map.get("MEMBERID"); 					// memberId 		--> MEMBERID
-			String memberPassword = map.get("MEMBERPASSWORD");	// memberPassword 	--> MEMBERPASSWORD
-			String memberRole = map.get("MEMBERROLE");			// memberRole 		--> MEMBERROLE
-			
-			return new UserDetailsDto(memberId, memberPassword, memberRole);
 		}
+		
+		memberId = map.get("MEMBERID"); 					// memberId 		--> MEMBERID
+		String memberPassword = map.get("MEMBERPASSWORD");	// memberPassword 	--> MEMBERPASSWORD
+		String memberRole = map.get("MEMBERROLE");			// memberRole 		--> MEMBERROLE
+			
+		return new UserDetailsDto(memberId, memberPassword, memberRole);
 	}
 }
