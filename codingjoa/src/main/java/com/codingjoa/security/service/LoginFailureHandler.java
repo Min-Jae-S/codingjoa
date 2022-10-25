@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
@@ -36,8 +37,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		if(e instanceof LoginRequireFieldException) {
 			String code = ((LoginRequireFieldException) e).getCode();
 			errorMessage = messageSource.getMessage(code, null, Locale.getDefault());
-		} else if(e instanceof BadCredentialsException) {
-			errorMessage = messageSource.getMessage("error.BadCredentials", null, Locale.getDefault());
+		} else if(e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
+			errorMessage = messageSource.getMessage("error.UsernameNotFoundOrBadCredentials", null, Locale.getDefault());
 		}
 		
 		log.info("erroMessage = {}", errorMessage);
