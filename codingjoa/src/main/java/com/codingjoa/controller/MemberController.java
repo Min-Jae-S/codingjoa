@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingjoa.dto.EmailDto;
@@ -96,7 +97,7 @@ public class MemberController {
 		return emailResponseDto;
 	}
 	
-	@GetMapping("/member/login")
+	@RequestMapping("/member/login")
 	public String login(@ModelAttribute LoginDto loginDto) {
 		log.info("login, {}", loginDto);
 		
