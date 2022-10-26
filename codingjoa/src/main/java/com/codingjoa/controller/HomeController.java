@@ -40,11 +40,12 @@ public class HomeController {
 		
 		if(principal instanceof UserDetails) {
 			UserDetails userDetails = (UserDetails) principal;
-			log.info("{}", userDetails);
+			log.info("userDetails = {}", userDetails);
 		} else {
 			String memberId = (String) principal;
-			log.info("{}", memberId);
+			log.info("memberId = {}", memberId);
 		}
+		
 		
 		return "home";
 	}

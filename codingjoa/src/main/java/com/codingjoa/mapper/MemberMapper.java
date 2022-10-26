@@ -16,7 +16,7 @@ public interface MemberMapper {
 	
 	public boolean isIdExist(String memberId);
 	
-	public Map<String, String> findUserDetailsById(String memberId); // spring security(login)
+	public Map<String, Object> findUserDetailsById(String memberId); // Member, memberRole
 	
 	
 }
