@@ -45,8 +45,6 @@ public class HomeController {
 			String memberId = (String) principal;
 			log.info("memberId = {}", memberId);
 		}
-		
-		
 		return "home";
 	}
 	
