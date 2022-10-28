@@ -29,7 +29,13 @@
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
 					<li class="nav-item">
-						<span class="nav-link text-white font-weight-bold">${principal.member.memberId}</span> 님
+						<span class="nav-link text-white">
+							<span class="font-weight-bold">${principal.member.memberId}</span>
+							<span>님</span>
+						</span>
+					</li>
+					<li class="nav-item">
+						<span class="nav-link">|</span>
 					</li>
 					<li class="nav-item">
 						<a href="${contextPath}/member/myInfo" class="nav-link">내 정보</a>
