@@ -45,12 +45,13 @@
 	
 	.item span {
 		font-size: 18px;
+		color: black;
 	}
 	
 	.item p {
 		margin-bottom: 0;
 		margin-top: 10px;
-		color: #9e9e9e;
+		color: #888A88;
 		font-size: 14px;
 	}
 	

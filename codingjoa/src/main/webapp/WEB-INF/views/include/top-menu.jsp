@@ -38,7 +38,7 @@
 						</span>
 					</li>
 					<li class="nav-item">
-						<span class="nav-link">|</span>
+						<span class="nav-link" style="pointer-events:none;">|</span>
 					</li>
 					<li class="nav-item">
 						<a href="${contextPath}/member/account" class="nav-link">계정 관리</a>
