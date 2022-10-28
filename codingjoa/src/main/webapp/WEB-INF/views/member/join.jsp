@@ -47,12 +47,12 @@
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="card shadow">
-				<div class="card-body">
+				<div class="card-body p-4">
 					<form:form action="${contextPath}/member/joinProc" method="POST" modelAttribute="joinDto">
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
 							<div class="input-group">
-								<form:input path="memberId" class="form-control"/>
+								<form:input path="memberId" class="form-control" autocomplete="off"/>
 							</div>
 							<form:errors path="memberId" cssClass="error" />
 						</div>
@@ -69,13 +69,13 @@
 						<div class="form-group mb-4">
 							<form:label path="memberEmail" class="font-weight-bold">이메일</form:label>
 							<div class="input-group mb-2">
-								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력"/>
+								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력" autocomplete="off"/>
 								<div class="input-group-append">
 									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="sendAuthEmail()">인증번호 받기</button>
 								</div>
 							</div>
 							<div class="input-group">
-								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요."/>
+								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요." autocomplete="off"/>
 							</div>
 							<form:errors path="memberEmail" cssClass="error" element="div"/>
 							<form:errors path="authCode" cssClass="error" element="div"/>
@@ -95,7 +95,7 @@
 							<form:errors path="memberAddr" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
-							<form:input path="memberAddrDetail" class="form-control" placeholder="상세주소 입력"/>
+							<form:input path="memberAddrDetail" class="form-control" placeholder="상세주소 입력" autocomplete="off"/>
 							<form:errors path="memberAddrDetail" cssClass="error"/>
 						</div>
 						<div class="form-check small mb-1">
@@ -113,8 +113,9 @@
 							<form:button class="btn btn-primary btn-lg btn-block mb-4" id="joinBtn" disabled="true">회원가입</form:button>
 						</div>
 					</form:form>
-					<p class="text-center small">
-						이미 회원이신가요? <a href="${contextPath}/member/login">로그인 하기</a>
+					<p class="text-center small mb-0">
+						<span>이미 회원이신가요?</span>
+						<span><a href="${contextPath}/member/login">로그인 하기</a></span>
 					</p>
 				</div>
 			</div>

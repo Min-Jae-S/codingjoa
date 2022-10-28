@@ -38,7 +38,7 @@
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="card shadow">
-				<div class="card-body">
+				<div class="card-body p-4">
 					<form:form action="${contextPath}/member/loginProc" method="POST" modelAttribute="loginDto">
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
@@ -51,10 +51,14 @@
 						<c:if test="${not empty errorMessage}">
 							<div class="error">${errorMessage}</div>
 						</c:if>
-						<div class="form-group pt-4">
+						<div class="form-group pt-4 mb-4">
 							<form:button class="btn btn-primary btn-lg btn-block">로그인</form:button>
 						</div>
 					</form:form>
+					<p class="text-center small mb-0">
+						<span>비밀번호를 잃어버리셨나요?</span>
+						<span><a href="#">비밀번호 찾기</a></span>
+					</p>
 				</div>
 			</div>
 		</div>

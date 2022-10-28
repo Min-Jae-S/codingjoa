@@ -216,7 +216,7 @@
 			<version>${org.thymeleaf-version}</version>
 		</dependency>
 		
-		<!-- RandStringUtils -->
+		<!-- RandomStringUtils -->
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
