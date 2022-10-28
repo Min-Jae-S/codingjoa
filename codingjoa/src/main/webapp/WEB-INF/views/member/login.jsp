@@ -15,7 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 	.container {
-		margin-top: 200px;
+		margin-top: 300px;
 		margin-bottom: 100px;
 	}
 	
@@ -42,7 +42,7 @@
 					<form:form action="${contextPath}/member/loginProc" method="POST" modelAttribute="loginDto">
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
-							<form:input path="memberId" class="form-control" placeholder="아이디"/>
+							<form:input path="memberId" class="form-control" placeholder="아이디" autocomplete="off"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberPassword" class="font-weight-bold">비밀번호</form:label>

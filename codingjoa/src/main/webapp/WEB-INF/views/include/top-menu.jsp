@@ -41,7 +41,7 @@
 						<span class="nav-link">|</span>
 					</li>
 					<li class="nav-item">
-						<a href="${contextPath}/member/myInfo" class="nav-link">내 정보</a>
+						<a href="${contextPath}/member/account" class="nav-link">계정 관리</a>
 					</li>
 					<li class="nav-item">
 						<a href="${contextPath}/member/logout" class="nav-link">로그아웃</a>

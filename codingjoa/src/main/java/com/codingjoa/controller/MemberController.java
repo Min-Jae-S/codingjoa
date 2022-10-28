@@ -29,6 +29,7 @@ import com.codingjoa.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@RequestMapping("/member")
 @Controller
 public class MemberController {
 	
@@ -58,14 +59,14 @@ public class MemberController {
 		}
 	}
 	
-	@GetMapping("/member/join")
+	@GetMapping("/join")
 	public String join(@ModelAttribute JoinDto joinDto) {
 		log.info("join, {}", joinDto);
 		
 		return "member/join"; 
 	}
 	
-	@PostMapping("/member/joinProc")
+	@PostMapping("/joinProc")
 	public String joinProc(@Valid @ModelAttribute JoinDto joinDto, BindingResult bindingResult) {
 		log.info("joinProc, {}", joinDto);
 
@@ -78,7 +79,7 @@ public class MemberController {
 		return "member/join-success"; 
 	}
 	
-	@PostMapping("/member/sendAuthEmail")
+	@PostMapping("/sendAuthEmail")
 	@ResponseBody
 	public EmailResponseDto sendAuthEmail(@Valid @RequestBody EmailDto emailDto, BindingResult bindingResult) {
 		log.info("sendAuthEmail, {}", emailDto);
@@ -97,11 +98,16 @@ public class MemberController {
 		return emailResponseDto;
 	}
 	
-	@RequestMapping("/member/login")
+	@RequestMapping("/login")
 	public String login(@ModelAttribute LoginDto loginDto) {
 		log.info("login, {}", loginDto);
 		
 		return "member/login";
+	}
+
+	@GetMapping("/account")
+	public String account() {
+		return "member/account";
 	}
 	
 	

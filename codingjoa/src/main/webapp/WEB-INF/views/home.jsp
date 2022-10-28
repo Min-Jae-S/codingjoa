@@ -18,10 +18,7 @@
 <c:import url="/WEB-INF/views/include/top-menu.jsp" />
 
 <div class="container">
-	<h1>home</h1>
-	<div class="mt-4">
-		<button class="btn btn-primary" onclick="location.href='${contextPath}/test'">test</button>
-	</div>
+
 </div>
 
 <c:import url="/WEB-INF/views/include/bottom-menu.jsp"/>
