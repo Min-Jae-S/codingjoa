@@ -29,6 +29,9 @@
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
 					<li class="nav-item">
+						<img src="${contextPath}/resources/image/person.png" style="width: 40px; padding: 0.25rem;">
+					</li>
+					<li class="nav-item">
 						<span class="nav-link text-white">
 							<span class="font-weight-bold">${principal.member.memberId}</span>
 							<span>님</span>
