@@ -18,7 +18,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @ComponentScan("com.codingjoa.security.service")
-@EnableWebSecurity //(debug = true)
+@EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -67,6 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.addFilterBefore(encodingFilter(), CsrfFilter.class)
 			.authorizeRequests()
+				//.filterSecurityInterceptorOncePerRequest(false)
+				// https://stackoverflow.com/questions/19941466/spring-security-allows-unauthorized-user-access-to-restricted-url-from-a-forward
 				.anyRequest().permitAll()
 				.and()
 			.formLogin()

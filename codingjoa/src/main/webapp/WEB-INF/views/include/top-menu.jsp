@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="principal" value="${SPRING_SECURITY_CONTEXT.authentication.principal}" />
 <!-- 상단 메뉴 -->
@@ -19,15 +19,15 @@
 			</ul>
 			
 			<ul class="navbar-nav ml-auto">
-				<security:authorize access="isAnonymous()">
+				<sec:authorize access="isAnonymous()">
 					<li class="nav-item">
 						<a href="${contextPath}/member/join" class="nav-link">회원가입</a>
 					</li>
 					<li class="nav-item">
 						<a href="${contextPath}/member/login" class="nav-link">로그인</a>
 					</li>
-				</security:authorize>
-				<security:authorize access="isAuthenticated()">
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 					<li class="nav-item">
 						<img src="${contextPath}/resources/image/person.png" style="width: 40px; padding: 0.25rem;">
 					</li>
@@ -46,7 +46,7 @@
 					<li class="nav-item">
 						<a href="${contextPath}/member/logout" class="nav-link">로그아웃</a>
 					</li>
-				</security:authorize>
+				</sec:authorize>
 			</ul>
 		</div>
 	</div>
