@@ -36,6 +36,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
+		
 	}
 	
 	.item {
@@ -70,15 +71,15 @@
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="list-group">
-				<div class="list-group-item list-group-item-action font-900">
+				<div class="list-group-item list-group-item-action" onclick="location.href='${contextPath}/member/info'">
 					<span><i class="fa-solid fa-user"></i></span>
 					<div class="item">
 						<span>계정 정보</span>
-						<p>이메일, 전화번호, 주소를 확인하고 관리합니다.</p>
+						<p>이메일, 주소 등의 개인정보를 확인하고 관리합니다.</p>
 					</div>
 					<span><i class="fa-solid fa-angle-right"></i></span>
 				</div>
-				<div class="list-group-item list-group-item-action">
+				<div class="list-group-item list-group-item-action" onclick="location.href='${contextPath}/member/password'">
 					<span><i class="fa-solid fa-lock"></i></span>
 					<div class="item">
 						<span>계정 보안</span>
