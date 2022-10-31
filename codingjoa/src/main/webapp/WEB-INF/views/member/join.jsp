@@ -176,6 +176,8 @@
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('memberZipcode').value = data.zonecode;
                 document.getElementById("memberAddr").value = addr;
+                document.getElementById("memberAddrDetail").value = '';
+               
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("memberAddrDetail").focus();
             }
