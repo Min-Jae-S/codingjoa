@@ -23,6 +23,11 @@
 	.form-control:disabled {
 		background-color: #f2f2f2;
 	}
+	
+	input[name="memberZipcode"], 
+	input[name="memberAddr"] {
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>

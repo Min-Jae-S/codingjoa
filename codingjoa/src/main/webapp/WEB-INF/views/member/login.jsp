@@ -28,7 +28,7 @@
 					<form:form action="${contextPath}/member/loginProc" method="POST" modelAttribute="loginDto">
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
-							<form:input path="memberId" class="form-control" placeholder="아이디" autocomplete="off"/>
+							<form:input path="memberId" class="form-control" placeholder="아이디"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberPassword" class="font-weight-bold">비밀번호</form:label>
