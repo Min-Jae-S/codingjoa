@@ -19,7 +19,7 @@
 <c:import url="/WEB-INF/views/include/top-menu.jsp" />
 
 <div class="container">
-	<h1>Home</h1>
+	<h1>Home.jsp</h1>
 </div>
 
 <c:import url="/WEB-INF/views/include/bottom-menu.jsp"/>

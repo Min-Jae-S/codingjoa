@@ -19,7 +19,7 @@
 
 <c:import url="/WEB-INF/views/include/top-menu.jsp"/>
 
-<div class="container">
+<div class="container login-container">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">

@@ -16,11 +16,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/c503d71f81.js" crossorigin="anonymous"></script>
 <style>
-	.container {
-		margin-top: 300px;
-		margin-bottom: 100px;
-	}
-	
 	.list-group-item:first-child {
 		border-top: 2px solid #ccc;
 	}
@@ -67,7 +62,7 @@
 
 <c:import url="/WEB-INF/views/include/top-menu.jsp"/>
 
-<div class="container">
+<div class="container account-container">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
