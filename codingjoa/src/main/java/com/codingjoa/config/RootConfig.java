@@ -13,9 +13,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
+import com.codingjoa.util.MessageUtils;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -76,6 +78,19 @@ public class RootConfig {
 		source.setBasename("/WEB-INF/properties/error-message");
 		
 		return source;
+	}
+	
+	@Bean
+	public MessageSourceAccessor messageSourceAccessor() {
+		return new MessageSourceAccessor(messageSource());
+	}
+	
+	@Bean
+	public MessageUtils messageUtils() {
+		MessageUtils messageUtils = new MessageUtils();
+		messageUtils.setMessageSourceAccessor(messageSourceAccessor());
+		
+		return messageUtils;
 	}
 	
 	@Bean

@@ -1,12 +1,9 @@
 package com.codingjoa.controller;
 
-import java.util.Locale;
-
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
@@ -25,6 +22,7 @@ import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.LoginDto;
 import com.codingjoa.service.EmailService;
 import com.codingjoa.service.MemberService;
+import com.codingjoa.util.MessageUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,15 +30,12 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/member")
 @Controller
 public class MemberController {
-	
+
 	@Autowired
 	private MemberService memberService;
 	
 	@Autowired
 	private EmailService emailService;
-	
-	@Autowired
-	private MessageSource messageSource;
 	
 	@Resource(name = "joinValidator")
 	private Validator joinValidator;
@@ -85,10 +80,10 @@ public class MemberController {
 		log.info("sendAuthEmail, {}", emailDto);
 		
 		EmailResponseDto emailResponseDto = new EmailResponseDto();
-
+		
 		if(bindingResult.hasErrors()) {
 			String code = bindingResult.getAllErrors().get(0).getCodes()[0];
-			emailResponseDto.setErrorMessage(messageSource.getMessage(code, null, Locale.getDefault()));
+			emailResponseDto.setErrorMessage(MessageUtils.getMessage(code));
 			emailResponseDto.setValidated(false);
 		} else {
 			emailResponseDto.setValidated(true);
@@ -109,6 +104,15 @@ public class MemberController {
 	public String account() {
 		return "member/account";
 	}
+
+	@GetMapping("/info")
+	public String info() {
+		return "member/info";
+	}
 	
+	@GetMapping("/password")
+	public String password() {
+		return "member/password";
+	}
 	
 }
