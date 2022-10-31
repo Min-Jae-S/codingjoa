@@ -110,9 +110,9 @@ public class MemberController {
 		return "member/info";
 	}
 	
-	@GetMapping("/password")
-	public String password() {
-		return "member/password";
+	@GetMapping("/beforeChangePassword")
+	public String beforeChangePassword() {
+		return "member/before-change-password";
 	}
 	
 }
