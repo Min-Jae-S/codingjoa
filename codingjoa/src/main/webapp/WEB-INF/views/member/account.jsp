@@ -14,7 +14,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/c503d71f81.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/c503d71f81.js"></script>
 <style>
 	.list-group-item:first-child {
 		border-top: 2px solid #ccc;
