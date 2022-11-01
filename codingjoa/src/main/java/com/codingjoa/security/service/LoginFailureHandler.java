@@ -31,8 +31,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		String errorMessage = null;
 		
 		if(e instanceof LoginRequireFieldException) {
-			String code = ((LoginRequireFieldException) e).getCode();
-			errorMessage = MessageUtils.getMessage(code);
+			String errorCode = ((LoginRequireFieldException) e).getErrorCode();
+			errorMessage = MessageUtils.getMessage(errorCode);
 		} else if(e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
 			errorMessage = MessageUtils.getMessage("error.UsernameNotFoundOrBadCredentials");
 		}
