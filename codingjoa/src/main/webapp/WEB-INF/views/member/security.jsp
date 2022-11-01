@@ -27,15 +27,15 @@
 	.list-group-item {
 		border-left: none;
 		border-right: none;
-		padding-top: 40px;
-		padding-bottom: 40px;
+		padding: 40px 35px 40px 35px;
+		cursor: pointer;
 		display: flex;
 		align-items: center;
-		justify-content: space-around;
-		cursor: pointer;
 	}
 	
 	.item {
+		margin-left: auto;
+		margin-right: auto;
 		width: 350px;
 		font-weight: bold;
 	}
@@ -68,20 +68,20 @@
 		<div class="col-sm-6">
 			<div class="list-group">
 				<div class="list-group-item list-group-item-action" onclick="location.href='${contextPath}/member/info'">
-					<span><i class="fa-solid fa-user"></i></span>
+					<span class="mr-4"><i class="fa-solid fa-user"></i></span>
 					<div class="item">
 						<span>계정 정보</span>
 						<p>이메일, 주소 등의 개인정보를 확인하고 관리합니다.</p>
 					</div>
-					<span><i class="fa-solid fa-angle-right"></i></span>
+					<span class="ml-4"><i class="fa-solid fa-angle-right"></i></span>
 				</div>
 				<div class="list-group-item list-group-item-action" onclick="location.href='${contextPath}/member/checkPassword'">
-					<span><i class="fa-solid fa-lock"></i></span>
+					<span class="mr-4"><i class="fa-solid fa-lock"></i></span>
 					<div class="item">
 						<span>계정 보안</span>
 						<p>비밀번호를 재설정합니다.</p>
 					</div>
-					<span><i class="fa-solid fa-angle-right"></i></span>
+					<span class="ml-4"><i class="fa-solid fa-angle-right"></i></span>
 				</div>
 			</div>
 		</div>

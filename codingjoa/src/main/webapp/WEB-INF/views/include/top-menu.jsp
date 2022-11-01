@@ -41,7 +41,7 @@
 						<span class="nav-link" style="pointer-events: none;">|</span>
 					</li>
 					<li class="nav-item">
-						<a href="${contextPath}/member/account" class="nav-link">계정 관리</a>
+						<a href="${contextPath}/member/security" class="nav-link">계정 관리</a>
 					</li>
 					<li class="nav-item">
 						<a href="${contextPath}/member/logout" class="nav-link">로그아웃</a>

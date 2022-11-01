@@ -100,9 +100,9 @@ public class MemberController {
 		return "member/login";
 	}
 
-	@GetMapping("/account")
-	public String account() {
-		return "member/account";
+	@GetMapping("/security")
+	public String security() {
+		return "member/security";
 	}
 
 	@GetMapping("/info")
