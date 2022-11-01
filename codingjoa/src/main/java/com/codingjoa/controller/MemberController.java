@@ -32,7 +32,7 @@ public class MemberController {
 	private Validator joinValidator;
 	
 	@InitBinder("joinDto")
-	public void initBinder(WebDataBinder binder) {
+	public void initBinderJoin(WebDataBinder binder) {
 		binder.addValidators(joinValidator);
 	}
 	
