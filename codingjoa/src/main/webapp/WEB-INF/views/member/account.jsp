@@ -75,7 +75,7 @@
 					</div>
 					<span><i class="fa-solid fa-angle-right"></i></span>
 				</div>
-				<div class="list-group-item list-group-item-action" onclick="location.href='${contextPath}/member/password'">
+				<div class="list-group-item list-group-item-action" onclick="location.href='${contextPath}/member/checkPassword'">
 					<span><i class="fa-solid fa-lock"></i></span>
 					<div class="item">
 						<span>계정 보안</span>
