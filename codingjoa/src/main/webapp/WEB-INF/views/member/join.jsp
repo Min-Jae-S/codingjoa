@@ -130,18 +130,22 @@
 			contentType : "application/json; charset=utf-8",
 			dataType : "JSON",
 			success : function() {
+				$("#memberEmail\\.errors").remove();
+				$("#authCode\\.errors").remove();
 				$("#authCode").val("");
 				$("#authCode").focus();
 			},
 			error : function(jqXHR) {
-				if(jqXHR.status == "422") {
-					console.log(jqXHR.responseText);
-					//$("#authCode").closest("div").after("<div id='memberEmail.errors' class='error'>" + result.errorMessage + "</div>");
-				}
-			},
-			complete : function() {
 				$("#memberEmail\\.errors").remove();
 				$("#authCode\\.errors").remove();
+				
+				if(jqXHR.status == "422") {
+					var errorMap = JSON.parse(jqXHR.responseText).errorMap;
+					
+					$.each(errorMap, function(errorField, errorMessage) {
+						$("#authCode").closest("div").after("<div id='" + errorField + ".errors' class='error'>" + errorMessage + "</div>");
+					});
+				}
 			}
 		});
 	}
