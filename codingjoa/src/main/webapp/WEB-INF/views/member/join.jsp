@@ -125,20 +125,23 @@
 			type : "POST",
 			url : "${contextPath}/member/sendAuthEmail",
 			data : JSON.stringify({
-				memberEmail : $("#memberEmail").val() 
+				memberEmail : $("#memberEmail").val()
 			}),
 			contentType : "application/json; charset=utf-8",
 			dataType : "JSON",
-			success : function(result) {
+			success : function() {
+				$("#authCode").val("");
+				$("#authCode").focus();
+			},
+			error : function(jqXHR) {
+				if(jqXHR.status == "422") {
+					console.log(jqXHR.responseText);
+					//$("#authCode").closest("div").after("<div id='memberEmail.errors' class='error'>" + result.errorMessage + "</div>");
+				}
+			},
+			complete : function() {
 				$("#memberEmail\\.errors").remove();
 				$("#authCode\\.errors").remove();
-				
-				if(result.validated) {
-					$("#authCode").val("");
-					$("#authCode").focus();
-				} else {
-					$("#authCode").closest("div").after("<div id='memberEmail.errors' class='error'>" + result.errorMessage + "</div>");
-				}
 			}
 		});
 	}
