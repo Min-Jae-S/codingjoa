@@ -121,6 +121,8 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	function sendAuthEmail() {
+		const UNPROCESSABLE_ENTITY = 422;
+		
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/member/sendAuthEmail",
@@ -139,7 +141,7 @@
 				$("#memberEmail\\.errors").remove();
 				$("#authCode\\.errors").remove();
 				
-				if(jqXHR.status == "422") {
+				if(jqXHR.status == UNPROCESSABLE_ENTITY) {
 					var errorMap = JSON.parse(jqXHR.responseText).errorMap;
 					
 					$.each(errorMap, function(errorField, errorMessage) {

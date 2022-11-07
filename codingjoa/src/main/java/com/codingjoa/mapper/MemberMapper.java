@@ -23,5 +23,5 @@ public interface MemberMapper {
 	
 	public void updateAddr(@Param("addrDto") AddrDto addrDto, @Param("memberId") String memberId);
 	
-	public void updateAgree(@Param("addrDto") AgreeDto agreeDto, @Param("memberId") String memberId);
+	public void updateAgree(@Param("agreeDto") AgreeDto agreeDto, @Param("memberId") String memberId);
 }
