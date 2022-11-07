@@ -44,7 +44,7 @@
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
 							<div class="input-group">
-								<form:input path="memberId" class="form-control" autocomplete="off"/>
+								<form:input path="memberId" class="form-control"/>
 							</div>
 							<form:errors path="memberId" cssClass="error" />
 						</div>
@@ -61,13 +61,13 @@
 						<div class="form-group mb-4">
 							<form:label path="memberEmail" class="font-weight-bold">이메일</form:label>
 							<div class="input-group mb-2">
-								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력" autocomplete="off"/>
+								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력"/>
 								<div class="input-group-append">
-									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="sendAuthEmail()">인증번호 받기</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm" id="sendAuthEmailBtn" onclick="sendAuthEmail()">인증번호 받기</button>
 								</div>
 							</div>
 							<div class="input-group">
-								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요." autocomplete="off"/>
+								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요."/>
 							</div>
 							<form:errors path="memberEmail" cssClass="error" element="div"/>
 							<form:errors path="authCode" cssClass="error" element="div"/>
@@ -87,7 +87,7 @@
 							<form:errors path="memberAddr" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
-							<form:input path="memberAddrDetail" class="form-control" placeholder="상세주소 입력" autocomplete="off"/>
+							<form:input path="memberAddrDetail" class="form-control" placeholder="상세주소 입력"/>
 							<form:errors path="memberAddrDetail" cssClass="error"/>
 						</div>
 						<div class="form-check small mb-1">
