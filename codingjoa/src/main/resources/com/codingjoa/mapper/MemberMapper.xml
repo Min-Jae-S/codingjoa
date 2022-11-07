@@ -92,6 +92,28 @@
 			a.member_id = #{memberId}
 	</select>
 	
+	<update id="updateAddr" parameterType="map">
+		UPDATE 
+			member
+		SET
+			member_zipcode = #{addrDto.memberZipcode},
+			member_addr = #{addrDto.memberAddr},
+			member_addr_detail = #{addrDto.memberAddrDetail},
+			moddate = SYSDATE
+		WHERE
+			member_id = #{memberId}
+	</update>
+
+	<update id="updateAgree" parameterType="map">
+		UPDATE 
+			member
+		SET
+			member_agree = #{agreeDto.memberAgree},
+			moddate = SYSDATE
+		WHERE
+			member_id = #{memberId}
+	</update>
+	
 	
 	
 </mapper>

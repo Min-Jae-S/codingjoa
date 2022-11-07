@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.codingjoa.dto.AddrDto;
+import com.codingjoa.dto.AgreeDto;
 import com.codingjoa.dto.JoinDto;
 import com.codingjoa.entity.Auth;
 import com.codingjoa.entity.Member;
@@ -42,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
 			Auth auth = new Auth();
 			auth.setMemberId(member.getMemberId());
 			log.info("auth = {}", auth);
-
+	
 			memberMapper.registerAuth(auth);
 		}
 	}
@@ -50,6 +52,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean isIdExist(String memberId) {
 		return memberMapper.isIdExist(memberId);
+	}
+
+	@Override
+	public void updateAddr(AddrDto addrDto, String memberId) {
+		memberMapper.updateAddr(addrDto, memberId);
+	}
+
+	@Override
+	public void updateAgree(AgreeDto agreeDto, String memberId) {
+		memberMapper.updateAgree(agreeDto, memberId);
 	}
 
 }
