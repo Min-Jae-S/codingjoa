@@ -15,6 +15,7 @@ import org.thymeleaf.context.Context;
 
 import com.codingjoa.dto.EmailDto;
 import com.codingjoa.service.EmailService;
+import com.codingjoa.service.RedisService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,13 +30,16 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
 	private TemplateEngine templateEngine;
 	
+	@Autowired
+	private RedisService redisService;
+	
 	@Async // Async Config
 	@Override
-	public String sendAuthEmail(EmailDto emailDto) {
+	public void sendAuthEmail(EmailDto emailDto) {
 		String memberEmail = emailDto.getMemberEmail();
 		String authCode = RandomStringUtils.randomAlphanumeric(10);
-		log.info("authCode : {}", authCode);
-	
+		log.info("authCode = {}", authCode);
+		
 		String html = buildTemplate(authCode);
 		
 		try {
@@ -51,7 +55,9 @@ public class EmailServiceImpl implements EmailService {
 			e.printStackTrace();
 		}
 		
-		return authCode;
+		redisService.saveAuthCode(memberEmail, authCode);
+		
+		//return authCode; because @Async --> null
 	}
 	
 	private String buildTemplate(String authCode) {

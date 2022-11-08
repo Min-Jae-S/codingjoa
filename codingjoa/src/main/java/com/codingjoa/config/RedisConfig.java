@@ -7,6 +7,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @PropertySource("/WEB-INF/properties/redis.properties")
@@ -23,12 +25,26 @@ public class RedisConfig {
 		return new LettuceConnectionFactory(host, port);
 	}
 	
+//	@Bean
+//	public RedisSerializer<?> redisSerializer() {
+//		return new StringRedisSerializer();
+//	}
+	
+//	@Bean
+//	public RedisTemplate<String, String> redisTemplate() {
+//		RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+//        redisTemplate.setConnectionFactory(redisConnectionFactory());
+//        redisTemplate.setDefaultSerializer(redisSerializer());
+//
+//        return redisTemplate;
+//	}
+	
 	@Bean
-	public RedisTemplate<?, ?> redisTemplate() {
+	public RedisTemplate<?, ?> redistTemplate() {
 		RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(redisConnectionFactory());
-
-        return redisTemplate;
+		redisTemplate.setConnectionFactory(redisConnectionFactory());
+		
+		return redisTemplate;
 	}
 
 	

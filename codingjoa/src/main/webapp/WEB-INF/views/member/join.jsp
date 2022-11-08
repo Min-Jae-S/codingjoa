@@ -23,6 +23,12 @@
 	.form-control:disabled {
 		background-color: #f2f2f2;
 	}
+
+	span.error, span.success {
+		display: inline-block;
+		margin-top: 5px;
+		margin-left: 5px;
+	}
 	
 	input[name="memberZipcode"], 
 	input[name="memberAddr"] {
@@ -69,8 +75,8 @@
 							<div class="input-group">
 								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요."/>
 							</div>
-							<form:errors path="memberEmail" cssClass="error" element="div"/>
-							<form:errors path="authCode" cssClass="error" element="div"/>
+							<form:errors path="memberEmail" cssClass="error"/>
+							<form:errors path="authCode" cssClass="error"/>
 						</div>
 						<div class="form-group">
 							<form:label path="memberZipcode" class="font-weight-bold">주소</form:label>
@@ -130,22 +136,21 @@
 				memberEmail : $("#memberEmail").val()
 			}),
 			contentType : "application/json; charset=utf-8",
-			dataType : "JSON",
-			success : function() {
-				$("#memberEmail\\.errors").remove();
-				$("#authCode\\.errors").remove();
+			//dataType : "json",
+			success : function(result) {
+				$("#memberEmail\\.errors, #authCode\\.errors, .success").remove();
+				$("#authCode").closest("div").after("<span class='success'>" + result + "</span>");
 				$("#authCode").val("");
 				$("#authCode").focus();
 			},
 			error : function(jqXHR) {
-				$("#memberEmail\\.errors").remove();
-				$("#authCode\\.errors").remove();
+				$("#memberEmail\\.errors, #authCode\\.errors, .success").remove();
 				
 				if(jqXHR.status == UNPROCESSABLE_ENTITY) {
 					var errorMap = JSON.parse(jqXHR.responseText).errorMap;
 					
 					$.each(errorMap, function(errorField, errorMessage) {
-						$("#authCode").closest("div").after("<div id='" + errorField + ".errors' class='error'>" + errorMessage + "</div>");
+						$("#authCode").closest("div").after("<span id='" + errorField + ".errors' class='error'>" + errorMessage + "</span>");
 					});
 				}
 			}

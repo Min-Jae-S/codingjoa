@@ -75,7 +75,7 @@ public class RootConfig {
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
 		source.setDefaultEncoding("UTF-8");
-		source.setBasename("/WEB-INF/properties/error-message");
+		source.setBasenames("/WEB-INF/properties/error-message", "/WEB-INF/properties/success-message");
 		
 		return source;
 	}
@@ -97,4 +97,5 @@ public class RootConfig {
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
+	
 }
