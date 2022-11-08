@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.codingjoa.dto.AddrDto;
 import com.codingjoa.dto.AgreeDto;
 import com.codingjoa.dto.JoinDto;
+import com.codingjoa.dto.UpdateEmailDto;
 import com.codingjoa.entity.Auth;
 import com.codingjoa.entity.Member;
 import com.codingjoa.mapper.MemberMapper;
@@ -55,6 +56,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public void updateEmail(UpdateEmailDto updateEmailDto, String memberId) {
+		memberMapper.updateEmail(updateEmailDto, memberId);
+	}
+	
+	@Override
 	public void updateAddr(AddrDto addrDto, String memberId) {
 		memberMapper.updateAddr(addrDto, memberId);
 	}
@@ -63,5 +69,7 @@ public class MemberServiceImpl implements MemberService {
 	public void updateAgree(AgreeDto agreeDto, String memberId) {
 		memberMapper.updateAgree(agreeDto, memberId);
 	}
+
+
 
 }

@@ -15,7 +15,6 @@ import org.thymeleaf.context.Context;
 
 import com.codingjoa.dto.EmailDto;
 import com.codingjoa.service.EmailService;
-import com.codingjoa.service.RedisService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,12 +29,9 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
 	private TemplateEngine templateEngine;
 	
-	@Autowired
-	private RedisService redisService;
-	
 	@Async // Async Config
 	@Override
-	public void sendAuthEmail(EmailDto emailDto) {
+	public String sendAuthEmail(EmailDto emailDto) {
 		String memberEmail = emailDto.getMemberEmail();
 		String authCode = RandomStringUtils.randomAlphanumeric(10);
 		log.info("authCode : {}", authCode);
@@ -50,12 +46,12 @@ public class EmailServiceImpl implements EmailService {
 			mailHelper.setSubject("[codingjoa] 이메일 인증번호입니다.");
 			mailHelper.setText(html, true);
 			mailSender.send(mimeMessage);
-			
+
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 		
-		redisService.saveAuthCode(memberEmail, authCode);
+		return authCode;
 	}
 	
 	private String buildTemplate(String authCode) {

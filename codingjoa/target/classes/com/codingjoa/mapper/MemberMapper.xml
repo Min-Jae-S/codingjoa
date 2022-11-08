@@ -92,6 +92,16 @@
 			a.member_id = #{memberId}
 	</select>
 	
+	<update id="updateEmail" parameterType="map">
+		UPDATE 
+			member
+		SET
+			member_email = #{updateEmailDto.memberEmail},
+			moddate = SYSDATE
+		WHERE
+			member_id = #{memberId}
+	</update>
+	
 	<update id="updateAddr" parameterType="map">
 		UPDATE 
 			member

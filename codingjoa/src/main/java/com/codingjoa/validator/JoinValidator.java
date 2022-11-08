@@ -18,6 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Component(value = "joinValidator")
 public class JoinValidator implements Validator {
 	
+	private final String ID_REGEXP = "^([a-z0-9]{6,12})$";
+	private final String PASSWORD_REGEXP = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,16}";
+	private final String EMAIL_REGEXP = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+	
 	@Autowired
 	private MemberService memberService;
 	
@@ -40,11 +44,9 @@ public class JoinValidator implements Validator {
 	}
 
 	private void checkId(String memberId, Errors errors) {
-		String regexp = "^([a-z0-9]{6,12})$";
-
 		if (!StringUtils.hasText(memberId)) {
 			errors.rejectValue("memberId", "NotBlank");
-		} else if (!Pattern.matches(regexp, memberId)) {
+		} else if (!Pattern.matches(ID_REGEXP, memberId)) {
 			errors.rejectValue("memberId", "Pattern");
 		} else if (memberService.isIdExist(memberId)) {
 			errors.rejectValue("memberId", "IdExist");
@@ -52,17 +54,15 @@ public class JoinValidator implements Validator {
 	}
 
 	private void checkPassword(String memberPassword, String confirmPassword, Errors errors) {
-		String regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,16}";
-
 		if (!StringUtils.hasText(memberPassword)) {
 			errors.rejectValue("memberPassword", "NotBlank");
-		} else if (!Pattern.matches(regexp, memberPassword)) {
+		} else if (!Pattern.matches(PASSWORD_REGEXP, memberPassword)) {
 			errors.rejectValue("memberPassword", "Pattern");
 		}
 
 		if (!StringUtils.hasText(confirmPassword)) {
 			errors.rejectValue("confirmPassword", "NotBlank");
-		} else if (!Pattern.matches(regexp, confirmPassword)) {
+		} else if (!Pattern.matches(PASSWORD_REGEXP, confirmPassword)) {
 			errors.rejectValue("confirmPassword", "Pattern");
 		}
 
@@ -75,11 +75,9 @@ public class JoinValidator implements Validator {
 	}
 	
 	private void checkEmailAndAuth(String memberEmail, String authCode, Errors errors) {
-		String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
-		
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
-		} else if (!Pattern.matches(regexp, memberEmail)) {
+		} else if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
 		} else if (!StringUtils.hasText(authCode)) {
 			errors.rejectValue("authCode", "NotBlank");

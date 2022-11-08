@@ -4,6 +4,6 @@ import com.codingjoa.dto.EmailDto;
 
 public interface EmailService {
 	
-	public void sendAuthEmail(EmailDto emailDto);
+	public String sendAuthEmail(EmailDto emailDto);
 	
 }
