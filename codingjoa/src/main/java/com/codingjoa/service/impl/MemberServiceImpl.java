@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.codingjoa.dto.AddrDto;
-import com.codingjoa.dto.AgreeDto;
+import com.codingjoa.dto.UpdateAddrDto;
+import com.codingjoa.dto.UpdateAgreeDto;
 import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.UpdateEmailDto;
 import com.codingjoa.entity.Auth;
@@ -61,13 +61,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public void updateAddr(AddrDto addrDto, String memberId) {
-		memberMapper.updateAddr(addrDto, memberId);
+	public void updateAddr(UpdateAddrDto updateAddrDto, String memberId) {
+		memberMapper.updateAddr(updateAddrDto, memberId);
 	}
 
 	@Override
-	public void updateAgree(AgreeDto agreeDto, String memberId) {
-		memberMapper.updateAgree(agreeDto, memberId);
+	public void updateAgree(UpdateAgreeDto updateAgreeDto, String memberId) {
+		memberMapper.updateAgree(updateAgreeDto, memberId);
 	}
 
 

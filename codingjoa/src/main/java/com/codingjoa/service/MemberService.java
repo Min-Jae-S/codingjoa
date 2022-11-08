@@ -1,7 +1,7 @@
 package com.codingjoa.service;
 
-import com.codingjoa.dto.AddrDto;
-import com.codingjoa.dto.AgreeDto;
+import com.codingjoa.dto.UpdateAddrDto;
+import com.codingjoa.dto.UpdateAgreeDto;
 import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.UpdateEmailDto;
 
@@ -13,8 +13,8 @@ public interface MemberService {
 	
 	public void updateEmail(UpdateEmailDto updateEmailDto, String memberId);
 	
-	public void updateAddr(AddrDto addrDto, String memberId);
+	public void updateAddr(UpdateAddrDto updateAddrDto, String memberId);
 	
-	public void updateAgree(AgreeDto agreeDto, String memberId);
+	public void updateAgree(UpdateAgreeDto updateAddrDto, String memberId);
 	
 }

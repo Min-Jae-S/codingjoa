@@ -5,8 +5,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.codingjoa.dto.AddrDto;
-import com.codingjoa.dto.AgreeDto;
+import com.codingjoa.dto.UpdateAddrDto;
+import com.codingjoa.dto.UpdateAgreeDto;
 import com.codingjoa.dto.UpdateEmailDto;
 import com.codingjoa.entity.Auth;
 import com.codingjoa.entity.Member;
@@ -25,7 +25,9 @@ public interface MemberMapper {
 	public void updateEmail(@Param("updateEmailDto") UpdateEmailDto updateEmailDto, 
 							@Param("memberId") String memberId);
 	
-	public void updateAddr(@Param("addrDto") AddrDto addrDto, @Param("memberId") String memberId);
+	public void updateAddr(@Param("updateAddrDto") UpdateAddrDto updateAddrDto, 
+							@Param("memberId") String memberId);
 	
-	public void updateAgree(@Param("agreeDto") AgreeDto agreeDto, @Param("memberId") String memberId);
+	public void updateAgree(@Param("updateAgreeDto") UpdateAgreeDto updateAgreeDto, 
+							@Param("memberId") String memberId);
 }

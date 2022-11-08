@@ -106,9 +106,9 @@
 		UPDATE 
 			member
 		SET
-			member_zipcode = #{addrDto.memberZipcode},
-			member_addr = #{addrDto.memberAddr},
-			member_addr_detail = #{addrDto.memberAddrDetail},
+			member_zipcode = #{updateAddrDto.memberZipcode},
+			member_addr = #{updateAddrDto.memberAddr},
+			member_addr_detail = #{updateAddrDto.memberAddrDetail},
 			moddate = SYSDATE
 		WHERE
 			member_id = #{memberId}
@@ -118,7 +118,7 @@
 		UPDATE 
 			member
 		SET
-			member_agree = #{agreeDto.memberAgree},
+			member_agree = #{updateAgreeDto.memberAgree},
 			moddate = SYSDATE
 		WHERE
 			member_id = #{memberId}
