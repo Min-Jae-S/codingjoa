@@ -62,7 +62,7 @@
 
 <c:import url="/WEB-INF/views/include/top-menu.jsp"/>
 
-<div class="container account-container">
+<div class="container security-container">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
