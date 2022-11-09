@@ -33,8 +33,7 @@ public class EmailValidator implements Validator {
 		log.info("============== EmailValidator ==============");
 
 		String objectName = errors.getObjectName();
-		log.info("objectName = {}", objectName);
-		
+
 		if(objectName.equals("emailDto")) {
 			EmailDto emailDto = (EmailDto) target;
 			checkEmail(emailDto.getMemberEmail(), errors);
