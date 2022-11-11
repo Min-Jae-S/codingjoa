@@ -79,7 +79,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void updatePassword(UpdatePasswordDto updatePasswordDto, String memberId) {
-		memberMapper.updatePassword(updatePasswordDto.getMemberPassword(), memberId);
+		String rawPassword = updatePasswordDto.getMemberPassword();
+		String encPassword = passwordEncoder.encode(rawPassword);
+		
+		memberMapper.updatePassword(encPassword, memberId);
 	}
 
 
