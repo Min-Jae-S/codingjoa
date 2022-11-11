@@ -36,14 +36,12 @@ public class MemberController {
 		binder.addValidators(joinValidator);
 	}
 	
-	
 	@GetMapping("/join")
 	public String join(@ModelAttribute JoinDto joinDto) {
 		log.info("join, {}", joinDto);
 		
 		return "member/join"; 
 	}
-	
 	
 	@PostMapping("/joinProc")
 	public String joinProc(@Valid @ModelAttribute JoinDto joinDto, BindingResult bindingResult) {
@@ -58,30 +56,31 @@ public class MemberController {
 		return "member/join-success"; 
 	}
 	
-	
 	@RequestMapping("/login")
 	public String login(@ModelAttribute LoginDto loginDto) {
 		log.info("login, {}", loginDto);
 		
 		return "member/login";
 	}
-
 	
 	@GetMapping("/security")
 	public String security() {
 		return "member/security";
 	}
 
-	
 	@GetMapping("/info")
 	public String info() {
 		return "member/info";
 	}
 	
+	@GetMapping("checkPassword")
+	public String checkPassword() {
+		return "member/check-password";
+	}
 	
-	@GetMapping("changePassword")
-	public String changePassword() {
-		return "member/change-password";
+	@GetMapping("updatePassword")
+	public String updatePassword() {
+		return "member/update-password";
 	}
 	
 }

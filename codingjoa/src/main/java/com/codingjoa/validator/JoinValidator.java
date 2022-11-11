@@ -64,13 +64,12 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("confirmPassword", "NotBlank");
 		} else if (!Pattern.matches(PASSWORD_REGEXP, confirmPassword)) {
 			errors.rejectValue("confirmPassword", "Pattern");
+			return;
 		}
 
-		if (!errors.hasFieldErrors("memberPassword") && !errors.hasFieldErrors("confirmPassword")) {
-			if (!memberPassword.equals(confirmPassword)) {
-				errors.rejectValue("memberPassword", "NotEquals");
-				errors.rejectValue("confirmPassword", "NotEquals");
-			}
+		if (!memberPassword.equals(confirmPassword)) {
+			errors.rejectValue("memberPassword", "NotEquals");
+			errors.rejectValue("confirmPassword", "NotEquals");
 		}
 	}
 	

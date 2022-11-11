@@ -96,7 +96,7 @@
 		UPDATE 
 			member
 		SET
-			member_email = #{updateEmailDto.memberEmail},
+			member_email = #{memberEmail},
 			moddate = SYSDATE
 		WHERE
 			member_id = #{memberId}
@@ -106,9 +106,9 @@
 		UPDATE 
 			member
 		SET
-			member_zipcode = #{updateAddrDto.memberZipcode},
-			member_addr = #{updateAddrDto.memberAddr},
-			member_addr_detail = #{updateAddrDto.memberAddrDetail},
+			member_zipcode = #{memberZipcode},
+			member_addr = #{memberAddr},
+			member_addr_detail = #{memberAddrDetail},
 			moddate = SYSDATE
 		WHERE
 			member_id = #{memberId}
@@ -118,12 +118,30 @@
 		UPDATE 
 			member
 		SET
-			member_agree = #{updateAgreeDto.memberAgree},
+			member_agree = #{memberAgree},
 			moddate = SYSDATE
 		WHERE
 			member_id = #{memberId}
 	</update>
 	
+	<select id="findPasswordById" parameterType="string" resultType="string">
+		SELECT
+			member_password
+		FROM
+			member
+		WHERE
+			member_id = #{memberId}
+	</select>
+	
+	<update id="updatePassword" parameterType="map">
+		UPDATE 
+			member
+		SET
+			member_password = #{memberPassword},
+			moddate = SYSDATE
+		WHERE
+			member_id = #{memberId}
+	</update>
 	
 	
 </mapper>

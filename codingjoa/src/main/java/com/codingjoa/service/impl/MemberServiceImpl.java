@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.UpdateAddrDto;
 import com.codingjoa.dto.UpdateAgreeDto;
-import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.UpdateEmailDto;
+import com.codingjoa.dto.UpdatePasswordDto;
 import com.codingjoa.entity.Auth;
 import com.codingjoa.entity.Member;
 import com.codingjoa.mapper.MemberMapper;
@@ -25,10 +26,10 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper memberMapper;
 	
 	@Autowired
-	private ModelMapper modelMapper;
-	
-	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Override
 	public void register(JoinDto joinDto) {
@@ -57,17 +58,28 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void updateEmail(UpdateEmailDto updateEmailDto, String memberId) {
-		memberMapper.updateEmail(updateEmailDto, memberId);
+		memberMapper.updateEmail(updateEmailDto.getMemberEmail(), memberId);
 	}
 	
 	@Override
 	public void updateAddr(UpdateAddrDto updateAddrDto, String memberId) {
-		memberMapper.updateAddr(updateAddrDto, memberId);
+		memberMapper.updateAddr(updateAddrDto.getMemberZipcode(), 
+				updateAddrDto.getMemberAddr(), updateAddrDto.getMemberAddrDetail(), memberId);
 	}
 
 	@Override
 	public void updateAgree(UpdateAgreeDto updateAgreeDto, String memberId) {
-		memberMapper.updateAgree(updateAgreeDto, memberId);
+		memberMapper.updateAgree(updateAgreeDto.isMemberAgree(), memberId);
+	}
+
+	@Override
+	public boolean checkPassword(String memberId, String memberPassword) {
+		return passwordEncoder.matches(memberPassword, memberMapper.findPasswordById(memberId));
+	}
+
+	@Override
+	public void updatePassword(UpdatePasswordDto updatePasswordDto, String memberId) {
+		memberMapper.updatePassword(updatePasswordDto.getMemberPassword(), memberId);
 	}
 
 
