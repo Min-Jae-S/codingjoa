@@ -73,12 +73,12 @@ public class MemberController {
 		return "member/info";
 	}
 	
-	@GetMapping("checkPassword")
+	@GetMapping("/checkPassword")
 	public String checkPassword() {
 		return "member/check-password";
 	}
 	
-	@GetMapping("updatePassword")
+	@GetMapping("/updatePassword")
 	public String updatePassword() {
 		return "member/update-password";
 	}
