@@ -78,11 +78,6 @@ public class MemberController {
 		return "member/check-password";
 	}
 	
-	@GetMapping("notCheckPassword")
-	public String notCheckPassword() {
-		return "member/not-check-password";
-	}
-	
 	@GetMapping("updatePassword")
 	public String updatePassword() {
 		return "member/update-password";

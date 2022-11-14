@@ -127,8 +127,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	function sendAuthEmail() {
-		const UNPROCESSABLE_ENTITY = 422;
-		
 		$.ajax({
 			type : "POST",
 			url : "${contextPath}/member/sendAuthEmail",
@@ -136,18 +134,18 @@
 				memberEmail : $("#memberEmail").val()
 			}),
 			contentType : "application/json; charset=utf-8",
-			//dataType : "json",
+			dataType : "json",
 			success : function(result) {
 				$("#memberEmail\\.errors, #authCode\\.errors, .success").remove();
-				$("#authCode").closest("div").after("<span class='success'>" + result + "</span>");
+				$("#authCode").closest("div").after("<span class='success'>" + result.message + "</span>");
 				$("#authCode").val("");
 				$("#authCode").focus();
 			},
-			error : function(jqXHR) {
+			error : function(e) {
 				$("#memberEmail\\.errors, #authCode\\.errors, .success").remove();
 				
-				if(jqXHR.status == UNPROCESSABLE_ENTITY) {
-					var errorMap = JSON.parse(jqXHR.responseText).errorMap;
+				if(e.status == 422) {
+					var errorMap = JSON.parse(e.responseText).errorMap;
 					
 					$.each(errorMap, function(errorField, errorMessage) {
 						$("#authCode").closest("div").after("<span id='" + errorField + ".errors' class='error'>" + errorMessage + "</span>");
