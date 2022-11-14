@@ -8,14 +8,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.codingjoa.interceptor.BeforeUpdatePasswordInterceptor;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.codingjoa.controller")
-@ComponentScan("com.codingjoa.error")
 public class ServletConfig implements WebMvcConfigurer {
 
 	@Override
@@ -41,5 +43,12 @@ public class ServletConfig implements WebMvcConfigurer {
 			.filter(converter -> converter instanceof StringHttpMessageConverter)
 			.forEach(converter -> ((StringHttpMessageConverter) converter).setDefaultCharset(StandardCharsets.UTF_8));
 	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new BeforeUpdatePasswordInterceptor())
+				.addPathPatterns("/member/updatePassword");
+	}
+	
 	
 }
