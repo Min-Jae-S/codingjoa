@@ -50,18 +50,18 @@
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
 							<div class="input-group">
-								<form:input path="memberId" class="form-control"/>
+								<form:input path="memberId" class="form-control" placeholder="아이디 입력"/>
 							</div>
 							<form:errors path="memberId" cssClass="error" />
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="memberPassword" class="font-weight-bold">비밀번호</form:label>
-							<form:password path="memberPassword" class="form-control" showPassword="true"/>
+							<form:password path="memberPassword" class="form-control" placeholder="비밀번호 입력" showPassword="true"/>
 							<form:errors path="memberPassword" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
 							<form:label path="confirmPassword" class="font-weight-bold">비밀번호 확인</form:label>
-							<form:password path="confirmPassword" class="form-control" showPassword="true"/>
+							<form:password path="confirmPassword" class="form-control" placeholder="비밀번호 확인 입력" showPassword="true"/>
 							<form:errors path="confirmPassword" cssClass="error"/>
 						</div>
 						<div class="form-group mb-4">
