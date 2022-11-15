@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
+import com.codingjoa.error.ErrorResponse;
 import com.codingjoa.security.exception.LoginRequireFieldException;
-import com.codingjoa.util.MessageUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,19 +28,17 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 			AuthenticationException e) throws IOException, ServletException {
 		log.info("============== LoginFailureHandler ==============");
 		
-		String errorMessage = null;
+		String errorCode = "error.Login";
 		
-		if(e instanceof LoginRequireFieldException) {
-			String errorCode = ((LoginRequireFieldException) e).getErrorCode();
-			errorMessage = MessageUtils.getMessage(errorCode);
-		} else if(e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
-			errorMessage = MessageUtils.getMessage("error.UsernameNotFoundOrBadCredentials");
+		if(e instanceof LoginRequireFieldException || 
+				e instanceof UsernameNotFoundException || e instanceof BadCredentialsException) {
+			errorCode = e.getMessage();
 		}
 		
 		log.info("Exception = {}", e.getClass());
-		log.info("ErrorMessage = {}", errorMessage);
+		log.info("ErrorCode = {}", errorCode);
 		
-		request.setAttribute("errorMessage", errorMessage);
+		request.setAttribute("errorResponse", ErrorResponse.create().errorCode(errorCode));
 		request.getRequestDispatcher(DEFAULT_FAILURE_URL).forward(request, response);
 	}
 

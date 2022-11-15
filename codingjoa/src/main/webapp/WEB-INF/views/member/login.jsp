@@ -34,8 +34,9 @@
 							<form:label path="memberPassword" class="font-weight-bold">비밀번호</form:label>
 							<form:password path="memberPassword" class="form-control" placeholder="비밀번호" showPassword="true"/>
 						</div>
-						<c:if test="${not empty errorMessage}">
-							<div class="error">${errorMessage}</div>
+						<c:if test="${not empty errorResponse}">
+							<div class="error">${errorResponse.errorMessage}</div>
+							<div class="error d-none">${errorResponse.responseDateTime}</div>
 						</c:if>
 						<div class="form-group pt-4 mb-4">
 							<form:button class="btn btn-primary btn-lg btn-block">로그인</form:button>

@@ -34,16 +34,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String memberPassword = (String) authentication.getCredentials();
 		
 		if("".equals(memberId)) {
-			throw new LoginRequireFieldException("login validation failed", "error.LoginRequireField.memberId");
+			throw new LoginRequireFieldException("error.LoginRequireField.memberId");
 		} else if(!StringUtils.hasText(memberPassword)) {
-			throw new LoginRequireFieldException("login validation failed", "error.LoginRequireField.memberPassword");
+			throw new LoginRequireFieldException("error.LoginRequireField.memberPassword");
 		}
 		
 		UserDetails userDetails = userDetailsService.loadUserByUsername(memberId);
 		log.info("userDetails = {}", userDetails);
 		
 		if(!passwordEncoder.matches(memberPassword, userDetails.getPassword())) {
-			throw new BadCredentialsException(memberId);
+			throw new BadCredentialsException("error.UsernameNotFoundOrBadCredentials");
 		}
 		
 		return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

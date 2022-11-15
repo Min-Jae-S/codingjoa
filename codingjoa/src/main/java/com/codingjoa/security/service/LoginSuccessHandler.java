@@ -28,7 +28,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('" + MessageUtils.getMessage("success.onAuthenticationSuccess") + "')");
+		out.println("alert('" + MessageUtils.getMessage("success.onAuthenticationSuccess") + "');");
 		out.println("location.href='" +  request.getContextPath() + "';");
 		out.println("</script>");
 	}

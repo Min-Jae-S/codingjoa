@@ -142,6 +142,7 @@
 				$("#authCode").focus();
 			},
 			error : function(e) {
+				console.log(e.responseText);
 				$("#memberEmail\\.errors, #authCode\\.errors, .success").remove();
 				
 				if(e.status == 422) {

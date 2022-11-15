@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		log.info("map = {}", map);
 		
 		if(map == null) {
-			throw new UsernameNotFoundException(memberId);
+			throw new UsernameNotFoundException("error.UsernameNotFoundOrBadCredentials");
 		}
 		
 		Member member = (Member) map.get("member"); 			
