@@ -14,6 +14,42 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+	.info-member {
+		overflow: hidden;
+		font-size: 80%;
+    	font-weight: 400;
+	}
+	
+	.info-member a {
+		text-decoration-line: none;
+		color: #495057;
+		font-weight: bold; 
+	}
+
+	.link-join {
+		float: left;
+	}
+	
+	.link-ul {
+		float: right;
+		list-style: none;
+    	padding: 0;
+    	margin: 0;
+	}
+	
+	.link-ul li {
+		display: inline-block;
+	}
+
+	.link-li+.link-li::before {
+		content: "|";
+		margin-right: 10px;
+		margin-left: 10px;
+		color: #adb5bd;
+	}
+	
+</style>
 </head>
 <body>
 
@@ -24,7 +60,7 @@
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="card shadow">
-				<div class="card-body p-4">
+				<div class="card-body p-5">
 					<form:form action="${contextPath}/member/loginProc" method="POST" modelAttribute="loginDto">
 						<div class="form-group mb-4">
 							<form:label path="memberId" class="font-weight-bold">아이디</form:label>
@@ -42,10 +78,13 @@
 							<form:button class="btn btn-primary btn-lg btn-block">로그인</form:button>
 						</div>
 					</form:form>
-					<p class="text-center small mb-0">
-						<span>비밀번호를 잃어버리셨나요?</span>
-						<span><a href="#">비밀번호 찾기</a></span>
-					</p>
+					<div class="info-member">
+						<a class="link-join" href="${contextPath}/member/join">회원가입</a>
+						<ul class="link-ul">
+							<li class="link-li"><a href="#">아이디 찾기</a></li>
+							<li class="link-li"><a href="#">비밀번호 찾기</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
