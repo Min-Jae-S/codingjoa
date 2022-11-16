@@ -27,42 +27,42 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Resource(name = "joinValidator")
 	private Validator joinValidator;
-	
+
 	@InitBinder("joinDto")
 	public void initBinderJoin(WebDataBinder binder) {
 		binder.addValidators(joinValidator);
 	}
-	
+
 	@GetMapping("/join")
 	public String join(@ModelAttribute JoinDto joinDto) {
 		log.info("join, {}", joinDto);
-		
-		return "member/join"; 
+
+		return "member/join";
 	}
-	
+
 	@PostMapping("/joinProc")
 	public String joinProc(@Valid @ModelAttribute JoinDto joinDto, BindingResult bindingResult) {
 		log.info("joinProc, {}", joinDto);
 
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			return "member/join";
 		}
-		
+
 		memberService.register(joinDto);
-		
-		return "member/join-success"; 
+
+		return "member/join-success";
 	}
-	
+
 	@RequestMapping("/login")
 	public String login(@ModelAttribute LoginDto loginDto) {
 		log.info("login, {}", loginDto);
-		
+
 		return "member/login";
 	}
-	
+
 	@GetMapping("/security")
 	public String security() {
 		return "member/security";
@@ -72,15 +72,15 @@ public class MemberController {
 	public String info() {
 		return "member/info";
 	}
-	
+
 	@GetMapping("/checkPassword")
 	public String checkPassword() {
 		return "member/check-password";
 	}
-	
+
 	@GetMapping("/updatePassword")
 	public String updatePassword() {
 		return "member/update-password";
 	}
-	
+
 }

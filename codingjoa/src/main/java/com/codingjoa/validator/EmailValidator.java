@@ -3,6 +3,7 @@ package com.codingjoa.validator;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -20,15 +21,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component(value = "emailValidator")
 public class EmailValidator implements Validator {
-	
+
 	private final String EMAIL_REGEXP = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
-	
+
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	RedisService redisService;
-	
+
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return (EmailDto.class.isAssignableFrom(clazz) || UpdateEmailDto.class.isAssignableFrom(clazz));
@@ -40,29 +41,33 @@ public class EmailValidator implements Validator {
 
 		String objectName = errors.getObjectName();
 
-		if(objectName.equals("emailDto")) {
+		if (objectName.equals("emailDto")) {
 			EmailDto emailDto = (EmailDto) target;
 			checkEmail(emailDto.getMemberEmail(), errors);
-		} else if(objectName.equals("updateEmailDto")) {
+		} else if (objectName.equals("updateEmailDto")) {
 			UpdateEmailDto updateEmailDto = (UpdateEmailDto) target;
 			checkEmailAndAuth(updateEmailDto.getMemberEmail(), updateEmailDto.getAuthCode(), errors);
 		}
 	}
-	
+
 	private void checkEmail(String memberEmail, Errors errors) {
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
 		} else if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
-		} 
+		} else if (getCurrentId() != null && memberService.isMyEmail(memberEmail, getCurrentId())) {
+			errors.rejectValue("memberEmail", "NotMyEmail");
+		} else if (memberService.isEmailExist(memberEmail)) {
+			errors.rejectValue("memberEmail", "EmailExist");
+		}
 	}
-	
+
 	private void checkEmailAndAuth(String memberEmail, String authCode, Errors errors) {
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
 		} else if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
-		} else if (memberService.isMyEmail(memberEmail, loadMemberId())) {
+		} else if (memberService.isMyEmail(memberEmail, getCurrentId())) {
 			errors.rejectValue("memberEmail", "NotMyEmail");
 		} else if (memberService.isEmailExist(memberEmail)) {
 			errors.rejectValue("memberEmail", "EmailExist");
@@ -72,11 +77,23 @@ public class EmailValidator implements Validator {
 			errors.rejectValue("authCode", "NotValid");
 		}
 	}
-	
-	private String loadMemberId() {
-		UserDetailsDto principal = (UserDetailsDto) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
 
-		return principal.getMember().getMemberId();
+	private String getCurrentId() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		if (auth == null) return null;
+
+		Object principal = auth.getPrincipal();
+		String currentId = null;
+
+		if (principal instanceof UserDetailsDto) {
+			UserDetailsDto userDetailsDto = (UserDetailsDto) principal;
+			currentId = userDetailsDto.getMember().getMemberId();
+		} else if (principal instanceof String) {
+			currentId = null; // principal = anonymousUser
+		}
+
+		return currentId;
 	}
+
 }
