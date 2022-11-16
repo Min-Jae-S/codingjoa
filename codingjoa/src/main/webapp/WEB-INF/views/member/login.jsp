@@ -48,7 +48,6 @@
 		margin-left: 10px;
 		color: #adb5bd;
 	}
-	
 </style>
 </head>
 <body>
@@ -75,14 +74,14 @@
 							<div class="error d-none">${errorResponse.responseDateTime}</div>
 						</c:if>
 						<div class="form-group pt-4 mb-4">
-							<form:button class="btn btn-primary btn-lg btn-block">로그인</form:button>
+							<form:button class="btn btn-primary btn-block">로그인</form:button>
 						</div>
 					</form:form>
 					<div class="info-member">
 						<a class="link-join" href="${contextPath}/member/join">회원가입</a>
 						<ul class="link-ul">
-							<li class="link-li"><a href="#">아이디 찾기</a></li>
-							<li class="link-li"><a href="#">비밀번호 찾기</a></li>
+							<li class="link-li"><a href="${contextPath}/member/findAccount">계정 찾기</a></li>
+							<li class="link-li"><a href="${contextPath}/member/findPassword">비밀번호 찾기</a></li>
 						</ul>
 					</div>
 				</div>

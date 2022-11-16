@@ -82,5 +82,15 @@ public class MemberController {
 	public String updatePassword() {
 		return "member/update-password";
 	}
+	
+	@GetMapping("/findAccount")
+	public String findAccount() {
+		return "member/find-account";
+	}
+	
+	@GetMapping("/findPassword")
+	public String findPassword() {
+		return "member/find-password";
+	}
 
 }
