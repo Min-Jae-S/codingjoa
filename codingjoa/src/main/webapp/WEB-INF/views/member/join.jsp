@@ -69,11 +69,11 @@
 							<div class="input-group mb-2">
 								<form:input path="memberEmail" class="form-control" placeholder="이메일 입력"/>
 								<div class="input-group-append">
-									<button type="button" class="btn btn-outline-secondary btn-sm" id="sendAuthEmailBtn" onclick="sendAuthEmail()">인증번호 받기</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm" id="sendAuthEmailBtn" onclick="sendAuthEmail()">인증코드 받기</button>
 								</div>
 							</div>
 							<div class="input-group">
-								<form:input path="authCode" class="form-control" placeholder="인증번호를 입력하세요."/>
+								<form:input path="authCode" class="form-control" placeholder="인증코드를 입력하세요."/>
 							</div>
 							<form:errors path="memberEmail" cssClass="error"/>
 							<form:errors path="authCode" cssClass="error"/>
