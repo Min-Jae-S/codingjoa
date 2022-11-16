@@ -81,6 +81,8 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("memberEmail", "NotBlank");
 		} else if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
+		} else if (memberService.isEmailExist(memberEmail)) {
+			errors.rejectValue("memberEmail", "EmailExist");
 		} else if (!StringUtils.hasText(authCode)) {
 			errors.rejectValue("authCode", "NotBlank");
 		} else if (!redisService.isAuthCodeValid(memberEmail, authCode)) {

@@ -78,6 +78,15 @@
 		WHERE
 			member_id = #{memberId}
 	</select>
+
+	<select id="isEmailExist" parameterType="string" resultType="boolean">
+		SELECT
+			COUNT(member_email)
+		FROM
+			member
+		WHERE
+			member_email = #{member_email}
+	</select>
 	
 	<select id="findUserDetailsById" parameterType="string" resultMap="userDetailsMap">
 		SELECT 
@@ -101,6 +110,15 @@
 		WHERE
 			member_id = #{memberId}
 	</update>
+	
+	<select id="findEmailById" parameterType="string" resultType="string">
+		SELECT
+			member_email
+		FROM
+			member
+		WHERE
+			member_id = #{memberId}
+	</select>
 	
 	<update id="updateAddr" parameterType="map">
 		UPDATE 

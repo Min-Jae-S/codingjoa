@@ -17,9 +17,13 @@ public interface MemberMapper {
 	
 	public boolean isIdExist(String memberId);
 	
+	public boolean isEmailExist(String memberEmail);
+	
 	public Map<String, Object> findUserDetailsById(String memberId); // Member, memberRole
 	
 	public void updateEmail(@Param("memberEmail") String memberEmail, @Param("memberId") String memberId);
+	
+	public String findEmailById(String memberId);
 	
 	public void updateAddr(@Param("memberZipcode") String memberZipcode, 
 							@Param("memberAddr") String memberAddr,

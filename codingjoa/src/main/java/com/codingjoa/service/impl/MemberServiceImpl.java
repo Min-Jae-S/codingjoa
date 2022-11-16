@@ -55,10 +55,20 @@ public class MemberServiceImpl implements MemberService {
 	public boolean isIdExist(String memberId) {
 		return memberMapper.isIdExist(memberId);
 	}
+	
+	@Override
+	public boolean isEmailExist(String memberEmail) {
+		return memberMapper.isEmailExist(memberEmail);
+	}
 
 	@Override
 	public void updateEmail(UpdateEmailDto updateEmailDto, String memberId) {
 		memberMapper.updateEmail(updateEmailDto.getMemberEmail(), memberId);
+	}
+	
+	@Override
+	public boolean isMyEmail(String memberEmail, String memberId) {
+		return memberEmail.equals(memberMapper.findEmailById(memberId));
 	}
 	
 	@Override
