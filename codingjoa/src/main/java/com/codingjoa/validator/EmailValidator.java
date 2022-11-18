@@ -51,30 +51,60 @@ public class EmailValidator implements Validator {
 	}
 
 	private void checkEmail(String memberEmail, Errors errors) {
+		// 회원가입			// NotBlank, Pattern 	// EmailExist
+		// 회원정보 변경	// NotBlank, Pattern 	// NotMyEmail, EmailExist
+		// 계정찾기			// NotBlank, Pattern 	// NotEmailExist
+		
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
-		} else if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
+			return;
+		} 
+		
+		if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
-		} else if (getCurrentId() != null && memberService.isMyEmail(memberEmail, getCurrentId())) {
+			return;
+		} 
+		
+		if (getCurrentId() != null && memberService.isMyEmail(memberEmail, getCurrentId())) {
 			errors.rejectValue("memberEmail", "NotMyEmail");
-		} else if (memberService.isEmailExist(memberEmail)) {
+			return;
+		}
+		
+		if (memberService.isEmailExist(memberEmail)) {
 			errors.rejectValue("memberEmail", "EmailExist");
+			return;
 		}
 	}
 
 	private void checkEmailAndAuth(String memberEmail, String authCode, Errors errors) {
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
-		} else if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
+			return;
+		} 
+		
+		if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
-		} else if (memberService.isMyEmail(memberEmail, getCurrentId())) {
+			return;
+		} 
+		
+		if (memberService.isMyEmail(memberEmail, getCurrentId())) {
 			errors.rejectValue("memberEmail", "NotMyEmail");
-		} else if (memberService.isEmailExist(memberEmail)) {
+			return;
+		} 
+		
+		if (memberService.isEmailExist(memberEmail)) {
 			errors.rejectValue("memberEmail", "EmailExist");
-		} else if (!StringUtils.hasText(authCode)) {
+			return;
+		} 
+		
+		if (!StringUtils.hasText(authCode)) {
 			errors.rejectValue("authCode", "NotBlank");
-		} else if (!redisService.isAuthCodeValid(memberEmail, authCode)) {
+			return;
+		} 
+		
+		if (!redisService.isAuthCodeValid(memberEmail, authCode)) {
 			errors.rejectValue("authCode", "NotValid");
+			return;
 		}
 	}
 

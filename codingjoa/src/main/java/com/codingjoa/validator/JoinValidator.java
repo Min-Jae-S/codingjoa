@@ -47,10 +47,17 @@ public class JoinValidator implements Validator {
 	private void checkId(String memberId, Errors errors) {
 		if (!StringUtils.hasText(memberId)) {
 			errors.rejectValue("memberId", "NotBlank");
-		} else if (!Pattern.matches(ID_REGEXP, memberId)) {
+			return;
+		}
+		
+		if (!Pattern.matches(ID_REGEXP, memberId)) {
 			errors.rejectValue("memberId", "Pattern");
-		} else if (memberService.isIdExist(memberId)) {
+			return;
+		} 
+		
+		if (memberService.isIdExist(memberId)) {
 			errors.rejectValue("memberId", "IdExist");
+			return;
 		}
 	}
 
@@ -74,20 +81,34 @@ public class JoinValidator implements Validator {
 		if (!memberPassword.equals(confirmPassword)) {
 			errors.rejectValue("memberPassword", "NotEquals");
 			errors.rejectValue("confirmPassword", "NotEquals");
+			return;
 		}
 	}
 
 	private void checkEmailAndAuth(String memberEmail, String authCode, Errors errors) {
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
-		} else if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
+			return;
+		}
+		
+		if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
 			errors.rejectValue("memberEmail", "Pattern");
-		} else if (memberService.isEmailExist(memberEmail)) {
+			return;
+		} 
+		
+		if (memberService.isEmailExist(memberEmail)) {
 			errors.rejectValue("memberEmail", "EmailExist");
-		} else if (!StringUtils.hasText(authCode)) {
+			return;
+		}
+		
+		if (!StringUtils.hasText(authCode)) {
 			errors.rejectValue("authCode", "NotBlank");
-		} else if (!redisService.isAuthCodeValid(memberEmail, authCode)) {
+			return;
+		} 
+		
+		if (!redisService.isAuthCodeValid(memberEmail, authCode)) {
 			errors.rejectValue("authCode", "NotValid");
+			return;
 		}
 	}
 
