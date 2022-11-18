@@ -26,8 +26,7 @@
 
 	span.error, span.success {
 		display: inline-block;
-		margin-top: 5px;
-		margin-left: 5px;
+		padding-top: 7px;
 	}
 	
 	input[name="memberZipcode"], 

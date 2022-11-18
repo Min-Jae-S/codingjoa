@@ -22,7 +22,7 @@ public interface MemberService {
 	
 	public void updateAgree(UpdateAgreeDto updateAddrDto, String memberId);
 	
-	public boolean checkPassword(String memberPassword, String memberId);
+	public boolean isMyPassword(String memberPassword, String memberId);
 	
 	public void updatePassword(UpdatePasswordDto updatePasswordDto, String memberId);
 	
