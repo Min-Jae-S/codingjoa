@@ -51,9 +51,9 @@ public class EmailValidator implements Validator {
 	}
 
 	private void checkEmail(String memberEmail, Errors errors) {
-		// 회원가입			// NotBlank, Pattern 	// EmailExist
-		// 회원정보 변경	// NotBlank, Pattern 	// NotMyEmail, EmailExist
-		// 계정찾기			// NotBlank, Pattern 	// NotEmailExist
+		// 회원가입			// NotBlank, Pattern 	// 				// EmailExist				
+		// 회원정보 변경	// NotBlank, Pattern 	// NotMyEmail	// EmailExist
+		// 계정찾기			// NotBlank, Pattern 	// 				// NotEmailExist
 		
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
@@ -65,9 +65,13 @@ public class EmailValidator implements Validator {
 			return;
 		} 
 		
-		if (getCurrentId() != null && memberService.isMyEmail(memberEmail, getCurrentId())) {
-			errors.rejectValue("memberEmail", "NotMyEmail");
-			return;
+		String memberId = getCurrentId();
+		
+		if(memberId != null) {
+			if(memberService.isMyEmail(memberEmail, memberId)) {
+				errors.rejectValue("memberEmail", "NotMyEmail");
+				return;
+			}
 		}
 		
 		if (memberService.isEmailExist(memberEmail)) {
