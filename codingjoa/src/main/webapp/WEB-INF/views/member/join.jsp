@@ -130,7 +130,8 @@
 			type : "POST",
 			url : "${contextPath}/member/sendAuthEmail",
 			data : JSON.stringify({
-				memberEmail : $("#memberEmail").val()
+				memberEmail : $("#memberEmail").val(),
+				emailType : "join"
 			}),
 			contentType : "application/json; charset=utf-8",
 			dataType : "json",
