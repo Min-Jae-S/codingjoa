@@ -74,41 +74,6 @@ public class EmailValidator implements Validator {
 					errors.rejectValue("memberEmail", "NotEmailExist");
 					return;
 				}
-		} // switch-case
-		
-	}
-
-
-
-	private void checkEmailAndAuth(String memberEmail, String authCode, Errors errors) {
-		if (!StringUtils.hasText(memberEmail)) {
-			errors.rejectValue("memberEmail", "NotBlank");
-			return;
-		} 
-		
-		if (!Pattern.matches(EMAIL_REGEXP, memberEmail)) {
-			errors.rejectValue("memberEmail", "Pattern");
-			return;
-		} 
-		
-		if (memberService.isMyEmail(memberEmail, getCurrentId())) {
-			errors.rejectValue("memberEmail", "NotMyEmail");
-			return;
-		} 
-		
-		if (memberService.isEmailExist(memberEmail)) {
-			errors.rejectValue("memberEmail", "EmailExist");
-			return;
-		} 
-		
-		if (!StringUtils.hasText(authCode)) {
-			errors.rejectValue("authCode", "NotBlank");
-			return;
-		} 
-		
-		if (!redisService.isAuthCodeValid(memberEmail, authCode)) {
-			errors.rejectValue("authCode", "NotValid");
-			return;
 		}
 	}
 
