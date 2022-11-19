@@ -41,7 +41,7 @@ public class JoinValidator implements Validator {
 		JoinDto joinDto = (JoinDto) target;
 		checkId(joinDto.getMemberId(), errors);
 		checkPassword(joinDto.getMemberPassword(), joinDto.getConfirmPassword(), errors);
-		checkEmailAndAuth(joinDto.getMemberEmail(), joinDto.getAuthCode(), errors);
+		checkEmailAuth(joinDto.getMemberEmail(), joinDto.getAuthCode(), errors);
 	}
 
 	private void checkId(String memberId, Errors errors) {
@@ -85,7 +85,7 @@ public class JoinValidator implements Validator {
 		}
 	}
 
-	private void checkEmailAndAuth(String memberEmail, String authCode, Errors errors) {
+	private void checkEmailAuth(String memberEmail, String authCode, Errors errors) {
 		if (!StringUtils.hasText(memberEmail)) {
 			errors.rejectValue("memberEmail", "NotBlank");
 			return;

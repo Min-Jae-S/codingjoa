@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.codingjoa.dto.EmailDto;
+import com.codingjoa.enumclass.EmailType;
 import com.codingjoa.security.dto.UserDetailsDto;
 import com.codingjoa.service.MemberService;
 import com.codingjoa.service.RedisService;
@@ -51,29 +52,28 @@ public class EmailValidator implements Validator {
 			return;
 		}
 		
-		switch (emailDto.getEmailType()) {
-			case JOIN:
-				if (memberService.isEmailExist(memberEmail)) {
-					errors.rejectValue("memberEmail", "EmailExist");
-					return;
-				}
-	
-			case UPDATE:
-				if (memberService.isMyEmail(memberEmail, getCurrentId())) {
-					errors.rejectValue("memberEmail", "NotMyEmail");
-					return;
-				}
-				
-				if (memberService.isEmailExist(memberEmail)) {
-					errors.rejectValue("memberEmail", "EmailExist");
-					return;
-				}
-				
-			case FIND_ACCOUNT:
-				if (!memberService.isEmailExist(memberEmail)) {
-					errors.rejectValue("memberEmail", "NotEmailExist");
-					return;
-				}
+		EmailType emailType = emailDto.getEmailType();
+		
+		if (emailType == EmailType.JOIN) {
+			if (memberService.isEmailExist(memberEmail)) {
+				errors.rejectValue("memberEmail", "EmailExist");
+				return;
+			}
+		} else if (emailType == EmailType.UPDATE) {
+			if (memberService.isMyEmail(memberEmail, getCurrentId())) {
+				errors.rejectValue("memberEmail", "NotMyEmail");
+				return;
+			}
+			
+			if (memberService.isEmailExist(memberEmail)) {
+				errors.rejectValue("memberEmail", "EmailExist");
+				return;
+			}
+		} else if (emailType == EmailType.FIND_ACCOUNT) {
+			if (!memberService.isEmailExist(memberEmail)) {
+				errors.rejectValue("memberEmail", "NotEmailExist");
+				return;
+			}
 		}
 	}
 
