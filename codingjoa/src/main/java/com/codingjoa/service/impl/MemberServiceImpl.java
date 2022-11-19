@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.AddrDto;
 import com.codingjoa.dto.AgreeDto;
 import com.codingjoa.dto.EmailAuthDto;
+import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.UpdatePasswordDto;
 import com.codingjoa.entity.Auth;
 import com.codingjoa.entity.Member;
@@ -62,8 +62,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void updateEmail(EmailAuthDto updateEmailDto, String memberId) {
-		memberMapper.updateEmail(updateEmailDto.getMemberEmail(), memberId);
+	public void updateEmail(EmailAuthDto emailAuthDto, String memberId) {
+		memberMapper.updateEmail(emailAuthDto.getMemberEmail(), memberId);
 	}
 	
 	@Override
@@ -72,14 +72,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public void updateAddr(AddrDto updateAddrDto, String memberId) {
-		memberMapper.updateAddr(updateAddrDto.getMemberZipcode(), 
-				updateAddrDto.getMemberAddr(), updateAddrDto.getMemberAddrDetail(), memberId);
+	public void updateAddr(AddrDto addrDto, String memberId) {
+		memberMapper.updateAddr(addrDto.getMemberZipcode(), 
+				addrDto.getMemberAddr(), addrDto.getMemberAddrDetail(), memberId);
 	}
 
 	@Override
-	public void updateAgree(AgreeDto updateAgreeDto, String memberId) {
-		memberMapper.updateAgree(updateAgreeDto.isMemberAgree(), memberId);
+	public void updateAgree(AgreeDto agreeDto, String memberId) {
+		memberMapper.updateAgree(agreeDto.isMemberAgree(), memberId);
 	}
 
 	@Override

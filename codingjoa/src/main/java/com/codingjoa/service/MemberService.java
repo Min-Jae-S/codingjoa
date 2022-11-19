@@ -1,9 +1,9 @@
 package com.codingjoa.service;
 
-import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.AddrDto;
 import com.codingjoa.dto.AgreeDto;
 import com.codingjoa.dto.EmailAuthDto;
+import com.codingjoa.dto.JoinDto;
 import com.codingjoa.dto.UpdatePasswordDto;
 
 public interface MemberService {
@@ -14,13 +14,13 @@ public interface MemberService {
 	
 	public boolean isEmailExist(String memberEmail);
 	
-	public void updateEmail(EmailAuthDto updateEmailDto, String memberId);
+	public void updateEmail(EmailAuthDto emailAuthDto, String memberId);
 	
-	public void updateAddr(AddrDto updateAddrDto, String memberId);
+	public void updateAddr(AddrDto addrDto, String memberId);
 	
 	public boolean isMyEmail(String memberEmail, String memberId);
 	
-	public void updateAgree(AgreeDto updateAddrDto, String memberId);
+	public void updateAgree(AgreeDto agreeDto, String memberId);
 	
 	public boolean isMyPassword(String memberPassword, String memberId);
 	
