@@ -11,7 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.codingjoa.dto.EmailDto;
-import com.codingjoa.enumclass.EmailType;
+import com.codingjoa.enumclass.Type;
 import com.codingjoa.security.dto.UserDetailsDto;
 import com.codingjoa.service.MemberService;
 import com.codingjoa.service.RedisService;
@@ -25,10 +25,10 @@ public class EmailValidator implements Validator {
 	private final String EMAIL_REGEXP = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
 
 	@Autowired
-	RedisService redisService;
+	private RedisService redisService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -40,6 +40,13 @@ public class EmailValidator implements Validator {
 		log.info("============== EmailValidator ==============");
 
 		EmailDto emailDto = (EmailDto) target;
+		Type type = emailDto.getType();
+		
+		if (type == null) {
+			errors.rejectValue("memberEmail", "NotValidAccess");
+			return;
+		}
+		
 		String memberEmail = emailDto.getMemberEmail();
 		
 		if (!StringUtils.hasText(memberEmail)) {
@@ -51,15 +58,14 @@ public class EmailValidator implements Validator {
 			errors.rejectValue("memberEmail", "Pattern");
 			return;
 		}
-		
-		EmailType emailType = emailDto.getEmailType();
-		
-		if (emailType == EmailType.JOIN) {
+
+		if (type == Type.JOIN) {
 			if (memberService.isEmailExist(memberEmail)) {
 				errors.rejectValue("memberEmail", "EmailExist");
 				return;
 			}
-		} else if (emailType == EmailType.UPDATE) {
+			
+		} else if (type == Type.BEFORE_UPDATE) {
 			if (memberService.isMyEmail(memberEmail, getCurrentId())) {
 				errors.rejectValue("memberEmail", "NotMyEmail");
 				return;
@@ -69,11 +75,38 @@ public class EmailValidator implements Validator {
 				errors.rejectValue("memberEmail", "EmailExist");
 				return;
 			}
-		} else if (emailType == EmailType.FIND_ACCOUNT) {
+			
+		} else if (type == Type.UPDATE) {
+			if (memberService.isMyEmail(memberEmail, getCurrentId())) {
+				errors.rejectValue("memberEmail", "NotMyEmail");
+				return;
+			} 
+			
+			if (memberService.isEmailExist(memberEmail)) {
+				errors.rejectValue("memberEmail", "EmailExist");
+				return;
+			} 
+			
+			String authCode = emailDto.getAuthCode();
+			
+			if (!StringUtils.hasText(authCode)) {
+				errors.rejectValue("authCode", "NotBlank");
+				return;
+			} 
+			
+			if (!redisService.isAuthCodeValid(memberEmail, authCode)) {
+				errors.rejectValue("authCode", "NotValid");
+				return;
+			}
+			
+		} else if (type == Type.BEFORE_FIND_ACCOUNT) {
 			if (!memberService.isEmailExist(memberEmail)) {
 				errors.rejectValue("memberEmail", "NotEmailExist");
 				return;
 			}
+			
+		} else if (type == Type.FIND_ACCOUNT) {
+			
 		}
 	}
 

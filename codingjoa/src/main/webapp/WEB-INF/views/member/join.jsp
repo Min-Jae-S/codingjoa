@@ -131,7 +131,7 @@
 			url : "${contextPath}/member/sendAuthEmail",
 			data : JSON.stringify({
 				memberEmail : $("#memberEmail").val(),
-				emailType : "join"
+				type : "join"
 			}),
 			contentType : "application/json; charset=utf-8",
 			dataType : "json",
