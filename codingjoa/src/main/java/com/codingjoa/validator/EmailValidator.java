@@ -106,7 +106,22 @@ public class EmailValidator implements Validator {
 			}
 			
 		} else if (type == Type.FIND_ACCOUNT) {
+			if (!memberService.isEmailExist(memberEmail)) {
+				errors.rejectValue("memberEmail", "NotEmailExist");
+				return;
+			}
 			
+			String authCode = emailDto.getAuthCode();
+			
+			if (!StringUtils.hasText(authCode)) {
+				errors.rejectValue("authCode", "NotBlank");
+				return;
+			} 
+			
+			if (!redisService.isAuthCodeValid(memberEmail, authCode)) {
+				errors.rejectValue("authCode", "NotValid");
+				return;
+			}
 		}
 	}
 
